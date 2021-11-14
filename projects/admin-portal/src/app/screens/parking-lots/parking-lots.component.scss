@@ -11,6 +11,13 @@
   gap: 15px;
   .parking-lot-card {
     margin: 5px 0;
-    width: 395px;
+    width: 396px;
   }
+}
+
+.header {
+ display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
 }

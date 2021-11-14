@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {
     console.log('hi');
-    await this.router.navigate(['home', 'dashboard']);
+    await this.router.navigate(['/', 'dashboard']);
   }
 
   private addControlsToForm() {

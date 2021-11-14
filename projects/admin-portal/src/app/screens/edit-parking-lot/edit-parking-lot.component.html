@@ -1,0 +1,12 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div>
+    <mat-form-field class="full-width">
+      <input formControlName="email" matInput placeholder="Email">
+      <mat-error>Email is required.</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button mat-raised-button color="primary" type="button" (click)="onCancel()">Cancel</button>
+  </div>
+</form>

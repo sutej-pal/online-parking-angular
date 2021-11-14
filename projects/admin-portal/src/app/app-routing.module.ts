@@ -6,6 +6,7 @@ import {HomeComponent} from "./screens/home/home.component";
 import {ProfileComponent} from "./screens/profile/profile.component";
 import {MapComponent} from "./screens/map/map.component";
 import {ParkingLotsComponent} from "./screens/parking-lots/parking-lots.component";
+import {EditParkingLotComponent} from "./screens/edit-parking-lot/edit-parking-lot.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: "parking-lots",
         component: ParkingLotsComponent
+      },
+      {
+        path: "parking-lots/add",
+        component: EditParkingLotComponent
       }
     ]
   }

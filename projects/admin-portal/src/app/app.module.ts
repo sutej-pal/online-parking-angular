@@ -21,6 +21,7 @@ import { ProfileComponent } from './screens/profile/profile.component';
 import { MapComponent } from './screens/map/map.component';
 import { ParkingLotsComponent } from './screens/parking-lots/parking-lots.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { EditParkingLotComponent } from './screens/edit-parking-lot/edit-parking-lot.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     ToolbarComponent,
     ProfileComponent,
     MapComponent,
-    ParkingLotsComponent
+    ParkingLotsComponent,
+    EditParkingLotComponent
   ],
     imports: [
         BrowserModule,

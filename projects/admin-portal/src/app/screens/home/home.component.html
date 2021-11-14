@@ -1,8 +1,6 @@
+<app-toolbar></app-toolbar>
 <mat-drawer-container #sideDrawer class="example-container">
   <mat-drawer class="side-drawer" mode="side" opened>
-    <div style="height: 64px;background: #3f51b5;display: flex;justify-content: center;align-items: center">
-      <h3 style="color: #fff;font-size: 20px">App Title</h3>
-    </div>
     <mat-selection-list [multiple]="false">
       <mat-list-option [routerLink]="['/dashboard']">
         <mat-icon matListIcon>dashboard</mat-icon>
@@ -23,7 +21,6 @@
     </mat-selection-list>
   </mat-drawer>
   <mat-drawer-content>
-    <app-toolbar></app-toolbar>
     <div style="padding: 10px">
       <router-outlet></router-outlet>
     </div>

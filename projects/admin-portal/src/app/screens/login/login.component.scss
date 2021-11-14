@@ -14,8 +14,21 @@
     padding: 25px;
     min-width: 300px;
 
-    .mat-card-actions {
+    .login-card-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      flex-direction: column;
+      gap: 5px;
+      span:nth-child(1) {
+        font-size: 22px;
+        font-weight: 400;
+      }
+      span:nth-child(2) {
+        font-size: 14px;
+        font-weight: 300;
+      }
     }
   }
 }
