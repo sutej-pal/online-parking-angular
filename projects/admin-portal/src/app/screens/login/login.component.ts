@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ export class LoginComponent implements OnInit {
   formGroup: FormGroup = new FormGroup({});
 
   constructor(
-    private fb: FormBuilder,
+    private router: Router,
+    private fb: FormBuilder
   ) {
   }
 
@@ -20,8 +22,9 @@ export class LoginComponent implements OnInit {
     this.addControlsToForm();
   }
 
-  onSubmit() {
+  async onSubmit() {
     console.log('hi');
+    await this.router.navigate(['home', 'dashboard']);
   }
 
   private addControlsToForm() {

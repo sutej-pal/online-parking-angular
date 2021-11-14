@@ -1,0 +1,29 @@
+<mat-drawer-container #sideDrawer class="example-container">
+  <mat-drawer class="side-drawer" mode="side" opened>
+    <div style="height: 64px;background: #3f51b5;display: flex;justify-content: center;align-items: center">
+      <h3 style="color: #fff;font-size: 20px">App Title</h3>
+    </div>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option [routerLink]="['/dashboard']">
+        <mat-icon matListIcon>dashboard</mat-icon>
+        <h3 matLine> Dashboard </h3>
+      </mat-list-option>
+      <mat-list-option [routerLink]="['/profile']">
+        <mat-icon matListIcon>portrait</mat-icon>
+        <h3 matLine>Profile</h3>
+      </mat-list-option>
+      <mat-list-option [routerLink]="['/parking-lots']">
+        <mat-icon matListIcon>local_parking</mat-icon>
+        <h3 matLine>Parking Lots</h3>
+      </mat-list-option>
+      <mat-list-option [routerLink]="['/map']" >
+        <mat-icon matListIcon>map</mat-icon>
+        <h3 matLine> Map </h3>
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-toolbar></app-toolbar>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

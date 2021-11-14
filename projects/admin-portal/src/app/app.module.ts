@@ -10,22 +10,42 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {ReactiveFormsModule} from "@angular/forms";
+import { DashboardComponent } from './screens/dashboard/dashboard.component';
+import { HomeComponent } from './screens/home/home.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { ToolbarComponent } from './Components/toolbar/toolbar.component';
+import {MatListModule} from "@angular/material/list";
+import {MatLineModule} from "@angular/material/core";
+import { ProfileComponent } from './screens/profile/profile.component';
+import { MapComponent } from './screens/map/map.component';
+import { ParkingLotsComponent } from './screens/parking-lots/parking-lots.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    HomeComponent,
+    ToolbarComponent,
+    ProfileComponent,
+    MapComponent,
+    ParkingLotsComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatCardModule,
-        MatButtonModule,
-        BrowserAnimationsModule,
-        MatInputModule,
-        MatIconModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatCardModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatLineModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
