@@ -16,7 +16,7 @@
         <mat-icon matListIcon>local_parking</mat-icon>
         <h3 matLine>Parking Lots</h3>
       </mat-list-option>
-      <mat-list-option [routerLink]="['/map']" >
+      <mat-list-option [routerLink]="['/map']">
         <mat-icon matListIcon>map</mat-icon>
         <h3 matLine> Map </h3>
       </mat-list-option>
@@ -24,6 +24,8 @@
   </mat-drawer>
   <mat-drawer-content>
     <app-toolbar></app-toolbar>
-    <router-outlet></router-outlet>
+    <div style="padding: 10px">
+      <router-outlet></router-outlet>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>

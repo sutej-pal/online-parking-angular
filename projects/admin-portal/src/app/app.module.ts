@@ -20,6 +20,7 @@ import {MatLineModule} from "@angular/material/core";
 import { ProfileComponent } from './screens/profile/profile.component';
 import { MapComponent } from './screens/map/map.component';
 import { ParkingLotsComponent } from './screens/parking-lots/parking-lots.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -32,20 +33,21 @@ import { ParkingLotsComponent } from './screens/parking-lots/parking-lots.compon
     MapComponent,
     ParkingLotsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatCardModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatLineModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatCardModule,
+        MatButtonModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        MatLineModule,
+        MatTooltipModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

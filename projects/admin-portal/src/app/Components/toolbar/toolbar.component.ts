@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {Router, NavigationStart, Event as NavigationEvent} from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,16 +10,41 @@ import {Router} from "@angular/router";
 export class ToolbarComponent implements OnInit {
 
   title: string = '';
+  routerEvents$: Subscription | undefined
 
   constructor(
     private router: Router
-  ) { }
-
-  ngOnInit(): void {
-    const url = this.router.url;
-    switch (url) {
-      case '/dashboard': this.title = 'Dashboard'
-    }
+  ) {
   }
 
+  ngOnInit(): void {
+    this.routerEvents$
+      = this.router.events
+      .subscribe(
+        (event: NavigationEvent) => {
+          if (event instanceof NavigationStart) {
+            this.updateTitle(event.url);
+          }
+        });
+  }
+
+  updateTitle(url: string) {
+    switch (url) {
+      case '/dashboard': {
+        this.title = 'Dashboard'
+        return
+      }
+      case '/map': {
+        this.title = 'Map'
+        return
+      }
+      case '/parking-lots': {
+        this.title = 'Parking Lots'
+        return
+      }
+      default: {
+        this.title = ''
+      }
+    }
+  }
 }

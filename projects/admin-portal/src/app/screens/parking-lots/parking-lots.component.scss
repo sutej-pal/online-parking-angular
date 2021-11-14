@@ -1,0 +1,16 @@
+::ng-deep button .mat-button-wrapper {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.parking-lots-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  .parking-lot-card {
+    margin: 5px 0;
+    width: 395px;
+  }
+}
