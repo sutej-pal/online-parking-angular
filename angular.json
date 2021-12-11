@@ -70,6 +70,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "port": 5200
+          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
@@ -137,7 +140,8 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/admin-portal/src/styles.scss"
+              "projects/admin-portal/src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -175,6 +179,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "port": 5300
+          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {

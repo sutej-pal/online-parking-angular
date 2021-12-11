@@ -47,4 +47,8 @@ export class ToolbarComponent implements OnInit {
       }
     }
   }
+
+  async logOut() {
+    await this.router.navigate(['/login']);
+  }
 }

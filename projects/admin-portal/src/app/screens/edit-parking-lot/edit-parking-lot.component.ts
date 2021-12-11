@@ -13,7 +13,7 @@ export class EditParkingLotComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _location: Location,
+    private location: Location,
     private fb: FormBuilder
   ) {
   }
@@ -32,6 +32,6 @@ export class EditParkingLotComponent implements OnInit {
   }
 
   onCancel() {
-    this._location.back();
+    this.location.back();
   }
 }

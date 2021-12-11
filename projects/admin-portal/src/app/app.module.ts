@@ -1,27 +1,33 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './screens/login/login.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {LoginComponent} from './screens/login/login.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
-import {ReactiveFormsModule} from "@angular/forms";
-import { DashboardComponent } from './screens/dashboard/dashboard.component';
-import { HomeComponent } from './screens/home/home.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {DashboardComponent} from './screens/dashboard/dashboard.component';
+import {HomeComponent} from './screens/home/home.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatToolbarModule} from "@angular/material/toolbar";
-import { ToolbarComponent } from './Components/toolbar/toolbar.component';
+import {ToolbarComponent} from './Components/toolbar/toolbar.component';
 import {MatListModule} from "@angular/material/list";
 import {MatLineModule} from "@angular/material/core";
-import { ProfileComponent } from './screens/profile/profile.component';
-import { MapComponent } from './screens/map/map.component';
-import { ParkingLotsComponent } from './screens/parking-lots/parking-lots.component';
+import {ProfileComponent} from './screens/profile/profile.component';
+import {MapComponent} from './screens/map/map.component';
+import {ParkingLotsComponent} from './screens/parking-lots/parking-lots.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { EditParkingLotComponent } from './screens/edit-parking-lot/edit-parking-lot.component';
+import {EditParkingLotComponent} from './screens/edit-parking-lot/edit-parking-lot.component';
+import {ClientsComponent} from './screens/clients/clients.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {NotificationSuccessComponent} from './Components/notification/notification-success/notification-success.component';
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -33,24 +39,34 @@ import { EditParkingLotComponent } from './screens/edit-parking-lot/edit-parking
     ProfileComponent,
     MapComponent,
     ParkingLotsComponent,
-    EditParkingLotComponent
+    EditParkingLotComponent,
+    ClientsComponent,
+    NotificationSuccessComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatCardModule,
-        MatButtonModule,
-        BrowserAnimationsModule,
-        MatInputModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        MatSidenavModule,
-        MatToolbarModule,
-        MatListModule,
-        MatLineModule,
-        MatTooltipModule
-    ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatCardModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatLineModule,
+    MatTooltipModule,
+    MatTableModule,
+    FormsModule,
+    MatMenuModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+    }),
+  ],
+  providers: [MatSnackBar],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -7,6 +7,7 @@ import {ProfileComponent} from "./screens/profile/profile.component";
 import {MapComponent} from "./screens/map/map.component";
 import {ParkingLotsComponent} from "./screens/parking-lots/parking-lots.component";
 import {EditParkingLotComponent} from "./screens/edit-parking-lot/edit-parking-lot.component";
+import {ClientsComponent} from "./screens/clients/clients.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: "map",
         component: MapComponent
+      },
+      {
+        path: "clients",
+        component: ClientsComponent
       },
       {
         path: "parking-lots",

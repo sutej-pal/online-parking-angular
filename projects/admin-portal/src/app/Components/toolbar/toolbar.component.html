@@ -1,4 +1,15 @@
-<mat-toolbar color="primary" class="example-toolbar">
-<!--  <button mat-icon-button><mat-icon>menu</mat-icon></button>-->
-  <h1 class="example-app-name">{{title}}</h1>
+<mat-toolbar color="primary" class="header-main">
+  <div class="header">
+    <h1 class="example-app-name">{{title}}</h1>
+    <div class="user-menu" [matMenuTriggerFor]="menu">
+    <button mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <span class="mat-body">Hi, User</span>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/profile">Profile</button>
+      <button mat-menu-item (click)="logOut()">Log Out</button>
+    </mat-menu>
+    </div>
+  </div>
 </mat-toolbar>

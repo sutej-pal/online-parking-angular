@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notificationService: NotificationService
   ) {
   }
 
@@ -23,8 +25,9 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log('hi');
-    await this.router.navigate(['/', 'dashboard']);
+    // let res = await this.notificationService.showError('test');
+    // console.log(res);
+    await this.notificationService.showError('test');
   }
 
   private addControlsToForm() {

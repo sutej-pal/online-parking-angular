@@ -1,0 +1,14 @@
+.header-main {
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .user-menu {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+  }
+}
