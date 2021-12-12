@@ -1,9 +1,6 @@
 import {Injectable} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {NotificationSuccessComponent} from "../Components/notification/notification-success/notification-success.component";
 import {ToastrService} from "ngx-toastr";
 import {IndividualConfig} from "ngx-toastr/toastr/toastr-config";
-import {take} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -35,21 +32,24 @@ export class NotificationService {
   ) {
   }
 
-  public showSuccess(message: string, title: string) {
-    this.toastr.success('Hello world!', 'Toastr fun!');
+  public showSuccess(message: string, title?: string, config = {}) {
+    const options = Object.assign(this.toastOptions, config);
+    this.toastr.success(message, title, options);
   }
 
   public showError(message: string, title?: string, config = {}) {
     const options = Object.assign(this.toastOptions, config);
-    return new Promise(resolve => {
-      this.toastr.error(message, title, options)
-        .onTap
-        .pipe(take(1))
-        .subscribe(() => {
-          this.toastr.clear()
-          resolve(true);
-        });
-    })
+    this.toastr.error(message, title, options)
+    // const options = Object.assign(this.toastOptions, config);
+    // return new Promise(resolve => {
+    //   this.toastr.error(message, title, options)
+    //     .onTap
+    //     .pipe(take(1))
+    //     .subscribe(() => {
+    //       this.toastr.clear()
+    //       resolve(true);
+    //     });
+    // })
   }
 
 

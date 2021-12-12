@@ -1,2 +1,13 @@
 // regular style toast
 @import '~ngx-toastr/toastr';
+
+::ng-deep .toast-container .ngx-toastr {
+  box-shadow: none;
+
+  .toast-close-button {
+    right: -5px;
+    top: 0;
+    font-size: 25px;
+    font-weight: 300;
+  }
+}

@@ -28,6 +28,8 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NotificationSuccessComponent} from './Components/notification/notification-success/notification-success.component';
 import {ToastrModule} from "ngx-toastr";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -43,28 +45,30 @@ import {ToastrModule} from "ngx-toastr";
     ClientsComponent,
     NotificationSuccessComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatCardModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatLineModule,
-    MatTooltipModule,
-    MatTableModule,
-    FormsModule,
-    MatMenuModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      preventDuplicates: true,
-    }),
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatCardModule,
+        MatButtonModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        MatLineModule,
+        MatTooltipModule,
+        MatTableModule,
+        FormsModule,
+        MatMenuModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            preventDuplicates: true,
+        }),
+        MatCheckboxModule,
+        MatProgressSpinnerModule,
+    ],
   providers: [MatSnackBar],
   bootstrap: [AppComponent]
 })
