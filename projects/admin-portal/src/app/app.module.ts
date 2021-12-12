@@ -30,6 +30,7 @@ import {NotificationSuccessComponent} from './Components/notification/notificati
 import {ToastrModule} from "ngx-toastr";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         }),
         MatCheckboxModule,
         MatProgressSpinnerModule,
+        MatGridListModule,
     ],
   providers: [MatSnackBar],
   bootstrap: [AppComponent]
