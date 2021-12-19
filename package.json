@@ -25,6 +25,7 @@
     "axios": "^0.24.0",
     "chart.js": "^3.6.2",
     "google-maps": "^4.3.3",
+    "ngx-mask": "^13.0.0",
     "ngx-toastr": "^14.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",

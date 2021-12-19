@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {NotificationService} from "../../services/notification.service";
+import {NotificationService} from "../../../../../common-services/notification.service";
 import {BehaviorSubject} from "rxjs";
-import {HttpService} from "../../services/http.service";
+import {HttpService} from "../../../../../common-services/http.service";
 
 @Component({
   selector: 'app-login',
@@ -13,8 +13,8 @@ import {HttpService} from "../../services/http.service";
 export class LoginComponent implements OnInit {
 
   formGroup: FormGroup = new FormGroup({});
-  isRememberMeChecked = false
-  isLoggingIn$ = new BehaviorSubject(false)
+  isRememberMeChecked = false;
+  isLoggingIn$ = new BehaviorSubject(false);
 
   constructor(
     private router: Router,
