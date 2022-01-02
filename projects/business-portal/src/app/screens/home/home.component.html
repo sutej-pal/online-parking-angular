@@ -1,1 +1,32 @@
-<p>home works!</p>
+<app-toolbar></app-toolbar>
+<mat-drawer-container #sideDrawer class="example-container">
+  <mat-drawer class="side-drawer" mode="side" opened>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option [routerLink]="['/dashboard']">
+        <mat-icon matListIcon>dashboard</mat-icon>
+        <h3 matLine> Dashboard </h3>
+      </mat-list-option>
+      <mat-list-option [routerLink]="['/profile']">
+        <mat-icon matListIcon>portrait</mat-icon>
+        <h3 matLine>Profile</h3>
+      </mat-list-option>
+      <mat-list-option [routerLink]="['/parking-lots']">
+        <mat-icon matListIcon>local_parking</mat-icon>
+        <h3 matLine>Parking Lots</h3>
+      </mat-list-option>
+      <mat-list-option [routerLink]="['/clients']">
+        <mat-icon matListIcon>people</mat-icon>
+        <h3 matLine>Clients</h3>
+      </mat-list-option>
+      <mat-list-option [routerLink]="['/map']">
+        <mat-icon matListIcon>map</mat-icon>
+        <h3 matLine> Map </h3>
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

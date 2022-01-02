@@ -1,0 +1,46 @@
+<div class="login-main">
+  <mat-card class="login-card">
+    <div class="login-card-title">
+      <span>Welcome back</span>
+      <span>Sign in with your credentials below.</span>
+    </div>
+    <hr>
+    <br>
+    <mat-card-content>
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" autocomplete="off">
+        <div>
+          <mat-form-field class="full-width">
+            <input formControlName="email" matInput placeholder="Email">
+            <mat-error *ngIf="formGroup.controls['email'].errors?.required">
+              Email is required.
+            </mat-error>
+            <mat-error *ngIf="formGroup.controls['email'].errors?.email">
+              Please enter a valid email address.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="full-width">
+            <input formControlName="password" matInput placeholder="Password" type="password">
+            <mat-error>Password is required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div style="margin-top: 15px">
+          <mat-checkbox
+            [checked]="isRememberMeChecked"
+            (change)="rememberMe()">
+            Remember me
+          </mat-checkbox>
+        </div>
+        <div style="text-align: center;margin-top: 15px">
+          <button type="submit" mat-raised-button color="primary" [disabled]="isLoggingIn$ | async">
+            <span>
+              <mat-spinner *ngIf="isLoggingIn$ | async" diameter="20"></mat-spinner>
+              <span>{{(isLoggingIn$ | async) ? 'Logging in ...' : 'Login'}}</span>
+            </span>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

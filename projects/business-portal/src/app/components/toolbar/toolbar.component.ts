@@ -23,7 +23,7 @@ export class ToolbarComponent implements OnInit {
       .subscribe(
         (event: NavigationEvent) => {
           if (event instanceof NavigationStart) {
-            this.title = this.updateTitle(event.url);
+            this.updateTitle(event.url);
           }
         });
   }
@@ -31,7 +31,7 @@ export class ToolbarComponent implements OnInit {
   updateTitle(url: string) {
     let urlComponents: string[] = url.split('/');
     let title: string = urlComponents.reverse()[0];
-    return (title.charAt(0).toUpperCase() + title.slice(1)).replace('-',' ');
+    return title.charAt(0).toUpperCase() + title.slice(1);
     // switch (url) {
     //   case '/dashboard': {
     //     this.title = 'Dashboard'
@@ -43,6 +43,10 @@ export class ToolbarComponent implements OnInit {
     //   }
     //   case '/parking-lots': {
     //     this.title = 'Parking Lots'
+    //     return
+    //   }
+    //   case '/profile': {
+    //     this.title = 'Profile'
     //     return
     //   }
     //   default: {

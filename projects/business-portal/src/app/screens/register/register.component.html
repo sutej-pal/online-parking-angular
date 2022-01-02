@@ -1,0 +1,38 @@
+<div class="register-main">
+  <mat-card>
+    <div class="card-title">
+      <mat-card-title>Register Here</mat-card-title>
+      <mat-card-subtitle>Please fill up the form to start boarding process.</mat-card-subtitle>
+    </div>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" autocomplete="off">
+      <div>
+        <mat-form-field class="full-width">
+          <input formControlName="email" matInput placeholder="Email">
+          <mat-error *ngIf="formGroup.controls['email'].hasError('required')">Email is required.</mat-error>
+          <mat-error *ngIf="formGroup.controls['email'].hasError('email')">Please enter a valid email.</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="full-width">
+          <input formControlName="mobile" mask="000-000-0000" matInput placeholder="Mobile">
+          <mat-error *ngIf="formGroup.controls['mobile'].hasError('required')">Mobile is required.</mat-error>
+          <mat-error *ngIf="formGroup.controls['mobile'].hasError('pattern')">Please enter a valid mobile number.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="full-width">
+          <input formControlName="location" matInput placeholder="Location">
+        </mat-form-field>
+      </div>
+      <div style="text-align: center;margin-top: 15px">
+        <button type="submit" mat-raised-button color="primary" [disabled]="isRegistering$ | async">
+            <span style="display: flex;align-items: center;gap: 10px">
+              <mat-spinner *ngIf="isRegistering$ | async" diameter="20"></mat-spinner>
+              <span>{{(isRegistering$ | async) ? 'Registering ...' : 'Register'}}</span>
+            </span>
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

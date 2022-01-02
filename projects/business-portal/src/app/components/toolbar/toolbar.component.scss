@@ -1,0 +1,23 @@
+.header-main {
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .user-menu {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+  }
+}
+
+.app-info {
+  position: absolute;
+  top: 0;
+  right: 800px;
+  padding: 5px 10px;
+  background: bisque;
+  opacity: .5;
+}
