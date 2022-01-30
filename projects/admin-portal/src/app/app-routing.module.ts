@@ -35,11 +35,11 @@ const routes: Routes = [
         component: ClientsComponent
       },
       {
-        path: "parking-lots",
+        path: "parking-lot",
         component: ParkingLotsComponent
       },
       {
-        path: "parking-lots/add",
+        path: "parking-lot/add",
         component: EditParkingLotComponent
       }
     ]

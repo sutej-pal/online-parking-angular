@@ -3,14 +3,16 @@
   <!--  Search Row-->
 
   <ng-container matColumnDef="search_id">
-    <th mat-header-cell *matHeaderCellDef>
-      <mat-form-field>
-        <mat-label>Search ID</mat-label>
-        <input matInput type="text" [(ngModel)]="search.id">
-        <button *ngIf="search.id" matSuffix mat-icon-button aria-label="Clear" color="warn" (click)="search.id=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+    <th mat-header-cell *matHeaderCellDef #searchIdParent>
+      <div>
+        <mat-form-field>
+          <mat-label>Search ID</mat-label>
+          <input matInput type="text" [(ngModel)]="search.id">
+          <button *ngIf="search.id" matSuffix mat-icon-button aria-label="Clear" color="warn" (click)="search.id=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
     </th>
   </ng-container>
 

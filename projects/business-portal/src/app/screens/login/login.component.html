@@ -10,7 +10,7 @@
       <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" autocomplete="off">
         <div>
           <mat-form-field class="full-width">
-            <input formControlName="email" matInput placeholder="Email">
+            <input formControlName="email" matInput placeholder="Email" autocomplete="on">
             <mat-error *ngIf="formGroup.controls['email'].errors?.required">
               Email is required.
             </mat-error>
@@ -21,7 +21,7 @@
         </div>
         <div>
           <mat-form-field class="full-width">
-            <input formControlName="password" matInput placeholder="Password" type="password">
+            <input formControlName="password" matInput placeholder="Password" type="password" autocomplete="on">
             <mat-error>Password is required.</mat-error>
           </mat-form-field>
         </div>

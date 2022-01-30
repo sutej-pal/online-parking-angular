@@ -22,6 +22,10 @@ import {MatListModule} from "@angular/material/list";
 import {ToolbarComponent} from "./components/toolbar/toolbar.component";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatMenuModule} from "@angular/material/menu";
+import { ParkingLotComponent } from './screens/parking-lot/parking-lot.component';
+import {MatGridListModule} from "@angular/material/grid-list";
+import { ParkingLotCardComponent } from './components/parking-lot-card/parking-lot-card.component';
+import { EditParkingLotComponent } from './screens/edit-parking-lot/edit-parking-lot.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,10 @@ import {MatMenuModule} from "@angular/material/menu";
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ParkingLotComponent,
+    ParkingLotCardComponent,
+    EditParkingLotComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +57,8 @@ import {MatMenuModule} from "@angular/material/menu";
     MatIconModule,
     MatListModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatGridListModule
   ],
   providers: [],
   exports: [ToolbarComponent],

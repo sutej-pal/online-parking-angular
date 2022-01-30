@@ -29,9 +29,13 @@ export class ToolbarComponent implements OnInit {
   }
 
   updateTitle(url: string) {
-    let urlComponents: string[] = url.split('/');
-    let title: string = urlComponents.reverse()[0];
-    return title.charAt(0).toUpperCase() + title.slice(1);
+    try {
+      let urlComponents: string[] = url.split('/');
+      let title: string = urlComponents.reverse()[0];
+      return (title.charAt(0).toUpperCase() + title.slice(1)).replace('-',' ');
+    } catch (e) {
+      return ''
+    }
     // switch (url) {
     //   case '/dashboard': {
     //     this.title = 'Dashboard'
@@ -41,7 +45,7 @@ export class ToolbarComponent implements OnInit {
     //     this.title = 'Map'
     //     return
     //   }
-    //   case '/parking-lots': {
+    //   case '/parking-lot': {
     //     this.title = 'Parking Lots'
     //     return
     //   }
