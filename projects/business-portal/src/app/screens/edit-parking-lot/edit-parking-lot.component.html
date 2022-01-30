@@ -16,37 +16,22 @@
       </div>
     </div>
     <div>
-      <input type="file" hidden #imageUpload>
-      <div fxLayout fxLayoutGap="16px">
+      <input type="file" multiple accept="image/*" (change)="handleImageUpload($event)" hidden #imageUpload>
+      <div style="display: flex;justify-content: flex-start;align-items: center;gap: 5px">
         <button mat-raised-button (click)="imageUpload.click()">Upload Images</button>
         <mat-icon matTooltip="Please upload a perfect pics only. These will be representing your Parking Lot."
                   matTooltipClass="upload-images-tooltip" matTooltipPosition="right">info
         </mat-icon>
       </div>
       <div class="uploaded-images">
-        <div>
+        <mat-spinner *ngIf="!(isImagePreviewReady$ | async)" [diameter]="30"></mat-spinner>
+        <div *ngFor="let image of imagesForUpload; let i = index">
           <div class="delete-icon-container">
-            <button mat-mini-fab color="warn" class="delete-icon">
+            <button mat-mini-fab color="warn" class="delete-icon" (click)="removeImage(i)">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
-          <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-        </div>
-        <div>
-          <div class="delete-icon-container">
-            <button mat-mini-fab color="warn" class="delete-icon">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-          <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-        </div>
-        <div>
-          <div class="delete-icon-container">
-            <button mat-mini-fab color="warn" class="delete-icon">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-          <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+          <img [src]="image.src" [alt]="image.name">
         </div>
       </div>
     </div>

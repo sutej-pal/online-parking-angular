@@ -25,6 +25,10 @@
     div {
       width: 200px;
       position: relative;
+      padding: 5px;
+      border: 1px solid #aaa;
+      border-style: dashed;
+      border-radius: 3px;
 
       .delete-icon-container {
         display: none;
