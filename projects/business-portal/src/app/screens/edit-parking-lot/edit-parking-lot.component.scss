@@ -1,0 +1,53 @@
+.edit-parking-lot-main {
+  padding: 16px;
+
+  .spinner-container {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-fields-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .uploaded-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 0;
+
+    div {
+      width: 200px;
+      position: relative;
+
+      .delete-icon-container {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #00000087;
+      }
+
+      &:hover {
+        .delete-icon-container {
+          display: flex;
+        }
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

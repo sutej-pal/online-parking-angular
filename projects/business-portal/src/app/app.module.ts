@@ -26,6 +26,7 @@ import { ParkingLotComponent } from './screens/parking-lot/parking-lot.component
 import {MatGridListModule} from "@angular/material/grid-list";
 import { ParkingLotCardComponent } from './components/parking-lot-card/parking-lot-card.component';
 import { EditParkingLotComponent } from './screens/edit-parking-lot/edit-parking-lot.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -38,28 +39,29 @@ import { EditParkingLotComponent } from './screens/edit-parking-lot/edit-parking
     ParkingLotCardComponent,
     EditParkingLotComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    NgxMaskModule.forRoot(),
-    MatCardModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    ToastrModule.forRoot({
-      preventDuplicates: true,
-    }),
-    MatCheckboxModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatGridListModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        NgxMaskModule.forRoot(),
+        MatCardModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        ToastrModule.forRoot({
+            preventDuplicates: true,
+        }),
+        MatCheckboxModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatGridListModule,
+        MatTooltipModule
+    ],
   providers: [],
   exports: [ToolbarComponent],
   bootstrap: [AppComponent]
