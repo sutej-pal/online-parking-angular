@@ -54,7 +54,7 @@ export class HttpService {
     return this.hitApi(config);
   }
 
-  async post(url: string, query: any, data: any, accessToken: string) {
+  async post(url: string, query: any = '', data: any, accessToken: string) {
     const requestParams: RequestParams = {
       method: 'POST',
       url: `${baseApiUrl}/${url}`,

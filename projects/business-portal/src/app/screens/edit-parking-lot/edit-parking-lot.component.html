@@ -6,15 +6,39 @@
     <div>Loading Form ...</div>
   </div>
   <form *ngIf="(isFormReady$| async)" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <div class="form-fields-container">
-      <div>
-        <mat-form-field appearance="legacy">
-          <mat-label>Parking Lot Name</mat-label>
-          <input matInput autocomplete="nope" placeholder="Name" formControlName="parkingLotName">
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
-      </div>
-    </div>
+    <mat-card>
+      <mat-card-title>Basic Info</mat-card-title>
+      <mat-card-content>
+        <div class="form-fields-container">
+          <div>
+            <mat-form-field appearance="legacy">
+              <mat-label>Parking Lot Name</mat-label>
+              <input matInput autocomplete="nope" placeholder="Name" formControlName="name">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Address</mat-card-title>
+      <mat-card-content>
+        <div class="form-fields-container" formGroupName="address">
+          <div>
+            <mat-form-field appearance="legacy">
+              <mat-label>Address Line One</mat-label>
+              <input matInput autocomplete="nope" placeholder="Address" formControlName="addressLineOne">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="legacy">
+              <mat-label>Address Line Two</mat-label>
+              <input matInput autocomplete="nope" placeholder="Address" formControlName="addressLineTwo">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
     <div>
       <input type="file" multiple accept="image/*" (change)="handleImageUpload($event)" hidden #imageUpload>
       <div style="display: flex;justify-content: flex-start;align-items: center;gap: 5px">
@@ -40,7 +64,7 @@
         <mat-icon>add</mat-icon>
         Add
       </button>
-      <button mat-raised-button (click)="cancel()">
+      <button mat-raised-button type="button" (click)="cancel()">
         <mat-icon>clear</mat-icon>
         Cancel
       </button>

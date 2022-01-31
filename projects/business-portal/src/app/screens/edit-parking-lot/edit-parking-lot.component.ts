@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Location} from '@angular/common';
 import {BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
+import {NotificationService} from "../../../../../common-services/notification.service";
+import {HttpService} from "../../../../../common-services/http.service";
 
 @Component({
   selector: 'app-edit-parking-lot',
@@ -18,19 +20,32 @@ export class EditParkingLotComponent implements OnInit {
   constructor(
     private router: Router,
     private location: Location,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private httpService: HttpService,
+    private notificationService: NotificationService
   ) {
   }
 
   ngOnInit(): void {
+    this.notificationService.showSuccess('res.data.message');
     this.createForm();
   }
 
-  onSubmit() {
-    if (this.formGroup.valid) {
-      console.log('hi');
+  async onSubmit() {
+    if (this.formGroup.invalid) {
+      this.notificationService.showSuccess('Please fix the form errors');
+      return;
+    }
+    try {
+      const token = localStorage.getItem('token') || '';
+      let res = await this.httpService.post('business/parking-lot', {}, this.formGroup.value, token);
+      this.notificationService.showSuccess(res.data.message);
+      console.log('res', res);
+      await this.router.navigate(['parking-lot']);
+    } catch (e) {
 
     }
+
   }
 
   async cancel() {
@@ -39,7 +54,11 @@ export class EditParkingLotComponent implements OnInit {
 
   private createForm() {
     this.formGroup = this.fb.group({
-      parkingLotName: ['', Validators.required]
+      name: ['', Validators.required],
+      address: this.fb.group({
+        addressLineOne: ['', Validators.required],
+        addressLineTwo: ['', Validators.required]
+      }),
     });
     setTimeout(() => {
       this.isFormReady$.next(true);

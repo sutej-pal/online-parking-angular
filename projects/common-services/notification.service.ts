@@ -13,7 +13,7 @@ export class NotificationService {
     easeTime: 300,
     easing: "",
     enableHtml: false,
-    extendedTimeOut: 10000000,
+    extendedTimeOut: 1000,
     messageClass: "",
     newestOnTop: false,
     onActivateTick: false,
@@ -22,7 +22,7 @@ export class NotificationService {
     progressAnimation: 'decreasing',
     progressBar: true,
     tapToDismiss: false,
-    timeOut: 300000000,
+    timeOut: 2000,
     titleClass: "toast-title",
     toastClass: "ngx-toastr"
   }

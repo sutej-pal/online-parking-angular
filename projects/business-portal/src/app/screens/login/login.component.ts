@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
       let res = await this.httpService.post('login', {}, this.formGroup.value, '');
       this.notificationService.showSuccess(res.data.message);
       console.log('res', res);
+      localStorage.setItem('token', res.data.data.token);
       await this.router.navigate(['']);
     } catch (e) {
 
