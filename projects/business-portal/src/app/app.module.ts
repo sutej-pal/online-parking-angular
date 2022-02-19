@@ -27,6 +27,9 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {ParkingLotCardComponent} from './components/parking-lot-card/parking-lot-card.component';
 import {EditParkingLotComponent} from './screens/edit-parking-lot/edit-parking-lot.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { FullscreenImagePreviewComponent } from './components/fullscreen-image-preview/fullscreen-image-preview.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     ToolbarComponent,
     ParkingLotComponent,
     ParkingLotCardComponent,
-    EditParkingLotComponent
+    EditParkingLotComponent,
+    ConfirmDialogComponent,
+    FullscreenImagePreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatToolbarModule,
     MatMenuModule,
     MatGridListModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ],
   providers: [],
   exports: [ToolbarComponent],

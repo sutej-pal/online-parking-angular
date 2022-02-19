@@ -40,9 +40,9 @@
     </mat-card>
 
     <div>
-      <input type="file" multiple accept="image/*" (change)="handleImageUpload($event)" hidden #imageUpload>
+      <input type="file" multiple accept="image/*" (click)="resetFilesArray($event)" (change)="handleImageUpload($event)" hidden #imageUpload>
       <div style="display: flex;justify-content: flex-start;align-items: center;gap: 5px">
-        <button mat-raised-button (click)="imageUpload.click()">Upload Images</button>
+        <button mat-raised-button type="button" (click)="imageUpload.click()">Upload Images</button>
         <mat-icon matTooltip="Please upload a perfect pics only. These will be representing your Parking Lot."
                   matTooltipClass="upload-images-tooltip" matTooltipPosition="right">info
         </mat-icon>
@@ -50,9 +50,12 @@
       <div class="uploaded-images">
         <mat-spinner *ngIf="!(isImagePreviewReady$ | async)" [diameter]="30"></mat-spinner>
         <div *ngFor="let image of imagesForUpload; let i = index">
-          <div class="delete-icon-container">
-            <button mat-mini-fab color="warn" class="delete-icon" (click)="removeImage(i)">
+          <div class="icon-container">
+            <button mat-mini-fab color="warn" type="button" class="delete-icon" (click)="removeImage(i)">
               <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" type="button" class="fullscreen-icon" (click)="fullScreenPreview(i)">
+              <mat-icon>fullscreen</mat-icon>
             </button>
           </div>
           <img [src]="image.src" [alt]="image.name">

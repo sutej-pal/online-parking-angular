@@ -36,24 +36,34 @@
       overflow: hidden;
       position: relative;
       padding: 5px;
-      border: 1px solid #aaa;
-      border-style: dashed;
+      border: 1px dashed #aaa;
       border-radius: 3px;
 
-      .delete-icon-container {
+      .icon-container {
         display: none;
-        justify-content: center;
-        align-items: center;
         position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
         background: #00000087;
+
+        .delete-icon {
+          position: absolute;
+          left: 0;
+          right: 0;
+          margin: 25% auto;
+        }
+
+        .fullscreen-icon {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+        }
       }
 
       &:hover {
-        .delete-icon-container {
+        .icon-container {
           display: flex;
         }
       }

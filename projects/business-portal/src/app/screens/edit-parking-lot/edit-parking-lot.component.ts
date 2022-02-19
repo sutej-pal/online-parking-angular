@@ -5,6 +5,10 @@ import {BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
 import {NotificationService} from "../../../../../common-services/notification.service";
 import {HttpService} from "../../../../../common-services/http.service";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  FullscreenImagePreviewComponent
+} from "../../components/fullscreen-image-preview/fullscreen-image-preview.component";
 
 @Component({
   selector: 'app-edit-parking-lot',
@@ -19,21 +23,22 @@ export class EditParkingLotComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private location: Location,
     private fb: FormBuilder,
+    public dialog: MatDialog,
+    private location: Location,
     private httpService: HttpService,
     private notificationService: NotificationService
   ) {
   }
 
   ngOnInit(): void {
-    this.notificationService.showSuccess('res.data.message');
+    this.notificationService.showSuccess('res.ss.message');
     this.createForm();
   }
 
   async onSubmit() {
     if (this.formGroup.invalid) {
-      this.notificationService.showSuccess('Please fix the form errors');
+      this.notificationService.showError('Please fix the form errors');
       return;
     }
     try {
@@ -43,9 +48,8 @@ export class EditParkingLotComponent implements OnInit {
       console.log('res', res);
       await this.router.navigate(['parking-lot']);
     } catch (e) {
-
+      this.notificationService.showError('Failed to add Parking Lot.');
     }
-
   }
 
   async cancel() {
@@ -117,5 +121,18 @@ export class EditParkingLotComponent implements OnInit {
 
   removeImage(index: number) {
     this.imagesForUpload.splice(index, 1);
+  }
+
+  fullScreenPreview(index: number) {
+    console.log(this.imagesForUpload[index]);
+    const dialogRef = this.dialog.open(FullscreenImagePreviewComponent, {
+      width: '70vw',
+      data: {src: this.imagesForUpload[index].src}
+    });
+  }
+
+  resetFilesArray(event: HTMLElement | any) {
+    const input: HTMLInputElement = event.target;
+    input.value = '';
   }
 }
