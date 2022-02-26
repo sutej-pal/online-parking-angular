@@ -11,12 +11,17 @@
 }
 
 div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: auto;
-  max-height: 80vh;
+  max-height: 70vh;
   padding-right: 5px;
-  @include custom-scrollbar;
+  @include custom-scrollbar(5px);
 
   img {
-    width: 100%;
+    flex-shrink: 0;
+    max-width: 100%;
+    max-height: 100%
   }
 }
