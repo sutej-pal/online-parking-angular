@@ -1,6 +1,12 @@
 .parking-lot-card-main {
-  padding: 8px;
   width: 400px;
+  transition: transform .2s;
+
+  &:hover {
+    transform: scale(1.03);
+    z-index: 100;
+    position: relative;
+  }
 
   .example-card {
     max-width: 400px;
