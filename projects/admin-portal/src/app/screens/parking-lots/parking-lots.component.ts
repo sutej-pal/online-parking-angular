@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {ParkingLotService} from "../../services/parking-lot.service";
 
 @Component({
   selector: 'app-parking-lot',
@@ -9,13 +10,20 @@ import {Router} from "@angular/router";
 export class ParkingLotsComponent implements OnInit {
 
   constructor(
-    private router: Router
-  ) { }
+    private router: Router,
+    private parkingLotService: ParkingLotService
+  ) {
+  }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.getParkingLotList();
   }
 
   async addParkingLot() {
     await this.router.navigate(['parking-lot', 'add'])
+  }
+
+  private async getParkingLotList() {
+    await this.parkingLotService.getList();
   }
 }

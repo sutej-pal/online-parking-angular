@@ -1,3 +1,22 @@
-<span>map works!</span>
-<button mat-raised-button (click)="test()">Test</button>
+<div class="container">
+  <mat-card-title>Search</mat-card-title>
+  <form action="">
+    <div style="display: flex;flex-wrap: wrap;gap: 10px">
+      <div>
+        <mat-form-field appearance="legacy">
+          <mat-label>Parking Lot Name</mat-label>
+          <input matInput autocomplete="nope">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="legacy">
+          <mat-label>Parking Lot Name</mat-label>
+          <input matInput autocomplete="nope">
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</div>
 <div #map class="google-map"></div>
+

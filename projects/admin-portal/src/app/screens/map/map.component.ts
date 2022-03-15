@@ -34,8 +34,4 @@ export class MapComponent implements OnInit {
       zoom: 6,
     });
   }
-
-  test() {
-    console.log(this.mapObject);
-  }
 }
