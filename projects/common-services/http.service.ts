@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as _ from 'underscore';
 import {NotificationService} from "./notification.service";
 import {ToastrService} from "ngx-toastr";
+import {HttpClient} from "@angular/common/http";
 
 interface RequestParams {
   method: string;
@@ -23,13 +24,14 @@ export class HttpService {
   static toastr: ToastrService
 
   constructor(
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private httpClient: HttpClient
   ) {
     HttpService.toastr = toastr;
   }
 
 
-  static async executeRequest(params: RequestParams) {
+  async executeRequest(params: RequestParams) {
     let config: any = {
       headers: {'X-Requested-With': 'XMLHttpRequest'},
       withCredentials: false, // default
@@ -54,40 +56,55 @@ export class HttpService {
     return this.hitApi(config);
   }
 
-  async post(url: string, query: any = '', data: any, accessToken: string) {
+  async makeRequest(url: string, method: string, data: any, options: { queryParameters?: any, accessToken?: string }) {
     const requestParams: RequestParams = {
       method: 'POST',
       url: `${baseApiUrl}/${url}`,
       body: data,
-      queryParameters: query,
-      accessToken: accessToken
+      queryParameters: options.queryParameters,
+      accessToken: options.accessToken
     };
-    return HttpService.executeRequest(requestParams);
+    return this.executeRequest(requestParams);
   }
 
-  static async hitApi(request = {}) {
-    return axios(request)
-      .then((res) => {
-        return res
-      }).catch((err) => {
-        console.log('err', err);
-        if (err && err.response && err.response.status === 422 && typeof err.response.data.data === 'object') {
-          console.log(err.response.data.message)
-          this.toastr.error(err.response.data.message);
-          _.each(err.response.data.data, (data) => {
-            _.each(data, (error) => {
-              this.toastr.error(error);
-            });
-          })
-        } else if (err && err.response && err.response.status === 422 && typeof err.response.data.data === "string") {
-          this.toastr.error(err.response.data.data);
-        } else if (err && err.response && err.response.status && err.response.data.message) {
-          this.toastr.error(err.response.data.message);
-        } else {
-          this.toastr.error('Network Error');
-        }
-        throw err
-      });
+  async hitApi(request: RequestParams) {
+    switch (request.method) {
+      case 'GET':
+        return this.httpClient.get(request.url);
+      case 'POST':
+        return this.httpClient.post(request.url, request.body, {observe: 'response'});
+      case 'DELETE':
+        return this.httpClient.delete(request.url);
+      case 'PUT':
+        return this.httpClient.put(request.url, request.body, {observe: 'response'});
+      case 'PATCH':
+        return this.httpClient.patch(request.url, request.body, {observe: 'response'});
+      default:
+        return 'Invalid Method Request : 400 Method (' + request.method + ') not allowed ';
+    }
+    // return
+    // return axios(request)
+    //   .then((res) => {
+    //     return res
+    //   }).catch((err) => {
+    //     console.log('err', err);
+    //     if (err && err.response && err.response.status === 422 && typeof err.response.data.data === 'object') {
+    //       console.log(err.response.data.message)
+    //       this.toastr.error(err.response.data.message);
+    //       _.each(err.response.data.data, (data) => {
+    //         _.each(data, (error) => {
+    //           this.toastr.error(error);
+    //         });
+    //       })
+    //     } else if (err && err.response && err.response.status === 422 && typeof err.response.data.data === "string") {
+    //       this.toastr.error(err.response.data.data);
+    //     } else if (err && err.response && err.response.status && err.response.data.message) {
+    //       this.toastr.error(err.response.data.message);
+    //     } else {
+    //       this.toastr.error('Network Error');
+    //     }
+    //     throw err
+    //   });
   }
 }
 

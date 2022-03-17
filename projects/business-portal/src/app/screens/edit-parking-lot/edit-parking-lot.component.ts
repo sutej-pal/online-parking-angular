@@ -43,9 +43,9 @@ export class EditParkingLotComponent implements OnInit {
     }
     try {
       const token = localStorage.getItem('token') || '';
-      let res = await this.httpService.post('business/parking-lot', {}, this.formGroup.value, token);
-      this.notificationService.showSuccess(res.data.message);
-      console.log('res', res);
+      // let res = await this.httpService.makeRequest('business/parking-lot', 'get', this.formGroup.value);
+      // this.notificationService.showSuccess(res.data.message);
+      // console.log('res', res);
       await this.router.navigate(['parking-lot']);
     } catch (e) {
       this.notificationService.showError('Failed to add Parking Lot.');

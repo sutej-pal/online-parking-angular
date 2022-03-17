@@ -27,9 +27,9 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {ParkingLotCardComponent} from './components/parking-lot-card/parking-lot-card.component';
 import {EditParkingLotComponent} from './screens/edit-parking-lot/edit-parking-lot.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import { FullscreenImagePreviewComponent } from './components/fullscreen-image-preview/fullscreen-image-preview.component';
+import {FullscreenImagePreviewComponent} from './components/fullscreen-image-preview/fullscreen-image-preview.component';
 
 @NgModule({
   declarations: [
