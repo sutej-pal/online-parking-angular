@@ -41,9 +41,9 @@ export class RegisterComponent implements OnInit {
     }
     this.isRegistering$.next(true);
     try {
-      let res = await this.httpService.post('/register', {}, this.formGroup.value, '');
-      this.notificationService.showSuccess(res.data.message);
-      console.log('res', res);
+      // let res = await this.httpService.post('/register', {}, this.formGroup.value, '');
+      // this.notificationService.showSuccess(res.data.message);
+      // console.log('res', res);
       await this.router.navigate(['/dashboard']);
     } catch (e) {
 
