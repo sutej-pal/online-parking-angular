@@ -4,6 +4,8 @@ import {BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
 import {HttpService} from "../../../../../common-services/http.service";
 import {NotificationService} from "../../../../../common-services/notification.service";
+import {Store} from "@ngrx/store";
+import {updateUser} from "../../store/user/user.actions";
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginComponent implements OnInit {
   isLoggingIn$ = new BehaviorSubject(false);
 
   constructor(
+    private store: Store,
     private router: Router,
     private fb: FormBuilder,
     private httpService: HttpService,
@@ -35,9 +38,8 @@ export class LoginComponent implements OnInit {
     this.isLoggingIn$.next(true);
     try {
       const res = await this.httpService.executeRequest('login', 'post', this.formGroup.value).toPromise();
-      console.log('res', res);
       this.notificationService.showSuccess(res.body.message);
-      localStorage.setItem('token', res.body.data.token);
+      this.store.dispatch(updateUser(res.body.data));
       await this.router.navigate(['']);
       this.isLoggingIn$.next(false);
     } catch (e) {

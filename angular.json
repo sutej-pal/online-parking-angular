@@ -222,5 +222,8 @@
       }
     }
   },
-  "defaultProject": "business-portal"
+  "defaultProject": "business-portal",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

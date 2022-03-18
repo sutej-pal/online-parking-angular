@@ -30,7 +30,13 @@ import {EditParkingLotComponent} from './screens/edit-parking-lot/edit-parking-l
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import {FullscreenImagePreviewComponent} from './components/fullscreen-image-preview/fullscreen-image-preview.component';
+import {
+  FullscreenImagePreviewComponent
+} from './components/fullscreen-image-preview/fullscreen-image-preview.component';
+import {StoreModule} from '@ngrx/store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
+import {metaReducers, reducers} from "./store";
 
 @NgModule({
   declarations: [
@@ -68,7 +74,9 @@ import {FullscreenImagePreviewComponent} from './components/fullscreen-image-pre
     MatMenuModule,
     MatGridListModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production})
   ],
   providers: [],
   exports: [ToolbarComponent],
