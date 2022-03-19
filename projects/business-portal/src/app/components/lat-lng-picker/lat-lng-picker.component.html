@@ -1,6 +1,6 @@
 <div style="display: flex;justify-content: space-between;align-items: center">
   <div class="title">
-    Map
+    Locate your Parking Lot on Map
   </div>
   <span>
     <mat-icon mat-dialog-close="true" style="cursor: pointer">close</mat-icon>
@@ -11,6 +11,6 @@
   <div #map class="google-map"></div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button color="warn" mat-dialog-close="true">No</button>
-  <button mat-button color="primary" mat-dialog-close="true">Yes</button>
+  <button mat-button color="primary" (click)="setCoordinates()">Save Coordinates</button>
+  <button mat-button color="warn" mat-dialog-close="true">Close</button>
 </mat-dialog-actions>

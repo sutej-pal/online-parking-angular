@@ -168,7 +168,7 @@ export class EditParkingLotComponent implements OnInit {
     const result = await dialogRef.afterClosed().toPromise();
 
     if (result) {
-
+      this.formGroup.patchValue({geometry: result})
     }
   }
 }
