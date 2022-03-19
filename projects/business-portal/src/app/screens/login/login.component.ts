@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
       const res = await this.httpService.executeRequest('login', 'post', this.formGroup.value).toPromise();
       this.notificationService.showSuccess(res.body.message);
       this.store.dispatch(updateUser(res.body.data));
+      localStorage.setItem('token', res.body.data.token);
       await this.router.navigate(['']);
       this.isLoggingIn$.next(false);
     } catch (e) {

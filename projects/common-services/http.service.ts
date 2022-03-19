@@ -32,25 +32,22 @@ export class HttpService {
   }
 
 
-  executeRequest(url: string, method: string, body?: any, options = {
-    queryParameters: {},
-    accessToken: ''
-  }): Observable<any> {
+  executeRequest(url: string, method: string, body?: any ): Observable<any> {
     let config: any = {
       headers: {'X-Requested-With': 'XMLHttpRequest'},
       method: method.toUpperCase(),
       url: baseApiUrl + url,
     };
 
-    const queryParameters = options.queryParameters;
-
-    if (queryParameters) {
-      config['params'] = queryParameters;
-    }
-
-    if (options.accessToken) {
-      config.headers['Authorization'] = 'Bearer ' + options.accessToken;
-    }
+    // const queryParameters = options.queryParameters;
+    //
+    // if (queryParameters) {
+    //   config['params'] = queryParameters;
+    // }
+    //
+    // if (options.accessToken) {
+    //   config.headers['Authorization'] = 'Bearer ' + options.accessToken;
+    // }
 
     if (body) {
       config['body'] = body

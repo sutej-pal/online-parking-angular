@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import {BehaviorSubject} from "rxjs";
+
+interface ParkingLot {
+  name?: string
+}
 
 @Component({
   selector: 'app-parking-lot-card',
@@ -9,7 +14,10 @@ import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component
 })
 export class ParkingLotCardComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  @Input() parkingLot: ParkingLot = {};
+
+  constructor(public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
   }

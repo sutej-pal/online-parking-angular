@@ -18,4 +18,5 @@ export const reducers: ActionReducerMap<State> = {
 };
 
 
+// @ts-ignore
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];

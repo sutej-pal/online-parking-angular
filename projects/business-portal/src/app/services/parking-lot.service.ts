@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from "../../../../common-services/http.service";
 import {NotificationService} from "../../../../common-services/notification.service";
 
@@ -10,9 +10,16 @@ export class ParkingLotService {
   constructor(
     private httpService: HttpService,
     private notificationService: NotificationService
-  ) { }
+  ) {
+  }
 
   async list() {
-    // const res = await this.httpService.executeRequest('login', 'get', {}, {accessToken: }).toPromise();
+    try {
+      const res = await this.httpService.executeRequest('business/parking-lot', 'get').toPromise();
+      return res.data
+    } catch (e) {
+      return null
+    }
+
   }
 }

@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {loadParkingLots} from "../../store/parking-lot/parking-lot.actions";
-import {Observable, Subscription} from "rxjs";
-import {getUser} from "../../store/user/user.selectors";
+import {Observable} from "rxjs";
+import {HttpService} from "../../../../../common-services/http.service";
+import {ParkingLotService} from "../../services/parking-lot.service";
+
+interface ParkingLot {
+}
 
 @Component({
   selector: 'app-parking-lot',
@@ -13,18 +16,23 @@ import {getUser} from "../../store/user/user.selectors";
 export class ParkingLotComponent implements OnInit {
 
   user$: Observable<any> | undefined;
+  parkingLotArray: ParkingLot[] = [];
 
   constructor(
     private router: Router,
-    private store: Store
+    private store: Store,
+    private httpService: HttpService,
+    private parkingLotService: ParkingLotService,
   ) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.user$ = this.store.select((state: any) => state.user) as Observable<any>;
-    this.user$.subscribe(e => {
-      console.log('e', e)
-    });
+    await this.getParkingLots();
+  }
+
+  async getParkingLots() {
+    this.parkingLotArray = await this.parkingLotService.list();
   }
 
   async addParkingLot() {
