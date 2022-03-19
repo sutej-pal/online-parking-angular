@@ -1,0 +1,16 @@
+<div style="display: flex;justify-content: space-between;align-items: center">
+  <div class="title">
+    Map
+  </div>
+  <span>
+    <mat-icon mat-dialog-close="true" style="cursor: pointer">close</mat-icon>
+  </span>
+</div>
+<mat-divider></mat-divider>
+<mat-dialog-content>
+  <div #map class="google-map"></div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button color="warn" mat-dialog-close="true">No</button>
+  <button mat-button color="primary" mat-dialog-close="true">Yes</button>
+</mat-dialog-actions>

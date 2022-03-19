@@ -38,6 +38,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
 import {metaReducers, reducers} from "./store";
 import {AuthTokenInterceptor} from "./services/auth-token.interceptor";
+import { LatLngPickerComponent } from './components/lat-lng-picker/lat-lng-picker.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {AuthTokenInterceptor} from "./services/auth-token.interceptor";
     ParkingLotCardComponent,
     EditParkingLotComponent,
     ConfirmDialogComponent,
-    FullscreenImagePreviewComponent
+    FullscreenImagePreviewComponent,
+    LatLngPickerComponent
   ],
   imports: [
     BrowserModule,

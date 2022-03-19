@@ -4,6 +4,11 @@ import {loadParkingLots, loadParkingLotsFailure, loadParkingLotsSuccess} from ".
 
 export const parkingLotFeatureKey = 'parkingLot';
 
+export interface ParkingLot {
+  id: string;
+  name: string;
+}
+
 export interface State {
 
 }

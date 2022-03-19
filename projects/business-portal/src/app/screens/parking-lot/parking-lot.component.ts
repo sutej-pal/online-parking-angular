@@ -4,9 +4,7 @@ import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {HttpService} from "../../../../../common-services/http.service";
 import {ParkingLotService} from "../../services/parking-lot.service";
-
-interface ParkingLot {
-}
+import {ParkingLot} from "../../store/parking-lot/parking-lot.reducer";
 
 @Component({
   selector: 'app-parking-lot',
@@ -21,7 +19,6 @@ export class ParkingLotComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store,
-    private httpService: HttpService,
     private parkingLotService: ParkingLotService,
   ) {
   }

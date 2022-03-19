@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Location} from '@angular/common';
 import {BehaviorSubject} from "rxjs";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {NotificationService} from "../../../../../common-services/notification.service";
-import {HttpService} from "../../../../../common-services/http.service";
 import {MatDialog} from "@angular/material/dialog";
 import {
   FullscreenImagePreviewComponent
 } from "../../components/fullscreen-image-preview/fullscreen-image-preview.component";
+import {ParkingLotService} from "../../services/parking-lot.service";
+import {LatLngPickerComponent} from "../../components/lat-lng-picker/lat-lng-picker.component";
 
 @Component({
   selector: 'app-edit-parking-lot',
@@ -20,20 +21,34 @@ export class EditParkingLotComponent implements OnInit {
   imagesForUpload: { name: string, src: unknown | string }[] = [];
   isFormReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isImagePreviewReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  formType: string = 'Add';
+  editId: string = '';
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     public dialog: MatDialog,
     private location: Location,
-    private httpService: HttpService,
+    private route: ActivatedRoute,
+    private parkingLotService: ParkingLotService,
     private notificationService: NotificationService
   ) {
   }
 
   ngOnInit(): void {
-    this.notificationService.showSuccess('res.ss.message');
     this.createForm();
+    this.route.params.subscribe(e => {
+      if (e.parkingLotId) {
+        this.editId = e.parkingLotId;
+        this.populateFormValues()
+      }
+    });
+  }
+
+  populateFormValues() {
+    this.parkingLotService.get(this.editId).then(e => {
+      this.formGroup.patchValue(e.data)
+    })
   }
 
   async onSubmit() {
@@ -42,11 +57,14 @@ export class EditParkingLotComponent implements OnInit {
       return;
     }
     try {
-      const token = localStorage.getItem('token') || '';
-      // let res = await this.httpService.makeRequest('business/parking-lot', 'get', this.formGroup.value);
-      // this.notificationService.showSuccess(res.data.message);
-      // console.log('res', res);
-      await this.router.navigate(['parking-lot']);
+      let res;
+      if (this.editId) {
+        res = await this.parkingLotService.edit(this.editId, this.formGroup.value);
+      } else {
+        res = await this.parkingLotService.create(this.formGroup.value);
+      }
+      this.notificationService.showSuccess(res.message);
+      await this.router.navigate(['/parking-lot']);
     } catch (e) {
       this.notificationService.showError('Failed to add Parking Lot.');
     }
@@ -56,12 +74,17 @@ export class EditParkingLotComponent implements OnInit {
     this.location.back();
   }
 
+
   private createForm() {
     this.formGroup = this.fb.group({
       name: ['', Validators.required],
       address: this.fb.group({
         addressLineOne: ['', Validators.required],
         addressLineTwo: ['', Validators.required]
+      }),
+      geometry: this.fb.group({
+        lat: ['', Validators.required],
+        lng: ['', Validators.required]
       }),
     });
     setTimeout(() => {
@@ -134,5 +157,18 @@ export class EditParkingLotComponent implements OnInit {
   resetFilesArray(event: HTMLElement | any) {
     const input: HTMLInputElement = event.target;
     input.value = '';
+  }
+
+  async openLatLngPicker() {
+    const dialogRef = this.dialog.open(LatLngPickerComponent, {
+      width: '800px',
+      data: {}
+    })
+
+    const result = await dialogRef.afterClosed().toPromise();
+
+    if (result) {
+
+    }
   }
 }

@@ -38,9 +38,29 @@
         </div>
       </mat-card-content>
     </mat-card>
+    <mat-card>
+      <mat-card-title>Lat Long</mat-card-title>
+      <mat-card-content>
+        <div class="form-fields-container" formGroupName="geometry">
+          <div>
+            <mat-form-field appearance="legacy">
+              <mat-label>Latitude</mat-label>
+              <input matInput autocomplete="nope" [readonly]="true" formControlName="lat" (click)="openLatLngPicker()">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="legacy">
+              <mat-label>Longitude</mat-label>
+              <input matInput autocomplete="nope" formControlName="lng">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
     <div>
-      <input type="file" multiple accept="image/*" (click)="resetFilesArray($event)" (change)="handleImageUpload($event)" hidden #imageUpload>
+      <input type="file" multiple accept="image/*" (click)="resetFilesArray($event)"
+             (change)="handleImageUpload($event)" hidden #imageUpload>
       <div style="display: flex;justify-content: flex-start;align-items: center;gap: 5px">
         <button mat-raised-button type="button" (click)="imageUpload.click()">Upload Images</button>
         <mat-icon matTooltip="Please upload a perfect pics only. These will be representing your Parking Lot."
@@ -65,7 +85,7 @@
     <div style="display: flex;gap: 10px;margin: 10px 0;">
       <button mat-raised-button color="primary">
         <mat-icon>add</mat-icon>
-        Add
+        Save
       </button>
       <button mat-raised-button type="button" color="warn" (click)="cancel()">
         <mat-icon>clear</mat-icon>
