@@ -162,6 +162,7 @@ export class EditParkingLotComponent implements OnInit {
   async openLatLngPicker() {
     const dialogRef = this.dialog.open(LatLngPickerComponent, {
       width: '800px',
+
       data: {}
     })
 
