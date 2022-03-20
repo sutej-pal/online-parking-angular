@@ -18,7 +18,7 @@ import {LatLngPickerComponent} from "../../components/lat-lng-picker/lat-lng-pic
 })
 export class EditParkingLotComponent implements OnInit {
   formGroup: FormGroup = new FormGroup({});
-  imagesForUpload: { name: string, src: unknown | string }[] = [];
+  imagesForUpload: { name: string, src: unknown | string, file: File }[] = [];
   isFormReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isImagePreviewReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   formType: string = 'Add';
@@ -56,24 +56,39 @@ export class EditParkingLotComponent implements OnInit {
       this.notificationService.showError('Please fix the form errors');
       return;
     }
+    let request = Object.assign({}, this.formGroup.value);
     try {
       let res;
       if (this.editId) {
-        res = await this.parkingLotService.edit(this.editId, this.formGroup.value);
+        res = await this.parkingLotService.edit(this.editId, request);
       } else {
-        res = await this.parkingLotService.create(this.formGroup.value);
+        res = await this.parkingLotService.create(request);
       }
       this.notificationService.showSuccess(res.message);
+      await this.uploadGalleryImages();
       await this.router.navigate(['/parking-lot']);
     } catch (e) {
       this.notificationService.showError('Failed to add Parking Lot.');
     }
   }
 
+  async uploadGalleryImages() {
+    let formData = new FormData();
+    this.imagesForUpload.forEach(image => {
+      formData.append('gallery', image.file);
+    })
+    try {
+     const res = await this.parkingLotService.edit(this.editId, formData);
+     console.log(res);
+    } catch (e) {
+
+    }
+
+  }
+
   async cancel() {
     this.location.back();
   }
-
 
   private createForm() {
     this.formGroup = this.fb.group({
@@ -162,12 +177,9 @@ export class EditParkingLotComponent implements OnInit {
   async openLatLngPicker() {
     const dialogRef = this.dialog.open(LatLngPickerComponent, {
       width: '800px',
-
       data: {}
     })
-
     const result = await dialogRef.afterClosed().toPromise();
-
     if (result) {
       this.formGroup.patchValue({geometry: result})
     }

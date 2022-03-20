@@ -7,6 +7,7 @@ export const parkingLotFeatureKey = 'parkingLot';
 export interface ParkingLot {
   id: string;
   name: string;
+  gallery: string[];
 }
 
 export interface State {

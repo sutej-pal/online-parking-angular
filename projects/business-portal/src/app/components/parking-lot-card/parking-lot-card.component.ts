@@ -14,7 +14,7 @@ import {ParkingLot} from "../../store/parking-lot/parking-lot.reducer";
 })
 export class ParkingLotCardComponent implements OnInit {
 
-  @Input() parkingLot: ParkingLot | undefined;
+  @Input() parkingLot?: ParkingLot;
 
   constructor(
     public dialog: MatDialog,
@@ -43,5 +43,9 @@ export class ParkingLotCardComponent implements OnInit {
       }
     }
 
+  }
+
+  getImage() {
+    return 'http://localhost:3105/' + this.parkingLot?.gallery[0]
   }
 }
