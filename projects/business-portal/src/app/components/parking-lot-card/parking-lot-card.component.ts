@@ -24,6 +24,9 @@ export class ParkingLotCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.parkingLot?.gallery?.forEach((img, index, array) => {
+      array[index] = 'http://localhost:3105/' + img;
+    });
   }
 
   async showDeleteConfirmationDialog(parkingLot: any) {
@@ -43,9 +46,5 @@ export class ParkingLotCardComponent implements OnInit {
       }
     }
 
-  }
-
-  getImage() {
-    return 'http://localhost:3105/' + this.parkingLot?.gallery[0]
   }
 }

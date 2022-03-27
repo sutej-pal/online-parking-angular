@@ -39,6 +39,7 @@ import {environment} from '../environments/environment';
 import {metaReducers, reducers} from "./store";
 import {AuthTokenInterceptor} from "./services/auth-token.interceptor";
 import { LatLngPickerComponent } from './components/lat-lng-picker/lat-lng-picker.component';
+import { ImgCarouselComponent } from './components/img-carousel/img-carousel.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { LatLngPickerComponent } from './components/lat-lng-picker/lat-lng-picke
     EditParkingLotComponent,
     ConfirmDialogComponent,
     FullscreenImagePreviewComponent,
-    LatLngPickerComponent
+    LatLngPickerComponent,
+    ImgCarouselComponent
   ],
   imports: [
     BrowserModule,
