@@ -1,0 +1,19 @@
+$primary-color: #3f51b5;
+
+.profile-icons {
+  span {
+    cursor: pointer;
+    //border: 2px solid fade-out($primary-color, .7) !important;
+    //padding: 10px 21px 5px 11px;
+    mat-icon {
+      font-size: 35px;
+      &.mat-icon-inline {
+        line-height: 1.5;
+        width: inherit;
+        border: 2px solid fade-out($primary-color, .7) !important;
+        border-radius: 50%;
+        padding: 0px 7px 0px 8px;
+      }
+    }
+  }
+}

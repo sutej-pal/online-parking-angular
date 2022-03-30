@@ -6,6 +6,7 @@ import {LoginComponent} from "./screens/login/login.component";
 import {ParkingLotComponent} from "./screens/parking-lot/parking-lot.component";
 import {EditParkingLotComponent} from "./screens/edit-parking-lot/edit-parking-lot.component";
 import {AuthGuard} from "./guards/auth.guard";
+import {ProfileComponent} from "./screens/profile/profile.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'parking-lot/edit/:parkingLotId',
         component: EditParkingLotComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
       }
     ]
   },

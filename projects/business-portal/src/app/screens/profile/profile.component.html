@@ -1,0 +1,59 @@
+<div class="p-3">
+  <div class="mat-title">
+    <b>Business Name</b>
+    <div class="mat-subheading-1 d-flex align-items-center">
+      <mat-icon style="color: #fbbc05">star</mat-icon>
+      <mat-icon style="color: #fbbc05">star</mat-icon>
+      <mat-icon style="color: #fbbc05">star</mat-icon>
+      <mat-icon style="color: #fbbc05">star</mat-icon>
+      <span class="px-2"><b>(500)</b></span>
+    </div>
+  </div>
+  <mat-tab-group>
+    <!--    <mat-tab>-->
+    <!--      <ng-template mat-tab-label>-->
+    <!--        Overview-->
+    <!--      </ng-template>-->
+    <!--      <div>-->
+    <!--        <div class="p-4 d-flex profile-icons" style="gap: 20px">-->
+    <!--          <span>-->
+    <!--          <mat-icon color="primary" [matRippleColor]="'#3f51b54d'" matRipple-->
+    <!--                    [inline]="true">call</mat-icon>-->
+    <!--          </span>-->
+    <!--          <span>-->
+    <!--          <mat-icon color="primary" [matRippleColor]="'#3f51b54d'" matRipple-->
+    <!--                    [inline]="true">gps_fixed</mat-icon>-->
+    <!--          </span>-->
+    <!--          <span (click)="isFavourite = !isFavourite">-->
+    <!--          <mat-icon matRipple color="primary" [matRippleColor]="'#3f51b54d'"-->
+    <!--                    [inline]="true">{{isFavourite ? 'favorite' : 'favorite_border'}}</mat-icon>-->
+    <!--          </span>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </mat-tab>-->
+    <!--    <mat-tab>-->
+    <!--      <ng-template mat-tab-label>-->
+    <!--        Services-->
+    <!--      </ng-template>-->
+    <!--      <div>-->
+    <!--        Services-->
+    <!--      </div>-->
+    <!--    </mat-tab>-->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Reviews
+      </ng-template>
+      <div>
+        <app-profile-review></app-profile-review>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Gallery
+      </ng-template>
+      <div>
+        Gallery
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

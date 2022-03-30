@@ -1,0 +1,22 @@
+@import "../../../assets/global-styles";
+
+.user-image {
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.reviews-container {
+  overflow: auto;
+  max-height: 75vh;
+  padding-right: 5px;
+  @include custom-scrollbar(5px);
+}
+
+.no-reviews {
+  .d-flex {
+    height: 30vh;
+  }
+}
