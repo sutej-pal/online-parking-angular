@@ -51,7 +51,7 @@
           <div>
             <mat-form-field appearance="legacy">
               <mat-label>Longitude</mat-label>
-              <input matInput autocomplete="nope" formControlName="lng">
+              <input matInput autocomplete="nope" [readonly]="true" formControlName="lng" (click)="openLatLngPicker()">
             </mat-form-field>
           </div>
         </div>

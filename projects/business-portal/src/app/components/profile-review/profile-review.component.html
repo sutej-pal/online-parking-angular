@@ -1,87 +1,47 @@
-<div class="container-fluid pt-3">
-  <div class="mat-title">
-    Parking Lot One
-  </div>
-  <div class="row reviews-container" *ngIf="reviews.length > 0">
-    <div class="col-md-6 pb-3" *ngFor="let x of reviews">
-      <mat-card>
-        <div class="d-flex" style="gap: 10px">
-          <div>
-            <div class="user-image" style="background-image: url('./assets/images/user.png')"></div>
-          </div>
-          <div>
-            <div class="mat-subheading-1">
-              Formal Client
-              <div class="d-flex align-items-center">
-                <mat-icon style="color: #fbbc05">star</mat-icon>
-                <mat-icon style="color: #fbbc05">star</mat-icon>
-                <mat-icon style="color: #fbbc05">star</mat-icon>
-                <mat-icon style="color: #fbbc05">star</mat-icon>
-                <span class="mat-body-1 px-2">4 months ago</span>
-              </div>
+<div class="reviews-main">
+  <div class="container-fluid pt-2" *ngFor="let x of reviews">
+    <div class="mat-title">
+      Parking Lot One
+    </div>
+    <div class="row reviews-container" *ngIf="reviews.length > 0">
+      <div class="col-md-6 pb-3" *ngFor="let x of reviews">
+        <mat-card>
+          <div class="d-flex" style="gap: 10px">
+            <div>
+              <div class="user-image" style="background-image: url('./assets/images/user.png')"></div>
+            </div>
+            <div>
+              <div class="mat-subheading-1">
+                Formal Client
+                <div class="d-flex align-items-center">
+                  <mat-icon style="color: #fbbc05">star</mat-icon>
+                  <mat-icon style="color: #fbbc05">star</mat-icon>
+                  <mat-icon style="color: #fbbc05">star</mat-icon>
+                  <mat-icon style="color: #fbbc05">star</mat-icon>
+                  <span class="mat-body-1 px-2">4 months ago</span>
+                </div>
 
+              </div>
             </div>
           </div>
-        </div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi doloribus dolorum ea? Aspernatur
-          dignissimos dolores ea eos, est fuga nulla numquam praesentium reiciendis reprehenderit sed suscipit
-          totam? Perspiciatis quia, voluptate!
-        </p>
-        <p>
-      </mat-card>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi doloribus dolorum ea? Aspernatur
+            dignissimos dolores ea eos, est fuga nulla numquam praesentium reiciendis reprehenderit sed suscipit
+            totam? Perspiciatis quia, voluptate!
+          </p>
+          <p>
+        </mat-card>
+      </div>
     </div>
-  </div>
-  <div class="row no-reviews" *ngIf="reviews.length === 0">
-    <div class="col-md-12">
-      <div class="d-flex justify-content-center align-items-center">
-        <div class="mat-title">
-          You don't have any reviews till now.
+    <div class="row no-reviews" *ngIf="reviews.length === 0">
+      <div class="col-md-12">
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="mat-title">
+            You don't have any reviews till now.
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <mat-divider></mat-divider>
-  <div class="mat-title pt-2">
-    Parking Lot Two
-  </div>
-  <div class="row reviews-container" *ngIf="reviews.length > 0">
-    <div class="col-md-6 pb-3" *ngFor="let x of reviews">
-      <mat-card>
-        <div class="d-flex" style="gap: 10px">
-          <div>
-            <div class="user-image" style="background-image: url('./assets/images/user.png')"></div>
-          </div>
-          <div>
-            <div class="mat-subheading-1">
-              Formal Client
-              <div class="d-flex align-items-center">
-                <mat-icon style="color: #fbbc05">star</mat-icon>
-                <mat-icon style="color: #fbbc05">star</mat-icon>
-                <mat-icon style="color: #fbbc05">star</mat-icon>
-                <mat-icon style="color: #fbbc05">star</mat-icon>
-                <span class="mat-body-1 px-2">4 months ago</span>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi doloribus dolorum ea? Aspernatur
-          dignissimos dolores ea eos, est fuga nulla numquam praesentium reiciendis reprehenderit sed suscipit
-          totam? Perspiciatis quia, voluptate!
-        </p>
-        <p>
-      </mat-card>
-    </div>
-  </div>
-  <div class="row no-reviews" *ngIf="reviews.length === 0">
-    <div class="col-md-12">
-      <div class="d-flex justify-content-center align-items-center">
-        <div class="mat-title">
-          You don't have any reviews till now.
-        </div>
-      </div>
-    </div>
+    <mat-divider></mat-divider>
   </div>
 </div>

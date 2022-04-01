@@ -35,13 +35,14 @@ export class EditParkingLotComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-    this.createForm();
+  async ngOnInit() {
+    await this.createForm();
     this.route.params.subscribe(e => {
       if (e.parkingLotId) {
         this.editId = e.parkingLotId;
         this.populateFormValues()
       }
+      this.isFormReady$.next(true);
     });
   }
 
@@ -78,12 +79,11 @@ export class EditParkingLotComponent implements OnInit {
       formData.append('gallery', image.file);
     })
     try {
-     const res = await this.parkingLotService.edit(this.editId, formData);
-     console.log(res);
+      const res = await this.parkingLotService.edit(this.editId, formData);
+      console.log(res);
     } catch (e) {
-
+      console.log(e);
     }
-
   }
 
   async cancel() {
@@ -91,20 +91,20 @@ export class EditParkingLotComponent implements OnInit {
   }
 
   private createForm() {
-    this.formGroup = this.fb.group({
-      name: ['', Validators.required],
-      address: this.fb.group({
-        addressLineOne: ['', Validators.required],
-        addressLineTwo: ['', Validators.required]
-      }),
-      geometry: this.fb.group({
-        lat: ['', Validators.required],
-        lng: ['', Validators.required]
-      }),
+    return new Promise((resolve, reject) => {
+      this.formGroup = this.fb.group({
+        name: ['', Validators.required],
+        address: this.fb.group({
+          addressLineOne: ['', Validators.required],
+          addressLineTwo: ['', Validators.required]
+        }),
+        geometry: this.fb.group({
+          lat: ['', Validators.required],
+          lng: ['', Validators.required]
+        }),
+      });
+      resolve(true);
     });
-    setTimeout(() => {
-      this.isFormReady$.next(true);
-    }, 500);
   }
 
   async handleImageUpload(event: HTMLElement | any) {
@@ -175,9 +175,17 @@ export class EditParkingLotComponent implements OnInit {
   }
 
   async openLatLngPicker() {
+    let data = {};
+    if (this.editId) {
+      data = {
+        center: this.formGroup.controls['geometry'].value
+      };
+    } else {
+      data = {};
+    }
     const dialogRef = this.dialog.open(LatLngPickerComponent, {
       width: '800px',
-      data: {}
+      data: data
     })
     const result = await dialogRef.afterClosed().toPromise();
     if (result) {

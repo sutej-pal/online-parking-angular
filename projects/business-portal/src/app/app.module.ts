@@ -40,6 +40,10 @@ import {metaReducers, reducers} from "./store";
 import {AuthTokenInterceptor} from "./services/auth-token.interceptor";
 import { LatLngPickerComponent } from './components/lat-lng-picker/lat-lng-picker.component';
 import { ImgCarouselComponent } from './components/img-carousel/img-carousel.component';
+import { ProfileComponent } from './screens/profile/profile.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatRippleModule} from "@angular/material/core";
+import { ProfileReviewComponent } from './components/profile-review/profile-review.component';
 
 @NgModule({
   declarations: [
@@ -54,35 +58,39 @@ import { ImgCarouselComponent } from './components/img-carousel/img-carousel.com
     ConfirmDialogComponent,
     FullscreenImagePreviewComponent,
     LatLngPickerComponent,
-    ImgCarouselComponent
+    ImgCarouselComponent,
+    ProfileComponent,
+    ProfileReviewComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    NgxMaskModule.forRoot(),
-    MatCardModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    ToastrModule.forRoot({
-      preventDuplicates: true,
-    }),
-    MatCheckboxModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatGridListModule,
-    MatTooltipModule,
-    MatDialogModule,
-    StoreModule.forRoot(reducers, {metaReducers}),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production})
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        NgxMaskModule.forRoot(),
+        MatCardModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        ToastrModule.forRoot({
+            preventDuplicates: true,
+        }),
+        MatCheckboxModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatGridListModule,
+        MatTooltipModule,
+        MatDialogModule,
+        StoreModule.forRoot(reducers, {metaReducers}),
+        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+        MatTabsModule,
+        MatRippleModule
+    ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true}],
   exports: [ToolbarComponent],
   bootstrap: [AppComponent]

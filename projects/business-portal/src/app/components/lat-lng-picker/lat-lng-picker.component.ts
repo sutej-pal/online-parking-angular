@@ -1,14 +1,16 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Loader, LoaderOptions} from "google-maps";
 import {NotificationService} from "../../../../../common-services/notification.service";
+import {GoogleMapService} from "../../services/google-map.service";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-lat-lng-picker',
   templateUrl: './lat-lng-picker.component.html',
   styleUrls: ['./lat-lng-picker.component.scss']
 })
-export class LatLngPickerComponent implements OnInit {
+
+export class LatLngPickerComponent implements OnInit, OnDestroy {
 
   @ViewChild('map', {static: true}) map: ElementRef | undefined;
   mapOptions: any = {
@@ -18,54 +20,30 @@ export class LatLngPickerComponent implements OnInit {
     },
     zoom: 12
   };
-
   coordinatesData: { lat: number; lng: number; } | undefined;
 
   constructor(
     private notificationService: NotificationService,
+    private googleMapService: GoogleMapService,
     public dialogRef: MatDialogRef<LatLngPickerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
 
   async ngOnInit() {
-    this.getCurrentLocation();
+    await this.loadGoogleMap();
     this.dialogRef.beforeClosed().subscribe(e => {
       console.log(e);
     })
   }
 
-  getCurrentLocation() {
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.mapOptions.center = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          }
-          this.loadGoogleMap();
-        },
-        () => {
-          this.loadGoogleMap();
-          // handleLocationError(true, infoWindow, map.getCenter());
-        }
-      );
-    } else {
-      // Browser doesn't support Geolocation
-      // handleLocationError(false, infoWindow, map.getCenter());
-    }
-  }
-
   async loadGoogleMap() {
-    const options: LoaderOptions = {
-      libraries: ['places'],
-      region: 'IN'
-    };
-
-    const loader = new Loader('AIzaSyDM4BtVx-2cRWTEEu3JOdx0szr735nXzPU', options);
-
-    const google = await loader.load();
+    const google = AppComponent.googleMap
+    if (this.data.center && this.data.center.lat !== '' && this.data.center.lng !== '') {
+      this.mapOptions.center = this.data.center;
+    } else {
+      this.mapOptions.center = await AppComponent.getCurrentLocation()
+    }
     const MapTypeId = google.maps.MapTypeId;
     this.mapOptions['mapTypeId'] = MapTypeId.ROADMAP;
     const map = new google.maps.Map(this.map?.nativeElement, this.mapOptions);
@@ -114,5 +92,9 @@ export class LatLngPickerComponent implements OnInit {
     } else {
       this.notificationService.showError('Please add a marker on map');
     }
+  }
+
+  ngOnDestroy() {
+    this.googleMapService.removeGoogleMapScripts();
   }
 }
