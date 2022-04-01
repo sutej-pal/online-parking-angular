@@ -6,7 +6,7 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item" [ngClass]="{'active': i === 0}" *ngFor="let image of images;let i = index">
-      <div class="d-block w-100" [ngStyle]="{'background-image': 'url(' + image + ')'}"></div>
+      <img class="d-block w-100 h-100" style="object-fit: cover" [src]="image" alt="" loading="lazy"/>
     </div>
   </div>
   <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#' + carouselId" data-bs-slide="prev">

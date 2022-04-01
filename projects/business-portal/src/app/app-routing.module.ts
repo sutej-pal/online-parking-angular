@@ -7,6 +7,7 @@ import {ParkingLotComponent} from "./screens/parking-lot/parking-lot.component";
 import {EditParkingLotComponent} from "./screens/edit-parking-lot/edit-parking-lot.component";
 import {AuthGuard} from "./guards/auth.guard";
 import {ProfileComponent} from "./screens/profile/profile.component";
+import {BookingsComponent} from "./screens/bookings/bookings.component";
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [AuthGuard],
     children: [
+      {
+        path: 'bookings',
+        component: BookingsComponent
+      },
       {
         path: 'parking-lot',
         component: ParkingLotComponent

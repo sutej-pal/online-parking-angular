@@ -44,6 +44,8 @@ import { ProfileComponent } from './screens/profile/profile.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatRippleModule} from "@angular/material/core";
 import { ProfileReviewComponent } from './components/profile-review/profile-review.component';
+import { BookingsComponent } from './screens/bookings/bookings.component';
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { ProfileReviewComponent } from './components/profile-review/profile-revi
     LatLngPickerComponent,
     ImgCarouselComponent,
     ProfileComponent,
-    ProfileReviewComponent
+    ProfileReviewComponent,
+    BookingsComponent
   ],
     imports: [
         BrowserModule,
@@ -89,7 +92,8 @@ import { ProfileReviewComponent } from './components/profile-review/profile-revi
         StoreModule.forRoot(reducers, {metaReducers}),
         StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
         MatTabsModule,
-        MatRippleModule
+        MatRippleModule,
+        MatTableModule
     ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true}],
   exports: [ToolbarComponent],

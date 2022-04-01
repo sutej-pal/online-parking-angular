@@ -10,7 +10,7 @@
 
 .reviews-main {
   overflow: auto;
-  max-height: 75vh;
+  max-height: 76vh;
   padding-right: 5px;
   @include custom-scrollbar(5px);
 }

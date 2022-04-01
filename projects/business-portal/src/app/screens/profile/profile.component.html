@@ -10,35 +10,35 @@
     </div>
   </div>
   <mat-tab-group>
-    <!--    <mat-tab>-->
-    <!--      <ng-template mat-tab-label>-->
-    <!--        Overview-->
-    <!--      </ng-template>-->
-    <!--      <div>-->
-    <!--        <div class="p-4 d-flex profile-icons" style="gap: 20px">-->
-    <!--          <span>-->
-    <!--          <mat-icon color="primary" [matRippleColor]="'#3f51b54d'" matRipple-->
-    <!--                    [inline]="true">call</mat-icon>-->
-    <!--          </span>-->
-    <!--          <span>-->
-    <!--          <mat-icon color="primary" [matRippleColor]="'#3f51b54d'" matRipple-->
-    <!--                    [inline]="true">gps_fixed</mat-icon>-->
-    <!--          </span>-->
-    <!--          <span (click)="isFavourite = !isFavourite">-->
-    <!--          <mat-icon matRipple color="primary" [matRippleColor]="'#3f51b54d'"-->
-    <!--                    [inline]="true">{{isFavourite ? 'favorite' : 'favorite_border'}}</mat-icon>-->
-    <!--          </span>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </mat-tab>-->
-    <!--    <mat-tab>-->
-    <!--      <ng-template mat-tab-label>-->
-    <!--        Services-->
-    <!--      </ng-template>-->
-    <!--      <div>-->
-    <!--        Services-->
-    <!--      </div>-->
-    <!--    </mat-tab>-->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Overview
+      </ng-template>
+      <div>
+        <div class="p-4 d-flex profile-icons" style="gap: 20px">
+              <span>
+              <mat-icon color="primary" [matRippleColor]="'#3f51b54d'" matRipple
+                        [inline]="true">call</mat-icon>
+              </span>
+          <span>
+              <mat-icon color="primary" [matRippleColor]="'#3f51b54d'" matRipple
+                        [inline]="true">gps_fixed</mat-icon>
+              </span>
+          <span (click)="isFavourite = !isFavourite">
+              <mat-icon matRipple color="primary" [matRippleColor]="'#3f51b54d'"
+                        [inline]="true">{{isFavourite ? 'favorite' : 'favorite_border'}}</mat-icon>
+              </span>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Services
+      </ng-template>
+      <div>
+        Services
+      </div>
+    </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
         Reviews
