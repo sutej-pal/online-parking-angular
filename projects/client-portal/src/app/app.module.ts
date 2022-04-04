@@ -16,6 +16,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatListModule} from "@angular/material/list";
     MatNativeDateModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

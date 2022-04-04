@@ -3,6 +3,7 @@ import {AppComponent} from "../../app.component";
 import {BehaviorSubject, interval} from "rxjs";
 import {google} from 'google-maps';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-search-bar',
@@ -29,6 +30,7 @@ export class SearchBarComponent implements OnInit {
   timeSlots: string[] = [];
 
   constructor(
+    private router: Router,
     private fb: FormBuilder
   ) {
   }
@@ -91,8 +93,8 @@ export class SearchBarComponent implements OnInit {
     this.isFormReady$.next(true);
   }
 
-  onSubmit() {
-
+  async onSubmit() {
+    await this.router.navigate(['/search']);
   }
 
   handleTimeScroll($event: Event) {
