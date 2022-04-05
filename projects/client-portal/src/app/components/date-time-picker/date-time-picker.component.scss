@@ -1,0 +1,62 @@
+.time-picker {
+  padding-top: 0;
+  position: absolute;
+  bottom: 20px;
+  z-index: 1;
+  background: #fff;
+  width: 79px;
+  overflow: scroll;
+  height: 212px;
+  right: -263px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mat-list-item-content {
+    padding: 0;
+    text-align: center;
+
+    .mat-list-text {
+      padding: 0;
+    }
+  }
+
+  .time {
+    font-size: 14px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background: rgba(0, 0, 0, .04);
+    }
+  }
+
+  .icon-up, .icon-down {
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .icon-up {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .icon-down {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+}

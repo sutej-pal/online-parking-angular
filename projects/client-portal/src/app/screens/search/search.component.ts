@@ -16,13 +16,13 @@ export class SearchComponent implements OnInit {
     },
     zoom: 12
   };
-  reviews: any = [0, 1, 2, 3, 4, 5, 6];
+  reviews: any = [0, 1, 2];
 
   constructor() {
   }
 
   async ngOnInit() {
-    await this.loadGoogleMap();
+    // await this.loadGoogleMap();
   }
 
   async loadGoogleMap() {

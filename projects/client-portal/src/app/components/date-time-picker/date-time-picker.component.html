@@ -1,0 +1,12 @@
+<div class="position-relative">
+  <div class="time-picker border border-secondary" #selectedTime>
+    <div class="icon-up">
+      <mat-icon>expand_less</mat-icon>
+    </div>
+    <div class="time" matRipple matDateRangePickerApply [id]="time" (click)="handleTimePicker(time)"
+         *ngFor="let time of timeSlotsArray">{{time}}</div>
+    <div class="icon-down">
+      <mat-icon>expand_more</mat-icon>
+    </div>
+  </div>
+</div>

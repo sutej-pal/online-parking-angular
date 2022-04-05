@@ -7,40 +7,44 @@
       <mat-icon>my_location</mat-icon>
     </button>
   </mat-form-field>
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="custom-datepicker">
+    <mat-label>Arrival Time</mat-label>
     <input matInput [matDatepicker]="picker" formControlName="startDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <input matInput [matDatepicker]="picker1" formControlName="endDate">
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1>
-      <mat-datepicker-actions class="w-100" style="position: relative">
-        <mat-selection-list *ngIf="isTimeVisible" class="time-picker" (scroll)="handleTimeScroll($event)"
-                            [multiple]="false" #selectedTime>
-          <mat-list-item class="icon-up time">
-            <mat-icon>expand_less</mat-icon>
-          </mat-list-item>
-          <mat-list-option class="time" *ngFor="let time of timeSlotsArray">{{time}}</mat-list-option>
-
-          <!--          <mat-list-option class="time">10:00</mat-list-option>-->
-          <!--          <mat-list-option class="time">10:15</mat-list-option>-->
-          <!--          <mat-list-option class="time">10:30</mat-list-option>-->
-          <!--          <mat-list-option class="time">10:45</mat-list-option>-->
-          <!--          <mat-list-option class="time">11:00</mat-list-option>-->
-          <!--          <mat-list-option class="time">11:15</mat-list-option>-->
-          <!--          <mat-list-option class="time">11:30</mat-list-option>-->
-          <!--          <mat-list-option class="time">11:45</mat-list-option>-->
-          <mat-list-item class="icon-down time">
-            <mat-icon>expand_more</mat-icon>
-          </mat-list-item>
-        </mat-selection-list>
-        <span class="time-modal-trigger-button border border-1 border-dark"
-              (click)="isTimeVisible = !isTimeVisible"> 10:00</span>
+    <mat-datepicker-toggle matSuffix [for]="picker" (click)="setEventListener(picker)"></mat-datepicker-toggle>
+    <mat-datepicker #picker>
+      <mat-datepicker-actions class="w-100 position-relative">
+        <app-date-time-picker [hidden]="!isTimeVisible"
+                              (hideTimePicker)="isTimeVisible = false"
+                              [time]="'10:00'"
+                              (timeSelected)="handleTimePicker($event)"
+        ></app-date-time-picker>
+        <div class="custom-datepicker-actions position-relative w-100 d-flex justify-content-evenly align-items-center py-3">
+          <span class="text">Time of arrival</span>
+          <span class="time-modal-trigger-button border border-1 border border-secondary d-flex justify-content-evenly align-items-center"
+                (click)="isTimeVisible = !isTimeVisible">{{selectedTime}} <mat-icon>expand_more</mat-icon> </span>
+        </div>
       </mat-datepicker-actions>
     </mat-datepicker>
   </mat-form-field>
-  <button mat-raised-button color="primary">SEARCH</button>
+  <mat-form-field appearance="outline">
+    <mat-label>Exit Time</mat-label>
+    <input matInput [matDatepicker]="picker1" formControlName="endDate">
+    <mat-datepicker-toggle matSuffix [for]="picker1" (click)="setEventListener(picker)"></mat-datepicker-toggle>
+    <mat-datepicker #picker1>
+      <mat-datepicker-actions class="w-100 position-relative">
+        <app-date-time-picker [hidden]="!isTimeVisible"
+                              (hideTimePicker)="isTimeVisible = false"
+                              [time]="'10:00'"
+                              (timeSelected)="handleTimePicker($event)"
+        ></app-date-time-picker>
+        <div class="custom-datepicker-actions w-100 d-flex justify-content-evenly align-items-center py-3">
+          <span class="text">Time of exit</span>
+          <span class="time-modal-trigger-button border border-1 border border-secondary d-flex justify-content-evenly align-items-center"
+                (click)="isTimeVisible = !isTimeVisible">{{selectedTime}} <mat-icon>expand_more</mat-icon> </span>
+        </div>
+      </mat-datepicker-actions>
+    </mat-datepicker>
+  </mat-form-field>
+  <button mat-raised-button color="primary" class="submit-btn">SEARCH</button>
 </form>
 
