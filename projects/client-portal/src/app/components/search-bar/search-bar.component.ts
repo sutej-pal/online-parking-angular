@@ -1,10 +1,9 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppComponent} from "../../app.component";
-import {BehaviorSubject, interval} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {google} from 'google-maps';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {MatDatepicker, MatDatepickerInputEvent} from "@angular/material/datepicker";
 import {DateAdapter} from "@angular/material/core";
 
 @Component({
@@ -24,9 +23,6 @@ export class SearchBarComponent implements OnInit {
   google: google | undefined
   formGroup: FormGroup = new FormGroup({});
   isFormReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  toppings = new FormControl();
-
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   isTimeVisible = false;
   timeSlotsArray: string[] = [];
   selectedTime: string = '10:00'
@@ -100,24 +96,6 @@ export class SearchBarComponent implements OnInit {
     await this.router.navigate(['/search']);
   }
 
-  handleTimeScroll($event: Event) {
-    console.log($event);
-  }
-
-  // generateTimeSlots() {
-  //   Array.from({length: 24}, (_, i) => i).map(e => {
-  //     let t;
-  //     e < 10 ? t = '0' + e : t = e
-  //     this.timeSlotsArray.push(...[`${t}:00`, `${t}:15`, `${t}:30`, `${t}:45`])
-  //   });
-  //   // let i = this.timeSlotsArray.indexOf('10:00');
-  //   // this.alterTimeSlots(i)
-  // }
-
-  // alterTimeSlots() {
-  //   this.timeSlotsArray
-  //   this.timeSlots.
-  // }
   handleTimePicker(time: string) {
     console.log(time);
     this.selectedTime = time

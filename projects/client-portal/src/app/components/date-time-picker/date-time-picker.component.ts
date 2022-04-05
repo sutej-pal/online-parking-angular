@@ -7,14 +7,6 @@ import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output
 })
 export class DateTimePickerComponent implements OnInit {
 
-  // @HostListener('document:click', ['$event']) onDocumentClick(event: any) {
-  //   console.log(event);
-  //   if (event.target.classList.contains('time-modal-trigger-button') || event.target.classList.contains('time')) {
-  //   } else {
-  //     this.hideTimePicker.emit(true);
-  //   }
-  // }
-
   timeSlotsArray: string[] = [];
   timeSlots: string[] = [];
   @ViewChild('selectedTime') selectedTime: ElementRef | undefined;

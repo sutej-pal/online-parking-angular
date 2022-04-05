@@ -1,6 +1,6 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" *ngIf="isFormReady$ | async"
       class="d-flex justify-content-center align-items-center">
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" style="width: 350px">
     <mat-label>Parking Destination</mat-label>
     <input matInput type="text" id="pac-input" formControlName="destination">
     <button type="button" matSuffix mat-icon-button aria-label="Clear" (click)="getCurrentLocation($event)">
@@ -18,10 +18,13 @@
                               [time]="'10:00'"
                               (timeSelected)="handleTimePicker($event)"
         ></app-date-time-picker>
-        <div class="custom-datepicker-actions position-relative w-100 d-flex justify-content-evenly align-items-center py-3">
+        <div
+          class="custom-datepicker-actions position-relative w-100 d-flex justify-content-evenly align-items-center py-3">
           <span class="text">Time of arrival</span>
-          <span class="time-modal-trigger-button border border-1 border border-secondary d-flex justify-content-evenly align-items-center"
-                (click)="isTimeVisible = !isTimeVisible">{{selectedTime}} <mat-icon>expand_more</mat-icon> </span>
+          <span
+            class="time-modal-trigger-button border border-1 border border-secondary d-flex justify-content-evenly align-items-center"
+            (click)="isTimeVisible = !isTimeVisible">{{selectedTime}}
+            <mat-icon>expand_more</mat-icon> </span>
         </div>
       </mat-datepicker-actions>
     </mat-datepicker>
@@ -39,8 +42,10 @@
         ></app-date-time-picker>
         <div class="custom-datepicker-actions w-100 d-flex justify-content-evenly align-items-center py-3">
           <span class="text">Time of exit</span>
-          <span class="time-modal-trigger-button border border-1 border border-secondary d-flex justify-content-evenly align-items-center"
-                (click)="isTimeVisible = !isTimeVisible">{{selectedTime}} <mat-icon>expand_more</mat-icon> </span>
+          <span
+            class="time-modal-trigger-button border border-1 border border-secondary d-flex justify-content-evenly align-items-center"
+            (click)="isTimeVisible = !isTimeVisible">{{selectedTime}}
+            <mat-icon>expand_more</mat-icon> </span>
         </div>
       </mat-datepicker-actions>
     </mat-datepicker>
