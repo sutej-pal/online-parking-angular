@@ -22,7 +22,7 @@ export class SearchComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.loadGoogleMap();
+    // await this.loadGoogleMap();
   }
 
   async loadGoogleMap() {

@@ -1,0 +1,25 @@
+.mat-form-field {
+  width: 300px;
+}
+::ng-deep.mat-datepicker-actions {
+  padding: 0 !important;
+  .custom-datepicker-actions {
+    background: rgba(0, 0, 0, .04);
+    .text {
+      width: 120px;
+    }
+  }
+}
+
+.time-modal-trigger-button {
+  cursor: pointer;
+  padding: 5px 5px 5px 10px;
+}
+
+.cs-input {
+  height: 18px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -2,9 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {BehaviorSubject} from "rxjs";
 import {google} from 'google-maps';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {
+  AbstractControl, Form, FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from "@angular/forms";
 import {Router} from "@angular/router";
 import {DateAdapter} from "@angular/material/core";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-search-bar',
@@ -26,6 +35,9 @@ export class SearchBarComponent implements OnInit {
   isTimeVisible = false;
   timeSlotsArray: string[] = [];
   selectedTime: string = '10:00'
+  moment: any = moment;
+  startDate: string = '';
+  startTime: string = '';
 
   constructor(
     private router: Router,
@@ -84,32 +96,51 @@ export class SearchBarComponent implements OnInit {
   }
 
   loadForm() {
+    const t = moment('10:00', 'hh:mm a');
+    const minutes = (t.hour() * 60) + t.minute();
+    let date = moment().add(1, "days").startOf('day')
+    let data = {
+      arrivalDateTime: moment(date).add(minutes, 'minutes').format(),
+      exitDateTime: moment(date).add(2, 'hours').add(minutes, 'minutes').format()
+    }
     this.formGroup = this.fb.group({
       destination: ['', [Validators.required]],
-      startDate: ['', [Validators.required]],
-      endDate: ['', [Validators.required]]
+      arrivalDateTime: [data.arrivalDateTime, [Validators.required]],
+      exitDateTime: [data.exitDateTime, [Validators.required]]
+    }, {
+      validators: DateTimeValidator.validateDiff('arrivalDateTime', 'exitDateTime')
     })
     this.isFormReady$.next(true);
   }
 
   async onSubmit() {
-    await this.router.navigate(['/search']);
-  }
-
-  handleTimePicker(time: string) {
-    console.log(time);
-    this.selectedTime = time
-  }
-
-
-  setEventListener(e: any) {
-    let t = document.querySelector('.mat-calendar-content');
-    if (t) {
-      t.addEventListener('click', (d: any) => {
-        if (d.target.classList.contains('mat-calendar-body-cell-content')) {
-          this.isTimeVisible = true
-        }
-      })
+    if (this.formGroup.invalid) {
+      return
+    } else {
+      await this.router.navigate(['/search']);
     }
+  }
+}
+
+export class DateTimeValidator {
+  static validateDiff(from: string, to: string): ValidatorFn {
+    return (control: any): ValidationErrors | null => {
+      if (control) {
+        const arrivalDateTime = control.get(from).value
+        const exitDateTime = control.get(to).value;
+        if (exitDateTime !== '' && arrivalDateTime !== '') {
+          const diff = moment(exitDateTime).diff(moment(arrivalDateTime), 'minutes');
+          // console.log(diff, 'arrivalDateTime => ', arrivalDateTime.toString(), 'exitDateTime => ', exitDateTime.toString());
+          if (diff < 30) {
+            return {invalidDates: "Arrival Date-time should be less than Exit-time"};
+          } else {
+            return null
+          }
+        } else {
+          return null
+        }
+      }
+      return null;
+    };
   }
 }

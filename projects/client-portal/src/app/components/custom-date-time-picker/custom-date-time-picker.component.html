@@ -1,0 +1,33 @@
+<div [formGroup]="formGroup">
+  <mat-form-field appearance="outline" class="custom-datepicker" (click)="picker.open();setEventListener(picker)">
+    <mat-label>{{controlName.includes('arrival') ? 'Arrival': 'Exit'}}</mat-label>
+    <input matInput style="display: none" [matDatepicker]="picker" [formControl]="formControl">
+    <div class="cs-input">
+      <div class="d-flex justify-content-evenly align-items-center">
+        <mat-icon>calendar_today</mat-icon>
+        <span class="px-2">{{startDate}}</span>
+      </div>
+      <div class="d-flex justify-content-evenly align-items-center">
+        <mat-icon>watch_later</mat-icon>
+        <span class="px-2">{{startTime}}</span>
+      </div>
+    </div>
+    <mat-datepicker #picker>
+      <mat-datepicker-actions class="w-100 position-relative">
+        <app-date-time-picker [hidden]="!isTimeVisible"
+                              (hideTimePicker)="isTimeVisible = false"
+                              [time]="'10:00'"
+                              (timeSelected)="handleTimePicker($event)"
+        ></app-date-time-picker>
+        <div
+          class="custom-datepicker-actions position-relative w-100 d-flex justify-content-evenly align-items-center py-3">
+          <span class="text">Time of arrival</span>
+          <span
+            class="time-modal-trigger-button border border-1 border border-secondary d-flex justify-content-evenly align-items-center"
+            (click)="isTimeVisible = !isTimeVisible">{{startTime}}
+            <mat-icon>expand_more</mat-icon> </span>
+        </div>
+      </mat-datepicker-actions>
+    </mat-datepicker>
+  </mat-form-field>
+</div>

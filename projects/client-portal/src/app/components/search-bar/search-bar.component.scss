@@ -1,23 +1,16 @@
-form {
-  gap: 10px;
-  .submit-btn {
-    margin: 0 5px 25px 5px;
-    padding: 5px 15px;
-    font-size: 20px;
-  }
-}
+.search-bar {
 
-::ng-deep.mat-datepicker-actions {
-  padding: 0 !important;
-  .custom-datepicker-actions {
-    background: rgba(0, 0, 0, .04);
-    .text {
-     width: 120px;
+  form {
+    gap: 10px;
+
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+      background-color: white;
+      border-radius: 5px;
+    }
+    .submit-btn {
+      margin: 0 5px 20px 5px;
+      padding: 5px 15px;
+      font-size: 20px;
     }
   }
-}
-
-.time-modal-trigger-button {
-  cursor: pointer;
-  padding: 5px 5px 5px 10px;
 }
