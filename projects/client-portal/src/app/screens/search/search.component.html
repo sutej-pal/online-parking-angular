@@ -2,8 +2,20 @@
   <app-search-bar></app-search-bar>
   <div class="row">
     <div class="col-md-3">
-      <div class="row">
-        <div class="col-md-12 pb-3" *ngFor="let x of reviews">
+      <div class="row position-relative bg-light" style="z-index: 2">
+        <div class="col-md-12 pb-3 bg-info bg-opacity-25">
+          <div class="p-2 d-flex justify-content-between">
+            <div>3 Parking Lots Found near DEST</div>
+            <div>
+              <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Sort By</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Price</button>
+                <button mat-menu-item>Distance</button>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 pb-3 px-3" *ngFor="let x of reviews" (click)="showParkingLotDetails()">
           <mat-card>
             <div class="d-flex" style="gap: 10px">
               <div>
@@ -19,20 +31,27 @@
                     <mat-icon style="color: #fbbc05">star</mat-icon>
                     <span class="mat-body-1 px-2">4 months ago</span>
                   </div>
-
                 </div>
               </div>
             </div>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi doloribus dolorum ea? Aspernatur
-              dignissimos dolores ea eos, est fuga nulla numquam praesentium reiciendis reprehenderit sed suscipit
-              totam? Perspiciatis quia, voluptate!
+              dignissimos dolores ea eos,
             </p>
             <p>
           </mat-card>
         </div>
       </div>
     </div>
-    <div #map class="col-md-9 google-map"></div>
+    <div class="col-md-9 p-0 position-relative">
+      <div class="parking-lot-details" [ngClass]="{'show-parking-lot-details': isParkingLotDetailsVisible}">
+        TEST
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolores officiis vitae? Aliquid aspernatur
+          eos esse est fugiat harum, id impedit, iusto placeat quod ratione sapiente sit. Accusamus, saepe
+          voluptate.</p>
+        <button mat-raised-button color="primary" (click)="isParkingLotDetailsVisible = false">Hide</button>
+      </div>
+      <div #map class="google-map"></div>
+    </div>
   </div>
 </div>

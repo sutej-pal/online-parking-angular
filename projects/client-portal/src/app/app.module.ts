@@ -18,6 +18,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 import { DateTimePickerComponent } from './components/date-time-picker/date-time-picker.component';
+import { CustomDateTimePickerComponent } from './components/custom-date-time-picker/custom-date-time-picker.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { DateTimePickerComponent } from './components/date-time-picker/date-time
     SearchComponent,
     SearchBarComponent,
     HomeComponent,
-    DateTimePickerComponent
+    DateTimePickerComponent,
+    CustomDateTimePickerComponent
   ],
     imports: [
         BrowserModule,
@@ -41,7 +44,8 @@ import { DateTimePickerComponent } from './components/date-time-picker/date-time
         MatSelectModule,
         MatListModule,
         MatCardModule,
-        MatRippleModule
+        MatRippleModule,
+        MatMenuModule
     ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

@@ -3,17 +3,14 @@ import {AppComponent} from "../../app.component";
 import {BehaviorSubject} from "rxjs";
 import {google} from 'google-maps';
 import {
-  AbstractControl, Form, FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
-  ValidationErrors,
-  ValidatorFn,
   Validators
 } from "@angular/forms";
 import {Router} from "@angular/router";
 import {DateAdapter} from "@angular/material/core";
 import * as moment from "moment";
+import {DateTimeValidator} from "./date-time-validator";
 
 @Component({
   selector: 'app-search-bar',
@@ -32,12 +29,6 @@ export class SearchBarComponent implements OnInit {
   google: google | undefined
   formGroup: FormGroup = new FormGroup({});
   isFormReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  isTimeVisible = false;
-  timeSlotsArray: string[] = [];
-  selectedTime: string = '10:00'
-  moment: any = moment;
-  startDate: string = '';
-  startTime: string = '';
 
   constructor(
     private router: Router,
@@ -88,8 +79,10 @@ export class SearchBarComponent implements OnInit {
       geocoder
         .geocode({location: latLng}, (response) => {
           console.log(response);
-          if (response[0]?.formatted_address) {
-            this.formGroup.controls['destination'].setValue(response[0]?.formatted_address);
+          if (response[0]) {
+            // response[0].geometry.location.lat(): ƒ ()
+            // lng: ƒ ()
+            this.formGroup.controls['destination'].setValue(response[0].formatted_address);
           }
         });
     }
@@ -117,30 +110,8 @@ export class SearchBarComponent implements OnInit {
     if (this.formGroup.invalid) {
       return
     } else {
+      localStorage.setItem('searchData', JSON.stringify(this.formGroup.value));
       await this.router.navigate(['/search']);
     }
-  }
-}
-
-export class DateTimeValidator {
-  static validateDiff(from: string, to: string): ValidatorFn {
-    return (control: any): ValidationErrors | null => {
-      if (control) {
-        const arrivalDateTime = control.get(from).value
-        const exitDateTime = control.get(to).value;
-        if (exitDateTime !== '' && arrivalDateTime !== '') {
-          const diff = moment(exitDateTime).diff(moment(arrivalDateTime), 'minutes');
-          // console.log(diff, 'arrivalDateTime => ', arrivalDateTime.toString(), 'exitDateTime => ', exitDateTime.toString());
-          if (diff < 30) {
-            return {invalidDates: "Arrival Date-time should be less than Exit-time"};
-          } else {
-            return null
-          }
-        } else {
-          return null
-        }
-      }
-      return null;
-    };
   }
 }

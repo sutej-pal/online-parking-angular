@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AppComponent} from "../../app.component";
+import {google} from 'google-maps';
 
 @Component({
   selector: 'app-search',
@@ -17,12 +18,28 @@ export class SearchComponent implements OnInit {
     zoom: 12
   };
   reviews: any = [0, 1, 2];
+  google: google | undefined
+  isParkingLotDetailsVisible = false;
 
   constructor() {
   }
 
   async ngOnInit() {
-    // await this.loadGoogleMap();
+    await this.checkIfMapLoaded();
+    const searchData = localStorage.getItem('searchData');
+    // @ts-ignore
+    console.log(JSON.parse(searchData));
+  }
+
+  async checkIfMapLoaded() {
+    this.google = await AppComponent.googleMap;
+    if (this.google && this.google.maps) {
+      await this.loadGoogleMap();
+    } else {
+      setTimeout(async () => {
+        await this.checkIfMapLoaded();
+      }, 500);
+    }
   }
 
   async loadGoogleMap() {
@@ -32,4 +49,7 @@ export class SearchComponent implements OnInit {
     const map = new google.maps.Map(this.map?.nativeElement, this.mapOptions);
   }
 
+  showParkingLotDetails() {
+    this.isParkingLotDetailsVisible = true
+  }
 }
