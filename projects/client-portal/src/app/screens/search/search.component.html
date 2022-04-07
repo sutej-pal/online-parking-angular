@@ -1,8 +1,11 @@
-<div class="search-main container-fluid pt-5">
-  <app-search-bar></app-search-bar>
-  <div class="row">
+<app-header></app-header>
+<div class="search-main container-fluid">
+  <div class="py-4">
+    <app-search-bar></app-search-bar>
+  </div>
+  <div class="row" style="height: calc(100vh - 172px);">
     <div class="col-md-3">
-      <div class="row position-relative bg-light" style="z-index: 2">
+      <div class="row position-relative bg-light h-100" style="z-index: 2">
         <div class="col-md-12 pb-3 bg-info bg-opacity-25">
           <div class="p-2 d-flex justify-content-between">
             <div>3 Parking Lots Found near DEST</div>
@@ -54,10 +57,10 @@
         </div>
         TEST
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolores officiis vitae? Aliquid aspernatur
-          eos esse est fugiat harum, id impedit, iusto placeat quod ratione sapiente sit. Accusamus, saepe
+          eos esse fugiat harum, id impedit, iusto placeat quod ratione sapiente sit. Accusamus, saepe
           voluptate.</p>
       </div>
-      <div #map class="google-map"></div>
+      <div #map class="google-map h-100"></div>
     </div>
   </div>
 </div>

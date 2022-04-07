@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppComponent} from "../../app.component";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {google} from 'google-maps';
 import {
   FormBuilder,
@@ -11,6 +11,10 @@ import {Router} from "@angular/router";
 import {DateAdapter} from "@angular/material/core";
 import * as moment from "moment";
 import {DateTimeValidator} from "./date-time-validator";
+import {updateSearch} from "../../store/search/search.actions";
+import {Store} from "@ngrx/store";
+import {getSearchData} from "../../store/search/search.selectors";
+import {searchData} from "../../store/search/search.reducer";
 
 @Component({
   selector: 'app-search-bar',
@@ -29,8 +33,10 @@ export class SearchBarComponent implements OnInit {
   google: google | undefined
   formGroup: FormGroup = new FormGroup({});
   isFormReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  searchData$: Observable<searchData> | undefined;
 
   constructor(
+    private store: Store,
     private router: Router,
     private fb: FormBuilder,
     private dateAdapter: DateAdapter<Date>
@@ -39,8 +45,9 @@ export class SearchBarComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.checkIfMapLoaded();
+    this.searchData$ = this.store.select(getSearchData);
     this.loadForm();
+    await this.checkIfMapLoaded();
   }
 
   async checkIfMapLoaded() {
@@ -78,10 +85,10 @@ export class SearchBarComponent implements OnInit {
       };
       geocoder
         .geocode({location: latLng}, (response) => {
-          console.log(response);
+          // console.log(response);
           if (response[0]) {
-            // response[0].geometry.location.lat(): ƒ ()
-            // lng: ƒ ()
+            this.formGroup.controls['lat'].setValue(response[0].geometry.location.lat());
+            this.formGroup.controls['lng'].setValue(response[0].geometry.location.lng());
             this.formGroup.controls['destination'].setValue(response[0].formatted_address);
           }
         });
@@ -98,19 +105,31 @@ export class SearchBarComponent implements OnInit {
     }
     this.formGroup = this.fb.group({
       destination: ['', [Validators.required]],
+      lat: [0],
+      lng: [0],
       arrivalDateTime: [data.arrivalDateTime, [Validators.required]],
       exitDateTime: [data.exitDateTime, [Validators.required]]
     }, {
       validators: DateTimeValidator.validateDiff('arrivalDateTime', 'exitDateTime')
     })
     this.isFormReady$.next(true);
+    this.searchData$?.subscribe(e => {
+      this.formGroup.controls['destination'].setValue(e.searchData.destination);
+      this.formGroup.controls['lat'].setValue(e.searchData.lat);
+      this.formGroup.controls['lng'].setValue(e.searchData.lng);
+    })
   }
 
   async onSubmit() {
     if (this.formGroup.invalid) {
       return
     } else {
-      localStorage.setItem('searchData', JSON.stringify(this.formGroup.value));
+        const searchData =  {
+          lat: this.formGroup.value.lat,
+          lng: this.formGroup.value.lng,
+          destination: this.formGroup.value.destination
+      }
+      this.store.dispatch(updateSearch({payload: searchData}))
       await this.router.navigate(['/search']);
     }
   }
