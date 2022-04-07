@@ -10,8 +10,8 @@ export class DateTimeValidator {
         if (exitDateTime !== '' && arrivalDateTime !== '') {
           const diff = moment(exitDateTime).diff(moment(arrivalDateTime), 'minutes');
           // console.log(diff, 'arrivalDateTime => ', arrivalDateTime.toString(), 'exitDateTime => ', exitDateTime.toString());
-          if (diff < 30) {
-            return {invalidDates: "Arrival Date-time should be less than Exit-time"};
+          if (diff < 59) {
+            return {invalidDates: "There should be at least One Hour difference between Arrival Date-time and Exit-time"};
           } else {
             return null
           }

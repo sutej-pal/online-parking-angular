@@ -14,42 +14,26 @@ export class CustomDateTimePickerComponent implements OnInit {
   isTimeVisible = false;
   startDate: string = '';
   startTime: string = '';
-  formControl = new FormControl('')
+  formControl = new FormControl('');
 
   constructor() {
   }
 
   ngOnInit(): void {
-    // const date = moment().add(1, 'days').startOf('day');
     this.formControl = this.formGroup.controls[this.controlName] as FormControl;
     console.log('this.formControl', this.formControl);
     const dateTime = this.formControl.value;
     this.startDate = moment(dateTime).format('ddd Do MMM');
     this.startTime = moment(dateTime).format('hh:mm a');
-
-    // this.formControl.setValue(date);
-    // if (this.controlName.toLowerCase().includes('arrival')) {
-    //   this.handleTimePicker('10:00 am');
-    // } else {
-    //   this.handleTimePicker('12:00 am');
-    // }
   }
 
   handleTimePicker(time: string) {
     this.isTimeVisible = false;
-    let date = moment(this.formControl.value).startOf('day').format('L');
-    date = date.toString();
-    console.log(date)
+    let date = moment(this.formControl.value).startOf('day').format('L').toString();
     const dateTime = moment(date + ' ' + time).format();
-    console.log(dateTime);
     this.formControl.setValue(dateTime);
     this.startDate = moment(dateTime).format('ddd Do MMM');
     this.startTime = moment(dateTime).format('hh:mm a');
-    if (this.controlName.includes('arrival')) {
-      this.formGroup.controls['arrivalDateTime'].updateValueAndValidity();
-    } else {
-      this.formGroup.controls['exitDateTime'].updateValueAndValidity();
-    }
   }
 
   setEventListener(e: any) {

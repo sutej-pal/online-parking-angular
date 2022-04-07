@@ -44,12 +44,18 @@
       </div>
     </div>
     <div class="col-md-9 p-0 position-relative">
-      <div class="parking-lot-details" [ngClass]="{'show-parking-lot-details': isParkingLotDetailsVisible}">
+      <div class="parking-lot-details"
+           [ngClass]="{'show-parking-lot-details': isParkingLotDetailsVisible}">
+        <div>
+          <div class="title">Title</div>
+          <button class="close-button" mat-icon-button (click)="isParkingLotDetailsVisible = false">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
         TEST
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolores officiis vitae? Aliquid aspernatur
           eos esse est fugiat harum, id impedit, iusto placeat quod ratione sapiente sit. Accusamus, saepe
           voluptate.</p>
-        <button mat-raised-button color="primary" (click)="isParkingLotDetailsVisible = false">Hide</button>
       </div>
       <div #map class="google-map"></div>
     </div>

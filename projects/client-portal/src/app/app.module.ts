@@ -20,6 +20,7 @@ import {MatCardModule} from "@angular/material/card";
 import { DateTimePickerComponent } from './components/date-time-picker/date-time-picker.component';
 import { CustomDateTimePickerComponent } from './components/custom-date-time-picker/custom-date-time-picker.component';
 import {MatMenuModule} from "@angular/material/menu";
+import {StoreModule} from "@ngrx/store";
 
 @NgModule({
   declarations: [
