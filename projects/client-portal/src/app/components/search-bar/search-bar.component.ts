@@ -65,12 +65,10 @@ export class SearchBarComponent implements OnInit {
     this.google = await AppComponent.googleMap;
     const input = document.getElementById("pac-input") as HTMLInputElement;
     this.autocomplete = new this.google.maps.places.Autocomplete(input, this.options);
-    this.autocomplete.addListener("place_changed", this.fillInAddress);
-  }
-
-  private fillInAddress() {
-    const place = this.autocomplete?.getPlace();
-    console.log(place);
+    this.autocomplete.addListener("place_changed", () => {
+      const place = this.autocomplete.getPlace();
+      this.updateForm(place);
+    });
   }
 
   async getCurrentLocation(e: MouseEvent) {
@@ -85,11 +83,8 @@ export class SearchBarComponent implements OnInit {
       };
       geocoder
         .geocode({location: latLng}, (response) => {
-          // console.log(response);
           if (response[0]) {
-            this.formGroup.controls['lat'].setValue(response[0].geometry.location.lat());
-            this.formGroup.controls['lng'].setValue(response[0].geometry.location.lng());
-            this.formGroup.controls['destination'].setValue(response[0].formatted_address);
+            this.updateForm(response[0]);
           }
         });
     }
@@ -114,20 +109,27 @@ export class SearchBarComponent implements OnInit {
     })
     this.isFormReady$.next(true);
     this.searchData$?.subscribe(e => {
-      this.formGroup.controls['destination'].setValue(e.searchData.destination);
-      this.formGroup.controls['lat'].setValue(e.searchData.lat);
-      this.formGroup.controls['lng'].setValue(e.searchData.lng);
+      this.formGroup.patchValue(e.searchData);
     })
+  }
+
+  updateForm(place: any) {
+    const searchData = {
+      destination: place.formatted_address,
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng(),
+    }
+    this.formGroup.patchValue(searchData);
   }
 
   async onSubmit() {
     if (this.formGroup.invalid) {
       return
     } else {
-        const searchData =  {
-          lat: this.formGroup.value.lat,
-          lng: this.formGroup.value.lng,
-          destination: this.formGroup.value.destination
+      const searchData = {
+        lat: this.formGroup.value.lat,
+        lng: this.formGroup.value.lng,
+        destination: this.formGroup.value.destination
       }
       this.store.dispatch(updateSearch({payload: searchData}))
       await this.router.navigate(['/search']);

@@ -1,6 +1,6 @@
 <div class="search-bar d-flex justify-content-center align-items-center">
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" *ngIf="isFormReady$ | async"
-        class="position-relative align-items-center bg-opacity-10 bg-secondary border d-flex justify-content-center pb-2 pt-4 px-4 rounded-3">
+        class="position-relative align-items-center d-flex justify-content-center pb-2 pt-4 px-4">
     <mat-form-field appearance="outline" style="width: 350px">
       <mat-label>Parking Destination</mat-label>
       <input matInput type="text" id="pac-input" formControlName="destination">

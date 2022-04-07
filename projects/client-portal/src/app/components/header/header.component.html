@@ -1,1 +1,19 @@
-<p>header works!</p>
+<div class="header-main container d-flex p-3">
+  <div class="align-items-center d-flex justify-content-between w-100">
+    <div class="">
+      <span class="mat-title">Pals Parking</span>
+    </div>
+    <div class="">
+      <button class="mx-2" [routerLink]="'/login'" mat-raised-button aria-label="Sign Up" color="primary">
+        Login
+      </button>
+      <button class="mx-2" [matMenuTriggerFor]="menu" mat-raised-button aria-label="Sign Up" color="primary">
+        Sign Up
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="'/sign-up'">As Individual</button>
+        <button mat-menu-item [routerLink]="'/sign-up'">As Business</button>
+      </mat-menu>
+    </div>
+  </div>
+</div>
