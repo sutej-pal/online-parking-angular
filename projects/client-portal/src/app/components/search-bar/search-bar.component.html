@@ -3,7 +3,7 @@
         class="position-relative align-items-center d-flex justify-content-center pb-2 pt-4 px-4">
     <mat-form-field appearance="outline" style="width: 350px">
       <mat-label>Parking Destination</mat-label>
-      <input matInput type="text" id="pac-input" formControlName="destination">
+      <input matInput type="text" id="pac-input" formControlName="destination" autocomplete="off">
       <button type="button" matSuffix mat-icon-button aria-label="Clear" (click)="getCurrentLocation($event)">
         <mat-icon>my_location</mat-icon>
       </button>

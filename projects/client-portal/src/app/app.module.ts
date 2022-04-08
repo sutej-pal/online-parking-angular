@@ -28,6 +28,14 @@ import {SignUpComponent} from './screens/sign-up/sign-up.component';
 import {SocialLoginModule, SocialAuthServiceConfig, SocialAuthService} from "angularx-social-login";
 import {GoogleLoginProvider} from "angularx-social-login";
 import {environment} from "../environments/environment";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthTokenInterceptor} from "../../../business-portal/src/app/services/auth-token.interceptor";
+import {ToastrModule} from "ngx-toastr";
+import {NgxMaskModule} from "ngx-mask";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import { TermAndConditionsComponent } from './screens/term-and-conditions/term-and-conditions.component';
+import { BookingsComponent } from './screens/bookings/bookings.component';
 
 const CLIENT_ID = environment.client_Id;
 
@@ -41,10 +49,13 @@ const CLIENT_ID = environment.client_Id;
     CustomDateTimePickerComponent,
     HeaderComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    TermAndConditionsComponent,
+    BookingsComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
@@ -59,9 +70,19 @@ const CLIENT_ID = environment.client_Id;
     MatCardModule,
     MatRippleModule,
     MatMenuModule,
-    StoreModule.forRoot(appReducer)
+    StoreModule.forRoot(appReducer),
+    MatProgressSpinnerModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+    }),
+    NgxMaskModule.forRoot(),
+    MatCheckboxModule,
   ],
-  providers: [MatDatepickerModule, SocialAuthService, {
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthTokenInterceptor,
+    multi: true
+  }, MatDatepickerModule, SocialAuthService, {
     provide: "SocialAuthServiceConfig",
     useValue: {
       autoLogin: true,

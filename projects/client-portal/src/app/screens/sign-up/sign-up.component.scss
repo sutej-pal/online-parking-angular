@@ -1,0 +1,23 @@
+.register-main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background: aliceblue;
+  justify-content: center;
+
+  .card-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 1px solid gray;
+    mat-card-subtitle {
+      margin-bottom: 7px;
+    }
+  }
+  form {
+    padding: 10px 0;
+
+  }
+}
