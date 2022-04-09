@@ -1,16 +1,23 @@
 
 .login-main {
+  //background: linear-gradient(-45deg, #ee7752, #e73c7e);
   height: 100vh;
 
-  .login-with-google-btn {
-    padding: 5px 20px;
-    color: #757575;
-    font-size: 18px;
-    font-weight: 500;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    background-color: white;
-    div {
-      gap: 10px;
+  .login-card {
+    max-width: 350px;
+    margin: auto;
+
+
+    .login-with-google-btn {
+      color: #757575;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      background-color: white;
+
+      div {
+        gap: 20px;
+      }
     }
   }
 }

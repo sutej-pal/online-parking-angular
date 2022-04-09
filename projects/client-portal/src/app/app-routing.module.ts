@@ -6,6 +6,8 @@ import {SignUpComponent} from "./screens/sign-up/sign-up.component";
 import {LoginComponent} from "./screens/login/login.component";
 import {TermAndConditionsComponent} from "./screens/term-and-conditions/term-and-conditions.component";
 import {BookingsComponent} from "./screens/bookings/bookings.component";
+import {ForgotPasswordComponent} from "./screens/forgot-password/forgot-password.component";
+import {ResetPasswordComponent} from "./screens/reset-password/reset-password.component";
 
 const routes: Routes = [
   {
@@ -27,6 +29,14 @@ const routes: Routes = [
   {
     path: 'bookings',
     component: BookingsComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
+  },
+  {
+    path: 'reset-password/:userId/:token',
+    component: ResetPasswordComponent
   },
   {
     path: 'terms-and-conditions',
