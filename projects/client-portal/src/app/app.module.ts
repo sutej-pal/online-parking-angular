@@ -39,6 +39,7 @@ import {BookingsComponent} from './screens/bookings/bookings.component';
 import {ForgotPasswordComponent} from './screens/forgot-password/forgot-password.component';
 import {ResetPasswordComponent} from './screens/reset-password/reset-password.component';
 import {metaReducers} from "./store/hydration.reducer";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 const CLIENT_ID = environment.client_Id;
 
@@ -75,7 +76,7 @@ const CLIENT_ID = environment.client_Id;
     MatCardModule,
     MatRippleModule,
     MatMenuModule,
-    StoreModule.forRoot(appReducer, { metaReducers }),
+    StoreModule.forRoot(appReducer, {metaReducers}),
     MatProgressSpinnerModule,
     ToastrModule.forRoot({
       preventDuplicates: true,
@@ -83,6 +84,7 @@ const CLIENT_ID = environment.client_Id;
     NgxMaskModule.forRoot(),
     MatCheckboxModule,
     FormsModule,
+    MatSidenavModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

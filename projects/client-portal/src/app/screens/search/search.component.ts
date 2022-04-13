@@ -22,7 +22,7 @@ export class SearchComponent implements OnInit {
     },
     zoom: 15
   };
-  reviews: any = [0, 1, 2];
+  reviews: any = [0, 1, 2, 3, 4];
   google: google | undefined
   isParkingLotDetailsVisible = false;
   searchData$: Observable<searchData> | undefined;
@@ -62,6 +62,6 @@ export class SearchComponent implements OnInit {
   }
 
   showParkingLotDetails() {
-    this.isParkingLotDetailsVisible = true
+    this.isParkingLotDetailsVisible = true;
   }
 }
