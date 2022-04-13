@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {getSearchData} from "../../store/search/search.selectors";
+import {Store} from "@ngrx/store";
+import {Observable} from "rxjs";
+import {getIndividual} from "../../store/individual/individual.selectors";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  individual$: Observable<any> | undefined;
 
-  ngOnInit(): void {
+  constructor(
+    private store: Store,
+  ) {
   }
 
+  ngOnInit(): void {
+    this.individual$ = this.store.select(getIndividual);
+    this.individual$.subscribe(e => {
+      console.log(e);
+    })
+  }
+
+  logOut() {
+
+  }
 }

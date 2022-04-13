@@ -3,7 +3,7 @@
     <div class="">
       <span class="mat-title">Pals Parking</span>
     </div>
-    <div class="">
+    <div class="" *ngIf="!((individual$ | async)?.id)">
       <button class="mx-2" [routerLink]="'/login'" mat-raised-button aria-label="Sign Up" color="primary">
         Login
       </button>
@@ -13,6 +13,16 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item [routerLink]="'/sign-up/individual'">As Individual</button>
         <button mat-menu-item [routerLink]="'/sign-up/business'">As Business</button>
+      </mat-menu>
+    </div>
+    <div class="user-menu"  *ngIf="(individual$ | async)?.id" [matMenuTriggerFor]="userMenu">
+      <button mat-icon-button>
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <span class="mat-body">Hi, {{(individual$ | async)?.firstName + ' ' + (individual$ | async)?.lastName}}</span>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item routerLink="/profile">Profile</button>
+        <button mat-menu-item (click)="logOut()">Log Out</button>
       </mat-menu>
     </div>
   </div>

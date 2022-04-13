@@ -12,7 +12,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatNativeDateModule, MatRippleModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
@@ -34,8 +34,11 @@ import {AuthTokenInterceptor} from "../../../business-portal/src/app/services/au
 import {ToastrModule} from "ngx-toastr";
 import {NgxMaskModule} from "ngx-mask";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import { TermAndConditionsComponent } from './screens/term-and-conditions/term-and-conditions.component';
-import { BookingsComponent } from './screens/bookings/bookings.component';
+import {TermAndConditionsComponent} from './screens/term-and-conditions/term-and-conditions.component';
+import {BookingsComponent} from './screens/bookings/bookings.component';
+import {ForgotPasswordComponent} from './screens/forgot-password/forgot-password.component';
+import {ResetPasswordComponent} from './screens/reset-password/reset-password.component';
+import {metaReducers} from "./store/hydration.reducer";
 
 const CLIENT_ID = environment.client_Id;
 
@@ -51,7 +54,9 @@ const CLIENT_ID = environment.client_Id;
     LoginComponent,
     SignUpComponent,
     TermAndConditionsComponent,
-    BookingsComponent
+    BookingsComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -70,13 +75,14 @@ const CLIENT_ID = environment.client_Id;
     MatCardModule,
     MatRippleModule,
     MatMenuModule,
-    StoreModule.forRoot(appReducer),
+    StoreModule.forRoot(appReducer, { metaReducers }),
     MatProgressSpinnerModule,
     ToastrModule.forRoot({
       preventDuplicates: true,
     }),
     NgxMaskModule.forRoot(),
     MatCheckboxModule,
+    FormsModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

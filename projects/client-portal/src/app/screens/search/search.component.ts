@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit {
     this.mapOptions['mapTypeId'] = MapTypeId.ROADMAP;
     const map = new google.maps.Map(this.map?.nativeElement, this.mapOptions);
     this.searchData$?.subscribe(e => {
-      map.setCenter({lat: e.searchData.lat, lng: e.searchData.lng});
+      map.setCenter({lat: e.lat, lng: e.lng});
     })
   }
 

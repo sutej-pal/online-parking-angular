@@ -3,20 +3,24 @@
   //background: linear-gradient(-45deg, #ee7752, #e73c7e);
   height: 100vh;
 
-  .login-card {
-    max-width: 350px;
-    margin: auto;
+  .login-card-wrapper {
+    height: 90vh;
+    padding-top: 10vh;
 
+    .login-card {
+      width: 400px;
+      height: fit-content;
 
-    .login-with-google-btn {
-      color: #757575;
-      font-size: 14px;
-      font-weight: 500;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-      background-color: white;
+      .login-with-google-btn {
+        color: #757575;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        background-color: white;
 
-      div {
-        gap: 20px;
+        div {
+          gap: 20px;
+        }
       }
     }
   }

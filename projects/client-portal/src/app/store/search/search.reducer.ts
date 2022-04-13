@@ -4,14 +4,12 @@ import {updateSearch} from "./search.actions";
 export const searchFeatureKey = 'search';
 
 export interface searchData {
-  searchData: {
-    lat: number,
-    lng: number,
-    destination: string
-  }
+  lat: number,
+  lng: number,
+  destination: string
 }
 
-export const initialState: searchData = {
+export const initialState = {
   searchData: {
     lat: 0,
     lng: 0,

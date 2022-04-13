@@ -11,8 +11,8 @@ import {Router} from "@angular/router";
 import {DateAdapter} from "@angular/material/core";
 import * as moment from "moment";
 import {DateTimeValidator} from "./date-time-validator";
-import {updateSearch} from "../../store/search/search.actions";
 import {Store} from "@ngrx/store";
+import {updateSearch} from "../../store/search/search.actions";
 import {getSearchData} from "../../store/search/search.selectors";
 import {searchData} from "../../store/search/search.reducer";
 
@@ -109,7 +109,7 @@ export class SearchBarComponent implements OnInit {
     })
     this.isFormReady$.next(true);
     this.searchData$?.subscribe(e => {
-      this.formGroup.patchValue(e.searchData);
+      this.formGroup.patchValue(e);
     })
   }
 
