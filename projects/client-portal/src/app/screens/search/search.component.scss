@@ -47,13 +47,4 @@
   height: calc(100vh - 261px);
   overflow: auto;
   @include custom-scrollbar(7px);
-  & > div:first-child {
-    padding: 10px 0 5px;
-  }
-  & > div {
-    padding: 5px 0 5px;
-  }
-  & > div:last-child {
-    padding: 5px 0 10px;
-  }
 }

@@ -40,6 +40,8 @@ import {ForgotPasswordComponent} from './screens/forgot-password/forgot-password
 import {ResetPasswordComponent} from './screens/reset-password/reset-password.component';
 import {metaReducers} from "./store/hydration.reducer";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { ParkingLotCardComponent } from './components/parking-lot-card/parking-lot-card.component';
+import { ParkingLotDetailsComponent } from './components/parking-lot-details/parking-lot-details.component';
 
 const CLIENT_ID = environment.client_Id;
 
@@ -57,7 +59,9 @@ const CLIENT_ID = environment.client_Id;
     TermAndConditionsComponent,
     BookingsComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ParkingLotCardComponent,
+    ParkingLotDetailsComponent
   ],
   imports: [
     BrowserModule,

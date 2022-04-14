@@ -26,3 +26,21 @@
     display: none;
   }
 }
+
+.custom-card {
+  height: 400px;
+  width: 400px;
+  position: absolute;
+  top: 52px;
+  right: -51px;
+  z-index: 2;
+}
+
+::ng-deep .mat-menu-panel {
+  width: 600px;
+  max-width: 600px!important;
+  min-width: 600px!important;
+  .mat-menu-content {
+    padding: 0 !important;
+  }
+}

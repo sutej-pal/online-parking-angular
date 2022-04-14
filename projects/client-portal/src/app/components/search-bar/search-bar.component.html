@@ -1,4 +1,4 @@
-<div class="search-bar d-flex justify-content-center align-items-center">
+<div class="search-bar d-flex justify-content-center align-items-center" #searchBar>
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" *ngIf="isFormReady$ | async"
         class="position-relative align-items-center d-flex justify-content-center pb-2 pt-4 px-4">
     <mat-form-field appearance="outline" style="width: 350px">
@@ -10,6 +10,37 @@
     </mat-form-field>
     <app-custom-date-time-picker [formGroup]="formGroup" controlName="arrivalDateTime"></app-custom-date-time-picker>
     <app-custom-date-time-picker [formGroup]="formGroup" controlName="exitDateTime"></app-custom-date-time-picker>
+    <mat-form-field appearance="outline" class="position-relative" style="width: 110px">
+      <mat-label>Vehicle</mat-label>
+      <input matInput type="text" formControlName="vehicleType" autocomplete="off" style="display: none">
+      <img src="../../../assets/images/car.svg" alt="" style="padding: 0 0 0 10px;">
+      <button type="button" matSuffix mat-icon-button aria-label="Clear" [matMenuTriggerFor]="menu">
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <div>
+          <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque debitis dolor, dolore dolores fuga
+            molestias saepe? Ad at blanditiis eligendi ipsum provident quae totam voluptates. Distinctio nisi numquam
+            officia perspiciatis?</span>
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button><button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Redial</span>
+        </button>
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button>
+
+        </div>
+      </mat-menu>
+    </mat-form-field>
     <button mat-raised-button color="primary" class="submit-btn">SEARCH</button>
     <mat-error class="position-absolute bottom-0"
                *ngIf="formGroup.hasError('invalidDates')">{{formGroup.errors?.invalidDates}}</mat-error>

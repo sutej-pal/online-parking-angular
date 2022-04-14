@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {BehaviorSubject, Observable} from "rxjs";
 import {google} from 'google-maps';
@@ -23,6 +23,8 @@ import {searchData} from "../../store/search/search.reducer";
 })
 export class SearchBarComponent implements OnInit {
 
+  @ViewChild('searchBar') searchBar: any;
+
   options = {
     componentRestrictions: {country: ["in"]},
     fields: ["formatted_address", "geometry", "name"],
@@ -34,6 +36,7 @@ export class SearchBarComponent implements OnInit {
   formGroup: FormGroup = new FormGroup({});
   isFormReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   searchData$: Observable<searchData> | undefined;
+  isVehicleSelectionModelVisible = false;
 
   constructor(
     private store: Store,
@@ -48,6 +51,7 @@ export class SearchBarComponent implements OnInit {
     this.searchData$ = this.store.select(getSearchData);
     this.loadForm();
     await this.checkIfMapLoaded();
+    console.log(this.searchBar);
   }
 
   async checkIfMapLoaded() {
@@ -103,7 +107,8 @@ export class SearchBarComponent implements OnInit {
       lat: [0],
       lng: [0],
       arrivalDateTime: [data.arrivalDateTime, [Validators.required]],
-      exitDateTime: [data.exitDateTime, [Validators.required]]
+      exitDateTime: [data.exitDateTime, [Validators.required]],
+      vehicleType: [' ']
     }, {
       validators: DateTimeValidator.validateDiff('arrivalDateTime', 'exitDateTime')
     })
@@ -135,4 +140,38 @@ export class SearchBarComponent implements OnInit {
       await this.router.navigate(['/search']);
     }
   }
+
+  openVehicleSelectionModel() {
+    this.isVehicleSelectionModelVisible = !this.isVehicleSelectionModelVisible;
+    document.addEventListener('click', (e: any) => {
+      let x = true;
+      if (e.path) {
+        for (let i = 0; i < e.path.length - 2; i++) {
+          if (e.path[i].classList.contains('vehicle-dropdown')) {
+            x = false
+          }
+        }
+        if (x) {
+          this.isVehicleSelectionModelVisible = !this.isVehicleSelectionModelVisible;
+          document.removeEventListener('click', () => {}, true);
+        }
+      }
+    }, true);
+    // document.removeEventListener('click', this.evtListener, true);
+  }
+
+  // evtListener(e: any) {
+  //   let x = true;
+  //   if (e.path) {
+  //     for (let i = 0; i < e.path.length - 2; i++) {
+  //       if (e.path[i].classList.contains('vehicle-dropdown')) {
+  //         x = false
+  //       }
+  //     }
+  //     if (x) {
+  //       this.isVehicleSelectionModelVisible = !this.isVehicleSelectionModelVisible;
+  //       document.removeEventListener('click', this.evtListener, true);
+  //     }
+  //   }
+  // }
 }

@@ -6,6 +6,8 @@ import {getSearchData} from "../../store/search/search.selectors";
 import {updateSearch} from "../../store/search/search.actions";
 import {Observable} from "rxjs";
 import {searchData} from "../../store/search/search.reducer";
+import {MatDrawer} from "@angular/material/sidenav";
+import {ParkingLot} from "../../types/types";
 
 @Component({
   selector: 'app-search',
@@ -15,6 +17,7 @@ import {searchData} from "../../store/search/search.reducer";
 export class SearchComponent implements OnInit {
 
   @ViewChild('map', {static: true}) map: ElementRef | undefined;
+  @ViewChild('drawer', {static: true}) drawer: MatDrawer | undefined;
   mapOptions: any = {
     center: {
       lat: 0,
@@ -22,10 +25,33 @@ export class SearchComponent implements OnInit {
     },
     zoom: 15
   };
-  reviews: any = [0, 1, 2, 3, 4];
+  parkingLotList: ParkingLot[] = [
+    {
+      name: "red"
+    },
+    {
+      name: "green"
+    },
+    {
+      name: "blue"
+    },
+    {
+      name: "cyan"
+    },
+    {
+      name: "magenta"
+    },
+    {
+      name: "yellow"
+    },
+    {
+      name: "black"
+    }
+  ];
   google: google | undefined
   isParkingLotDetailsVisible = false;
   searchData$: Observable<searchData> | undefined;
+  selectedParkingLot: ParkingLot | undefined;
 
   constructor(
     private store: Store
@@ -61,7 +87,11 @@ export class SearchComponent implements OnInit {
     })
   }
 
-  showParkingLotDetails() {
-    this.isParkingLotDetailsVisible = true;
+  showParkingLotDetails(parkingLot: ParkingLot) {
+    this.selectedParkingLot = parkingLot;
+    console.log('this.drawer', this.drawer);
+    if (!this.drawer?.opened) {
+      this.drawer?.open();
+    }
   }
 }

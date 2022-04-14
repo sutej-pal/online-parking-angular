@@ -16,47 +16,22 @@
             </div>
           </div>
         </div>
-        <div class="parking-lot-cards-container">
-          <div class="col-md-12" *ngFor="let x of reviews" (click)="drawer.toggle()">
-            <mat-card>
-              <div class="d-flex" style="gap: 10px">
-                <div>
-                  //TODO: Image
-                </div>
-                <div>
-                  <div class="mat-subheading-1">
-                    Formal Client
-                    <div class="d-flex align-items-center">
-                      <mat-icon style="color: #fbbc05">star</mat-icon>
-                      <mat-icon style="color: #fbbc05">star</mat-icon>
-                      <mat-icon style="color: #fbbc05">star</mat-icon>
-                      <mat-icon style="color: #fbbc05">star</mat-icon>
-                      <span class="mat-body-1 px-2">4 months ago</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi doloribus dolorum ea? Aspernatur
-                dignissimos dolores ea eos,
-              </p>
-              <p>
-            </mat-card>
-          </div>
+        <div class="parking-lot-cards-container py-2">
+          <app-parking-lot-card
+            *ngFor="let parkingLot of parkingLotList;let i = index"
+            [parkingLotData]="parkingLot"
+            (click)="showParkingLotDetails(parkingLot)">
+          </app-parking-lot-card>
         </div>
       </div>
     </div>
     <div class="col-md-9 p-0 position-relative">
       <mat-drawer-container class="w-100 h-100 position-absolute">
         <mat-drawer #drawer class="example-sidenav w-75" mode="side">
-          <p>Auto-resizing sidenav</p>
-          <p>Lorem, ipsum dolor sit amet consectetur.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolores officiis vitae? Aliquid aspernatur
-            eos esse fugiat harum, id impedit, iusto placeat quod ratione sapiente sit. Accusamus, saepe
-            voluptate.</p>
-          <button class="close-button" mat-icon-button (click)="drawer.toggle()">
-            <mat-icon>close</mat-icon>
-          </button>
+          <app-parking-lot-details
+            (closePLDetailWindow)="drawer.close()"
+            [parkingLot]="selectedParkingLot">
+          </app-parking-lot-details>
         </mat-drawer>
         <div #map class="google-map h-100"></div>
       </mat-drawer-container>
