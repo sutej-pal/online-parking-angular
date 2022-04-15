@@ -36,11 +36,22 @@
   z-index: 2;
 }
 
-::ng-deep .mat-menu-panel {
-  width: 600px;
-  max-width: 600px!important;
-  min-width: 600px!important;
+::ng-deep .vehicle-type-selection-panel-wrapper {
+  width: 452px;
+  max-width: 452px!important;
+  min-width: 452px!important;
+  margin-top: 15px;
+  margin-right: -10px;
   .mat-menu-content {
     padding: 0 !important;
+  }
+}
+
+.vehicle-type-selection-panel {
+  .vehicle-type {
+    button {
+      height: 50px;
+      width: 170px;
+    }
   }
 }

@@ -52,6 +52,7 @@ export class SearchComponent implements OnInit {
   isParkingLotDetailsVisible = false;
   searchData$: Observable<searchData> | undefined;
   selectedParkingLot: ParkingLot | undefined;
+  isPLDetailWindowExpanded = false;
 
   constructor(
     private store: Store

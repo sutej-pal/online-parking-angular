@@ -1,7 +1,7 @@
 <div class="header-main container d-flex p-3">
   <div class="align-items-center d-flex justify-content-between w-100">
     <div class="">
-      <span class="mat-title" role="button" [routerLink]="'/'">Pals Parking</span>
+      <span class="mat-display-1" role="button" [routerLink]="'/'">Pals Parking</span>
     </div>
     <div class="" *ngIf="!((individual$ | async)?.id)">
       <button class="mx-2" [routerLink]="'/login'" mat-raised-button aria-label="Sign Up" color="primary">
@@ -10,18 +10,19 @@
       <button class="mx-2" [matMenuTriggerFor]="menu" mat-raised-button aria-label="Sign Up" color="primary">
         Sign Up
       </button>
-      <mat-menu #menu="matMenu">
+      <mat-menu #menu="matMenu" xPosition="after">
         <button mat-menu-item [routerLink]="'/sign-up/individual'">As Individual</button>
         <button mat-menu-item [routerLink]="'/sign-up/business'">As Business</button>
       </mat-menu>
     </div>
-    <div class="user-menu"  *ngIf="(individual$ | async)?.id" [matMenuTriggerFor]="userMenu">
+    <div class="user-menu" role="button" *ngIf="(individual$ | async)?.id" [matMenuTriggerFor]="userMenu">
       <button mat-icon-button>
         <mat-icon>account_circle</mat-icon>
       </button>
       <span class="mat-body">Hi, {{(individual$ | async)?.firstName + ' ' + (individual$ | async)?.lastName}}</span>
       <mat-menu #userMenu="matMenu">
-        <button mat-menu-item routerLink="/profile">Profile</button>
+        <button mat-menu-item routerLink="/individual/profile">Profile</button>
+        <button mat-menu-item routerLink="/individual/bookings">Bookings</button>
         <button mat-menu-item (click)="logOut()">Log Out</button>
       </mat-menu>
     </div>

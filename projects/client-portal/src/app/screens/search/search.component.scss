@@ -1,5 +1,14 @@
 @import "../../../assets/global-styles";
 
+.search-result-sidebar {
+  transition: all .5s;
+
+  &.expanded-pl-detail-window {
+    width: 0;
+    padding: 0;
+  }
+}
+
 .parking-lot-details {
   position: absolute;
   top: 0;
@@ -47,4 +56,13 @@
   height: calc(100vh - 261px);
   overflow: auto;
   @include custom-scrollbar(7px);
+}
+
+.pl-detail-window {
+  width: 75%;
+  transition: width .5s;
+
+  &.expanded-pl-detail-window {
+    width: 100%;
+  }
 }

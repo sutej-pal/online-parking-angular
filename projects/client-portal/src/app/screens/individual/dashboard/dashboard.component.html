@@ -1,0 +1,41 @@
+<div style="height: calc(100vh - 64px)">
+  <mat-toolbar color="primary" class="justify-content-between">
+    <div class="d-flex justify-content-center align-items-center">
+      <button mat-icon-button (click)="isSidebarCollapsed = !isSidebarCollapsed">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span role="button" routerLink="/">Pals Parking</span>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+      <span class="example-spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Log out</button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+  <mat-drawer-container class="h-100">
+    <mat-drawer mode="side" opened class="mat-drawer" [ngClass]="{'mat-drawer-collapsed' : isSidebarCollapsed}">
+      <mat-selection-list #shoes [multiple]="false">
+        <mat-list-option routerLink="/individual/bookings" routerLinkActive="mat-list-single-selected-option">
+          <div class="d-flex justify-content-start align-items-center">
+            <mat-icon>event</mat-icon>
+            <span class="px-2 link-name">Bookings</span>
+          </div>
+        </mat-list-option>
+        <mat-list-option routerLink="/individual/profile" routerLinkActive="mat-list-single-selected-option">
+          <div class="d-flex justify-content-start align-items-center">
+            <mat-icon>perm_identity</mat-icon>
+            <span class="px-2 link-name">Profile</span>
+          </div>
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-drawer>
+    <mat-drawer-content
+      [ngClass]="{'mat-drawer-collapsed' : isSidebarCollapsed, 'mat-drawer-expanded' : !isSidebarCollapsed}">
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

@@ -2,9 +2,9 @@
 <app-search-bar></app-search-bar>
 <div class="search-main container-fluid">
   <div class="row" style="height: calc(100vh - 193px);">
-    <div class="col-md-3">
+    <div class="col-md-3 search-result-sidebar" [ngClass]="{'expanded-pl-detail-window': isPLDetailWindowExpanded}">
       <div class="row position-relative bg-light h-100">
-        <div class="col-md-12 pb-3 bg-info bg-opacity-25">
+        <div class="col-md-12 pb-3" style="background: rgba(63, 81, 181, .10);">
           <div class="p-2 d-flex justify-content-between">
             <div>3 Parking Lots Found near DEST</div>
             <div>
@@ -25,11 +25,12 @@
         </div>
       </div>
     </div>
-    <div class="col-md-9 p-0 position-relative">
+    <div class="col p-0 position-relative">
       <mat-drawer-container class="w-100 h-100 position-absolute">
-        <mat-drawer #drawer class="example-sidenav w-75" mode="side">
+        <mat-drawer #drawer class="pl-detail-window" mode="side" [ngClass]="{'expanded-pl-detail-window': isPLDetailWindowExpanded}">
           <app-parking-lot-details
-            (closePLDetailWindow)="drawer.close()"
+            (toggleExpandPLDetailWindow)="isPLDetailWindowExpanded = !isPLDetailWindowExpanded"
+            (closePLDetailWindow)="drawer.close();isPLDetailWindowExpanded = false"
             [parkingLot]="selectedParkingLot">
           </app-parking-lot-details>
         </mat-drawer>

@@ -10,37 +10,45 @@
     </mat-form-field>
     <app-custom-date-time-picker [formGroup]="formGroup" controlName="arrivalDateTime"></app-custom-date-time-picker>
     <app-custom-date-time-picker [formGroup]="formGroup" controlName="exitDateTime"></app-custom-date-time-picker>
-    <mat-form-field appearance="outline" class="position-relative" style="width: 110px">
+
+    <!--    Vehicle Selection Panel Menu Start   -->
+
+    <mat-form-field [ngClass]="{'d-block': isVehicleSelectionVisible, 'd-none': !isVehicleSelectionVisible}"
+                    appearance="outline" class="position-relative" style="width: 110px">
       <mat-label>Vehicle</mat-label>
       <input matInput type="text" formControlName="vehicleType" autocomplete="off" style="display: none">
       <img src="../../../assets/images/car.svg" alt="" style="padding: 0 0 0 10px;">
-      <button type="button" matSuffix mat-icon-button aria-label="Clear" [matMenuTriggerFor]="menu">
+      <button type="button" matSuffix mat-icon-button aria-label="Clear"
+              [matMenuTriggerFor]="vehicleSelectionPanelMenu">
         <mat-icon>expand_more</mat-icon>
       </button>
-      <mat-menu #menu="matMenu">
-        <div>
-          <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque debitis dolor, dolore dolores fuga
-            molestias saepe? Ad at blanditiis eligendi ipsum provident quae totam voluptates. Distinctio nisi numquam
-            officia perspiciatis?</span>
-          <button mat-menu-item>
-            <mat-icon>dialpad</mat-icon>
-            <span>Redial</span>
-          </button>
-          <button mat-menu-item>
-            <mat-icon>dialpad</mat-icon>
-            <span>Redial</span>
-          </button><button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <span>Redial</span>
-        </button>
-          <button mat-menu-item>
-            <mat-icon>dialpad</mat-icon>
-            <span>Redial</span>
-          </button>
-
+      <div></div>
+      <mat-menu #vehicleSelectionPanelMenu="matMenu" class="vehicle-type-selection-panel-wrapper"  xPosition="before">
+        <div class="text-center py-2">
+          <span class="mat-title">Type of Vehicle</span>
+        </div>
+        <mat-divider></mat-divider>
+        <div (click)="$event.stopPropagation();" class="d-flex flex-wrap vehicle-type-selection-panel p-2">
+          <div *ngFor="let x of [0, 1, 2, 3]" class="p-4 vehicle-type">
+            <button mat-stroked-button (click)="selectVehicleType()">
+              <div class="d-flex justify-content-around align-items-center">
+                <div>
+                  <img src="../../../assets/images/car.svg" alt="">
+                  <span class="px-2">Car</span>
+                </div>
+                <mat-icon [ngStyle]="{'color': x%2 === 0 ? 'green' : 'gray'}">check_circle</mat-icon>
+              </div>
+            </button>
+            <div>
+              <div class="text-center">Sample Text</div>
+            </div>
+          </div>
         </div>
       </mat-menu>
     </mat-form-field>
+
+    <!--    Vehicle Selection Panel Menu End   -->
+
     <button mat-raised-button color="primary" class="submit-btn">SEARCH</button>
     <mat-error class="position-absolute bottom-0"
                *ngIf="formGroup.hasError('invalidDates')">{{formGroup.errors?.invalidDates}}</mat-error>

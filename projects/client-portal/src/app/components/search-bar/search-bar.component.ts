@@ -15,6 +15,7 @@ import {Store} from "@ngrx/store";
 import {updateSearch} from "../../store/search/search.actions";
 import {getSearchData} from "../../store/search/search.selectors";
 import {searchData} from "../../store/search/search.reducer";
+import {MatMenuTrigger} from "@angular/material/menu";
 
 @Component({
   selector: 'app-search-bar',
@@ -23,7 +24,7 @@ import {searchData} from "../../store/search/search.reducer";
 })
 export class SearchBarComponent implements OnInit {
 
-  @ViewChild('searchBar') searchBar: any;
+  @ViewChild(MatMenuTrigger) vehicleSelectionPanelMenu: MatMenuTrigger | undefined;
 
   options = {
     componentRestrictions: {country: ["in"]},
@@ -36,7 +37,7 @@ export class SearchBarComponent implements OnInit {
   formGroup: FormGroup = new FormGroup({});
   isFormReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   searchData$: Observable<searchData> | undefined;
-  isVehicleSelectionModelVisible = false;
+  isVehicleSelectionVisible = false;
 
   constructor(
     private store: Store,
@@ -51,7 +52,7 @@ export class SearchBarComponent implements OnInit {
     this.searchData$ = this.store.select(getSearchData);
     this.loadForm();
     await this.checkIfMapLoaded();
-    console.log(this.searchBar);
+    this.isVehicleSelectionVisible = this.router.url === '/search';
   }
 
   async checkIfMapLoaded() {
@@ -141,37 +142,7 @@ export class SearchBarComponent implements OnInit {
     }
   }
 
-  openVehicleSelectionModel() {
-    this.isVehicleSelectionModelVisible = !this.isVehicleSelectionModelVisible;
-    document.addEventListener('click', (e: any) => {
-      let x = true;
-      if (e.path) {
-        for (let i = 0; i < e.path.length - 2; i++) {
-          if (e.path[i].classList.contains('vehicle-dropdown')) {
-            x = false
-          }
-        }
-        if (x) {
-          this.isVehicleSelectionModelVisible = !this.isVehicleSelectionModelVisible;
-          document.removeEventListener('click', () => {}, true);
-        }
-      }
-    }, true);
-    // document.removeEventListener('click', this.evtListener, true);
+  selectVehicleType () {
+    this.vehicleSelectionPanelMenu?.closeMenu()
   }
-
-  // evtListener(e: any) {
-  //   let x = true;
-  //   if (e.path) {
-  //     for (let i = 0; i < e.path.length - 2; i++) {
-  //       if (e.path[i].classList.contains('vehicle-dropdown')) {
-  //         x = false
-  //       }
-  //     }
-  //     if (x) {
-  //       this.isVehicleSelectionModelVisible = !this.isVehicleSelectionModelVisible;
-  //       document.removeEventListener('click', this.evtListener, true);
-  //     }
-  //   }
-  // }
 }

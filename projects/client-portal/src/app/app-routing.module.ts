@@ -5,7 +5,6 @@ import {HomeComponent} from "./screens/home/home.component";
 import {SignUpComponent} from "./screens/sign-up/sign-up.component";
 import {LoginComponent} from "./screens/login/login.component";
 import {TermAndConditionsComponent} from "./screens/term-and-conditions/term-and-conditions.component";
-import {BookingsComponent} from "./screens/bookings/bookings.component";
 import {ForgotPasswordComponent} from "./screens/forgot-password/forgot-password.component";
 import {ResetPasswordComponent} from "./screens/reset-password/reset-password.component";
 
@@ -27,8 +26,8 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'bookings',
-    component: BookingsComponent
+    path: 'individual',
+    loadChildren: () => import('./screens/individual/individual.module').then(m => m.IndividualModule)
   },
   {
     path: 'forgot-password',

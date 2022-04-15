@@ -9,7 +9,8 @@ import {ParkingLot} from "../../types/types";
 export class ParkingLotDetailsComponent implements OnInit {
 
   @Input() parkingLot: ParkingLot | undefined;
-  @Output() closePLDetailWindow: EventEmitter<any> = new EventEmitter()
+  @Output() toggleExpandPLDetailWindow: EventEmitter<any> = new EventEmitter();
+  @Output() closePLDetailWindow: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
