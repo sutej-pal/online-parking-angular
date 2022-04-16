@@ -1,6 +1,7 @@
 @import "../../../assets/global-styles";
 
 .search-result-sidebar {
+  width: 500px;
   transition: all .5s;
   overflow: hidden;
 
@@ -8,6 +9,12 @@
     width: 0;
     padding: 0;
   }
+}
+
+.availability-and-filters {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .parking-lot-details {

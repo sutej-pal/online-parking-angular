@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ParkingLot} from "../../types/types";
+import {UtilitiesService} from "../../services/utilities.service";
 
 @Component({
   selector: 'app-parking-lot-card',
@@ -10,7 +11,10 @@ export class ParkingLotCardComponent implements OnInit {
 
   @Input() parkingLotData: ParkingLot | undefined
 
-  constructor() { }
+  constructor(
+    public utilitiesService: UtilitiesService
+  ) {
+  }
 
   ngOnInit(): void {
   }

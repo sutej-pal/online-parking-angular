@@ -19,9 +19,9 @@
 
 ::ng-deep .pac-container.pac-logo {
   width: 348px !important;
-  left: 404px !important;
-  top: 172px !important;
-
+  left: 412px !important;
+  top: 165px !important;
+  border-radius: 0 0 5px 5px;
   &::after {
     display: none;
   }
@@ -54,4 +54,8 @@
       width: 170px;
     }
   }
+}
+
+::ng-deep .cdk-overlay-transparent-backdrop, .cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 1 !important;
 }

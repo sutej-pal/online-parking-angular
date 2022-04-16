@@ -1,8 +1,9 @@
 <div class="card-wrapper">
   <mat-card>
     <div class="d-flex" style="gap: 10px">
-      <div>
-        //TODO: Image
+      <div class="pl-profile-image">
+        <img class="w-100 h-auto" src='default-placeholder.png' (error)="utilitiesService.onImgError($event)" [title]="parkingLotData?.name"
+             [alt]="parkingLotData?.name">
       </div>
       <div>
         <div class="mat-subheading-1">

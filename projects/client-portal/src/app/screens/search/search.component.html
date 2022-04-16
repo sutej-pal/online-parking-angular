@@ -2,17 +2,25 @@
 <app-search-bar></app-search-bar>
 <div class="search-main container-fluid">
   <div class="row" style="height: calc(100vh - 193px);">
-    <div class="col-md-3 search-result-sidebar" style="height: calc(100vh - 193px);" [ngClass]="{'expanded-pl-detail-window': isPLDetailWindowExpanded}">
-      <div class="row position-relative bg-light h-100">
-        <div class="col-md-12 pb-3" style="background: rgba(63, 81, 181, .10);">
-          <div class="p-2 d-flex justify-content-between">
-            <div>3 Parking Lots Found near DEST</div>
-            <div>
-              <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Sort By</button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>Price</button>
-                <button mat-menu-item>Distance</button>
-              </mat-menu>
+    <div class="search-result-sidebar" style="height: calc(100vh - 193px);"
+         [ngClass]="{'expanded-pl-detail-window': isPLDetailWindowExpanded}">
+      <div class="row position-relative h-100">
+        <div class="col-md-12 pb-3 border-bottom border-2">
+          <div class="p-2 d-flex flex-column">
+            <div class="availability-and-filters w-100">
+              <span class="text-secondary">Parking Lots Found near </span>{{(searchData$ | async)?.destination}}
+            </div>
+            <div class="d-flex justify-content-between align-items-center pt-3">
+              <div>
+                3 Parking Lots Found
+              </div>
+              <div>
+                <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Sort By</button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>Price</button>
+                  <button mat-menu-item>Distance</button>
+                </mat-menu>
+              </div>
             </div>
           </div>
         </div>
@@ -27,7 +35,8 @@
     </div>
     <div class="col p-0 position-relative">
       <mat-drawer-container class="w-100 h-100 position-absolute">
-        <mat-drawer #drawer class="pl-detail-window" mode="side" [ngClass]="{'expanded-pl-detail-window': isPLDetailWindowExpanded}">
+        <mat-drawer #drawer class="pl-detail-window" mode="side"
+                    [ngClass]="{'expanded-pl-detail-window': isPLDetailWindowExpanded}">
           <app-parking-lot-details
             (toggleExpandPLDetailWindow)="isPLDetailWindowExpanded = !isPLDetailWindowExpanded"
             (closePLDetailWindow)="drawer.close();isPLDetailWindowExpanded = false"
