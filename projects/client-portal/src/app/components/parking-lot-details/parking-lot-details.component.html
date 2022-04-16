@@ -1,4 +1,4 @@
-<div class="parking-lot-details-main container-fluid">
+<div class="parking-lot-details-main container-fluid pt-3">
   <div>
     <button class="close-button" mat-icon-button (click)="closePLDetailWindow.emit(true)">
       <mat-icon>arrow_back</mat-icon>
@@ -15,7 +15,11 @@
           eos esse fugiat harum, id impedit, iusto placeat quod ratione sapiente sit. Accusamus, saepe
           voluptate.</p>
 
-        <button (click)="toggleExpandPLDetailWindow.emit(true)">test</button>
+        <button mat-icon-button
+                [matTooltip]="isPLDetailWindowExpanded ? 'Collapse Details' : 'Expand Details'"
+                (click)="toggleExpandPLDetailWindow.emit(true);isPLDetailWindowExpanded = !isPLDetailWindowExpanded">
+          <mat-icon style="transform: rotate(90deg);" >{{isPLDetailWindowExpanded ? 'unfold_less' : 'unfold_more'}}</mat-icon>
+        </button>
       </div>
     </div>
     <div>

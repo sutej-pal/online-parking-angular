@@ -2,6 +2,7 @@
 
 .search-result-sidebar {
   transition: all .5s;
+  overflow: hidden;
 
   &.expanded-pl-detail-window {
     width: 0;

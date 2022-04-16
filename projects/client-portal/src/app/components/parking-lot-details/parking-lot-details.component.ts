@@ -11,6 +11,7 @@ export class ParkingLotDetailsComponent implements OnInit {
   @Input() parkingLot: ParkingLot | undefined;
   @Output() toggleExpandPLDetailWindow: EventEmitter<any> = new EventEmitter();
   @Output() closePLDetailWindow: EventEmitter<any> = new EventEmitter();
+  isPLDetailWindowExpanded = false;
 
   constructor() { }
 

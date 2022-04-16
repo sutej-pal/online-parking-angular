@@ -35,13 +35,13 @@ import {ToastrModule} from "ngx-toastr";
 import {NgxMaskModule} from "ngx-mask";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {TermAndConditionsComponent} from './screens/term-and-conditions/term-and-conditions.component';
-import {BookingsComponent} from './screens/bookings/bookings.component';
 import {ForgotPasswordComponent} from './screens/forgot-password/forgot-password.component';
 import {ResetPasswordComponent} from './screens/reset-password/reset-password.component';
 import {metaReducers} from "./store/hydration.reducer";
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { ParkingLotCardComponent } from './components/parking-lot-card/parking-lot-card.component';
-import { ParkingLotDetailsComponent } from './components/parking-lot-details/parking-lot-details.component';
+import {ParkingLotCardComponent} from './components/parking-lot-card/parking-lot-card.component';
+import {ParkingLotDetailsComponent} from './components/parking-lot-details/parking-lot-details.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 const CLIENT_ID = environment.client_Id;
 
@@ -57,39 +57,39 @@ const CLIENT_ID = environment.client_Id;
     LoginComponent,
     SignUpComponent,
     TermAndConditionsComponent,
-    BookingsComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ParkingLotCardComponent,
     ParkingLotDetailsComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatListModule,
-    MatCardModule,
-    MatRippleModule,
-    MatMenuModule,
-    StoreModule.forRoot(appReducer, {metaReducers}),
-    MatProgressSpinnerModule,
-    ToastrModule.forRoot({
-      preventDuplicates: true,
-    }),
-    NgxMaskModule.forRoot(),
-    MatCheckboxModule,
-    FormsModule,
-    MatSidenavModule,
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatListModule,
+        MatCardModule,
+        MatRippleModule,
+        MatMenuModule,
+        StoreModule.forRoot(appReducer, {metaReducers}),
+        MatProgressSpinnerModule,
+        ToastrModule.forRoot({
+            preventDuplicates: true,
+        }),
+        NgxMaskModule.forRoot(),
+        MatCheckboxModule,
+        FormsModule,
+        MatSidenavModule,
+        MatTooltipModule,
+    ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthTokenInterceptor,
