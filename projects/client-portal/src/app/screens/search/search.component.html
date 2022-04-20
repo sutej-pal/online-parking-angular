@@ -1,63 +1,50 @@
-<div class="search-main container-fluid pt-5">
-  <app-search-bar></app-search-bar>
-  <div class="row">
-    <div class="col-md-3">
-      <div class="row position-relative bg-light" style="z-index: 2">
-        <div class="col-md-12 pb-3 bg-info bg-opacity-25">
-          <div class="p-2 d-flex justify-content-between">
-            <div>3 Parking Lots Found near DEST</div>
-            <div>
-              <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Sort By</button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>Price</button>
-                <button mat-menu-item>Distance</button>
-              </mat-menu>
+<app-header></app-header>
+<app-search-bar></app-search-bar>
+<div class="search-main container-fluid">
+  <div class="row" style="height: calc(100vh - 193px);">
+    <div class="search-result-sidebar" style="height: calc(100vh - 193px);"
+         [ngClass]="{'expanded-pl-detail-window': isPLDetailWindowExpanded}">
+      <div class="row position-relative h-100">
+        <div class="col-md-12 pb-3 border-bottom border-2">
+          <div class="p-2 d-flex flex-column">
+            <div class="availability-and-filters w-100">
+              <span class="text-secondary">Parking Lots Found near </span>{{(searchData$ | async)?.destination}}
+            </div>
+            <div class="d-flex justify-content-between align-items-center pt-3">
+              <div>
+                3 Parking Lots Found
+              </div>
+              <div>
+                <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Sort By</button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>Price</button>
+                  <button mat-menu-item>Distance</button>
+                </mat-menu>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-md-12 pb-3 px-3" *ngFor="let x of reviews" (click)="showParkingLotDetails()">
-          <mat-card>
-            <div class="d-flex" style="gap: 10px">
-              <div>
-                //TODO: Image
-              </div>
-              <div>
-                <div class="mat-subheading-1">
-                  Formal Client
-                  <div class="d-flex align-items-center">
-                    <mat-icon style="color: #fbbc05">star</mat-icon>
-                    <mat-icon style="color: #fbbc05">star</mat-icon>
-                    <mat-icon style="color: #fbbc05">star</mat-icon>
-                    <mat-icon style="color: #fbbc05">star</mat-icon>
-                    <span class="mat-body-1 px-2">4 months ago</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi doloribus dolorum ea? Aspernatur
-              dignissimos dolores ea eos,
-            </p>
-            <p>
-          </mat-card>
+        <div class="parking-lot-cards-container py-2">
+          <app-parking-lot-card
+            *ngFor="let parkingLot of parkingLotList;let i = index"
+            [parkingLotData]="parkingLot"
+            (click)="showParkingLotDetails(parkingLot)">
+          </app-parking-lot-card>
         </div>
       </div>
     </div>
-    <div class="col-md-9 p-0 position-relative">
-      <div class="parking-lot-details"
-           [ngClass]="{'show-parking-lot-details': isParkingLotDetailsVisible}">
-        <div>
-          <div class="title">Title</div>
-          <button class="close-button" mat-icon-button (click)="isParkingLotDetailsVisible = false">
-            <mat-icon>close</mat-icon>
-          </button>
-        </div>
-        TEST
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolores officiis vitae? Aliquid aspernatur
-          eos esse est fugiat harum, id impedit, iusto placeat quod ratione sapiente sit. Accusamus, saepe
-          voluptate.</p>
-      </div>
-      <div #map class="google-map"></div>
+    <div class="col p-0 position-relative">
+      <mat-drawer-container class="w-100 h-100 position-absolute border border-1">
+        <mat-drawer #drawer class="pl-detail-window" mode="side"
+                    [ngClass]="{'expanded-pl-detail-window': isPLDetailWindowExpanded}">
+          <app-parking-lot-details
+            (toggleExpandPLDetailWindow)="isPLDetailWindowExpanded = !isPLDetailWindowExpanded"
+            (closePLDetailWindow)="drawer.close();isPLDetailWindowExpanded = false"
+            [parkingLot]="selectedParkingLot">
+          </app-parking-lot-details>
+        </mat-drawer>
+        <div #map class="google-map h-100"></div>
+      </mat-drawer-container>
     </div>
   </div>
 </div>

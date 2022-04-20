@@ -1,0 +1,81 @@
+<div class="register-main bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-between pt-2">
+        <button mat-icon-button (click)="navigateBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div>
+          Already have a account. <a href="/login">Click here</a> to login.
+        </div>
+      </div>
+    </div>
+    <div class="sign-up-card-wrapper d-flex justify-content-center navigation-links">
+      <mat-card>
+        <div class="card-title">
+          <mat-card-title>Sign Up</mat-card-title>
+          <mat-card-subtitle>Please fill up the form to create a {{userType === 'individual' ? '' : 'Business'}}
+            account.
+          </mat-card-subtitle>
+        </div>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" autocomplete="off">
+          <div class="row">
+            <mat-form-field class="w-50">
+              <input formControlName="name" matInput placeholder="Name">
+              <mat-error *ngIf="f.name.hasError('required')">Name is required.</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-50">
+              <input formControlName="lastName" matInput placeholder="Last Name">
+              <mat-error *ngIf="f.lastName.hasError('required')">Last Name is required.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="w-100">
+              <input formControlName="email" matInput placeholder="Email">
+              <mat-error *ngIf="f.email.hasError('required')">Email is required.</mat-error>
+              <mat-error *ngIf="f.email.hasError('email')">Please enter a valid email.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="w-100">
+              <input formControlName="mobile" type="text" mask="000-000-0000" matInput placeholder="Mobile">
+              <mat-error *ngIf="f.mobile.hasError('required')">Mobile is required.</mat-error>
+              <mat-error *ngIf="f.mobile.hasError('pattern')">
+                Please enter a valid mobile number.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="w-100">
+              <input [type]="isPasswordVisible ? 'text' : 'password'" formControlName="password" matInput
+                     placeholder="Password">
+              <button type="button" matSuffix mat-icon-button (click)="isPasswordVisible = !isPasswordVisible">
+                <mat-icon *ngIf="isPasswordVisible">visibility_off</mat-icon>
+                <mat-icon *ngIf="!isPasswordVisible">visibility</mat-icon>
+              </button>
+              <mat-error *ngIf="f.password.hasError('required')">Password is required.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row pt-4 pb-2">
+            <div class="d-flex justify-content-start align-items-center mat-body-1">
+              <mat-checkbox class="d-inline" (click)="acceptTAndC = !acceptTAndC">I accept the&nbsp;</mat-checkbox>
+              <span class="d-inline"><a target="_blank" href="/terms-and-conditions">terms and conditions</a>.</span>
+            </div>
+            <mat-error *ngIf="submitted && !acceptTAndC" style="font-size: 12px">
+              Please accept the Term and Conditions.
+            </mat-error>
+          </div>
+          <div style="text-align: center;margin-top: 15px">
+            <button type="submit" mat-raised-button class="w-100 text-center" color="primary"
+                    [disabled]="isRegistering$ | async">
+            <span class="d-flex justify-content-center align-items-center" style="gap: 10px">
+              <mat-spinner *ngIf="isRegistering$ | async" diameter="20"></mat-spinner>
+              <span>{{(isRegistering$ | async) ? 'Registering ...' : 'Register'}}</span>
+            </span>
+            </button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

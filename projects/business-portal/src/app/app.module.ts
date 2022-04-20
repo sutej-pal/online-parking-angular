@@ -96,7 +96,7 @@ import {MatTableModule} from "@angular/material/table";
         MatTableModule
     ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true}],
-  exports: [ToolbarComponent],
+    exports: [ToolbarComponent, ParkingLotCardComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

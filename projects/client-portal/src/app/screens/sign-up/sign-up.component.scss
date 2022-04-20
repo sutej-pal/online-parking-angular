@@ -1,0 +1,31 @@
+.register-main {
+  height: 100vh;
+  .navigation-links {
+    padding-top: 10vh;
+  }
+  .sign-up-card-wrapper {
+    height: 90vh;
+    .mat-card {
+      width: 450px;
+      height: fit-content;
+    }
+  }
+
+  .card-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 1px solid gray;
+
+    mat-card-subtitle {
+      margin-bottom: 7px;
+    }
+  }
+
+  form {
+    padding: 10px 0;
+
+  }
+}

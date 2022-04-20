@@ -1,0 +1,74 @@
+<div class="parking-lot-details-main container-fluid pt-3">
+  <div>
+    <button class="close-button" mat-icon-button matTooltip="Hide Parking Lot Details" (click)="closePLDetailWindow.emit(true)">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  <div class="d-flex" style="gap: 15px">
+    <div class="w-75">
+      <p>{{parkingLot?.name}}</p>
+      <div class="mat-title">
+        About
+      </div>
+      <div class="mat-body-1">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolores officiis vitae? Aliquid aspernatur
+          eos esse fugiat harum, id impedit, iusto placeat quod ratione sapiente sit. Accusamus, saepe
+          voluptate.</p>
+
+        <button mat-icon-button
+                [matTooltip]="isPLDetailWindowExpanded ? 'Collapse Details' : 'Expand Details'"
+                (click)="toggleExpandPLDetailWindow.emit(true);isPLDetailWindowExpanded = !isPLDetailWindowExpanded">
+          <mat-icon
+            style="transform: rotate(90deg);">{{isPLDetailWindowExpanded ? 'unfold_less' : 'unfold_more'}}</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-divider vertical style="height: 300px"></mat-divider>
+    <div>
+      <mat-card class="booking-card">
+        <mat-card-title class="text-center">Booking</mat-card-title>
+        <mat-card-content style="width: 330px">
+          <div class="border border-1 rounded-3 p-2 position-relative">
+            <div class="d-flex justify-content-between align-items-center py-1">
+              <div class="d-flex flex-column">
+                <span class="fw-bolder">Basic Car Park</span>
+                <span class="text-secondary">One Time Pass</span>
+              </div>
+              <div class="d-flex align-items-center" style="gap: 5px">
+                Rs. 40.00
+                <mat-icon [ngStyle]="{'color': 'green'}">check_circle</mat-icon>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="d-flex justify-content-between align-items-center py-1" style="gap: 10px">
+              <div>
+                <div class="text-secondary">Arrival</div>
+                <div class="d-flex" style="gap: 5px">
+                  <div>{{moment().format('ddd, MMM Do')}}</div>
+                  <div class="fw-bolder">{{moment().format('hh:mm a')}}</div>
+                </div>
+              </div>
+              <mat-divider [vertical]="true" style="height:30px"></mat-divider>
+              <div>
+                <div class="text-secondary">Exit</div>
+                <div class="d-flex" style="gap: 5px">
+                  <div>{{moment().format('ddd, MMM Do')}}</div>
+                  <div class="fw-bolder">{{moment().format('hh:mm a')}}</div>
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="d-flex flex-column pt-1">
+              <div class="text-secondary">Arrival</div>
+              <div>Car</div>
+            </div>
+          </div>
+          <div class="px-3 py-2">Selected Time: <span class="fw-bold">1 hours</span></div>
+          <div class="text-center pt-2">
+            <button mat-raised-button color="primary" class="book-button">Book For <span class="fw-bolder">Rs.40.00</span></button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

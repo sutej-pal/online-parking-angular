@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AppComponent} from "../../app.component";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {google} from 'google-maps';
 import {
   FormBuilder,
@@ -11,6 +11,11 @@ import {Router} from "@angular/router";
 import {DateAdapter} from "@angular/material/core";
 import * as moment from "moment";
 import {DateTimeValidator} from "./date-time-validator";
+import {Store} from "@ngrx/store";
+import {updateSearch} from "../../store/search/search.actions";
+import {getSearchData} from "../../store/search/search.selectors";
+import {searchData} from "../../store/search/search.reducer";
+import {MatMenuTrigger} from "@angular/material/menu";
 
 @Component({
   selector: 'app-search-bar',
@@ -18,6 +23,8 @@ import {DateTimeValidator} from "./date-time-validator";
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
+
+  @ViewChild(MatMenuTrigger) vehicleSelectionPanelMenu: MatMenuTrigger | undefined;
 
   options = {
     componentRestrictions: {country: ["in"]},
@@ -29,8 +36,11 @@ export class SearchBarComponent implements OnInit {
   google: google | undefined
   formGroup: FormGroup = new FormGroup({});
   isFormReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  searchData$: Observable<searchData> | undefined;
+  isVehicleSelectionVisible = false;
 
   constructor(
+    private store: Store,
     private router: Router,
     private fb: FormBuilder,
     private dateAdapter: DateAdapter<Date>
@@ -39,8 +49,10 @@ export class SearchBarComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.checkIfMapLoaded();
+    this.searchData$ = this.store.select(getSearchData);
     this.loadForm();
+    await this.checkIfMapLoaded();
+    this.isVehicleSelectionVisible = this.router.url === '/search';
   }
 
   async checkIfMapLoaded() {
@@ -58,12 +70,10 @@ export class SearchBarComponent implements OnInit {
     this.google = await AppComponent.googleMap;
     const input = document.getElementById("pac-input") as HTMLInputElement;
     this.autocomplete = new this.google.maps.places.Autocomplete(input, this.options);
-    this.autocomplete.addListener("place_changed", this.fillInAddress);
-  }
-
-  private fillInAddress() {
-    const place = this.autocomplete?.getPlace();
-    console.log(place);
+    this.autocomplete.addListener("place_changed", () => {
+      const place = this.autocomplete.getPlace();
+      this.updateForm(place);
+    });
   }
 
   async getCurrentLocation(e: MouseEvent) {
@@ -78,11 +88,8 @@ export class SearchBarComponent implements OnInit {
       };
       geocoder
         .geocode({location: latLng}, (response) => {
-          console.log(response);
           if (response[0]) {
-            // response[0].geometry.location.lat(): ƒ ()
-            // lng: ƒ ()
-            this.formGroup.controls['destination'].setValue(response[0].formatted_address);
+            this.updateForm(response[0]);
           }
         });
     }
@@ -98,20 +105,44 @@ export class SearchBarComponent implements OnInit {
     }
     this.formGroup = this.fb.group({
       destination: ['', [Validators.required]],
+      lat: [0],
+      lng: [0],
       arrivalDateTime: [data.arrivalDateTime, [Validators.required]],
-      exitDateTime: [data.exitDateTime, [Validators.required]]
+      exitDateTime: [data.exitDateTime, [Validators.required]],
+      vehicleType: [' ']
     }, {
       validators: DateTimeValidator.validateDiff('arrivalDateTime', 'exitDateTime')
     })
     this.isFormReady$.next(true);
+    this.searchData$?.subscribe(e => {
+      this.formGroup.patchValue(e);
+    })
+  }
+
+  updateForm(place: any) {
+    const searchData = {
+      destination: place.formatted_address,
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng(),
+    }
+    this.formGroup.patchValue(searchData);
   }
 
   async onSubmit() {
     if (this.formGroup.invalid) {
       return
     } else {
-      localStorage.setItem('searchData', JSON.stringify(this.formGroup.value));
+      const searchData = {
+        lat: this.formGroup.value.lat,
+        lng: this.formGroup.value.lng,
+        destination: this.formGroup.value.destination
+      }
+      this.store.dispatch(updateSearch({payload: searchData}))
       await this.router.navigate(['/search']);
     }
+  }
+
+  selectVehicleType () {
+    this.vehicleSelectionPanelMenu?.closeMenu()
   }
 }

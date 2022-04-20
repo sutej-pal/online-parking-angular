@@ -1,4 +1,5 @@
 .search-bar {
+  background: rgba(63, 81, 181, .10);
 
   form {
     gap: 10px;
@@ -7,10 +8,54 @@
       background-color: white;
       border-radius: 5px;
     }
+
     .submit-btn {
       margin: 0 5px 20px 5px;
       padding: 5px 15px;
       font-size: 20px;
     }
   }
+}
+
+::ng-deep .pac-container.pac-logo {
+  width: 348px !important;
+  left: 412px !important;
+  top: 165px !important;
+  border-radius: 0 0 5px 5px;
+  &::after {
+    display: none;
+  }
+}
+
+.custom-card {
+  height: 400px;
+  width: 400px;
+  position: absolute;
+  top: 52px;
+  right: -51px;
+  z-index: 2;
+}
+
+::ng-deep .vehicle-type-selection-panel-wrapper {
+  width: 452px;
+  max-width: 452px!important;
+  min-width: 452px!important;
+  margin-top: 15px;
+  margin-right: -10px;
+  .mat-menu-content {
+    padding: 0 !important;
+  }
+}
+
+.vehicle-type-selection-panel {
+  .vehicle-type {
+    button {
+      height: 50px;
+      width: 170px;
+    }
+  }
+}
+
+::ng-deep .cdk-overlay-transparent-backdrop, .cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 1 !important;
 }

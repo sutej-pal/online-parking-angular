@@ -40,6 +40,10 @@ export class AppComponent {
               lng: 0,
             }
             reject(location);
+          }, {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
           }
         );
       } else {

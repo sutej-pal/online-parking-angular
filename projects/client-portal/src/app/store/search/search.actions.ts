@@ -6,5 +6,5 @@ export const loadSearch = createAction(
 
 export const updateSearch = createAction(
   '[Search] Update Search',
-  props<{ data: any }>()
+  props<{ payload: any }>()
 );

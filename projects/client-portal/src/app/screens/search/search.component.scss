@@ -1,3 +1,22 @@
+@import "../../../assets/global-styles";
+
+.search-result-sidebar {
+  width: 500px;
+  transition: all .5s;
+  overflow: hidden;
+
+  &.expanded-pl-detail-window {
+    width: 0;
+    padding: 0;
+  }
+}
+
+.availability-and-filters {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .parking-lot-details {
   position: absolute;
   top: 0;
@@ -7,17 +26,51 @@
   z-index: 1;
   background: #ffb9b9;
   transition: 0.5s;
+
   .close-button {
     position: absolute;
     top: 10px;
     right: 10px;
   }
 }
+
 .show-parking-lot-details {
   transition: 0.5s;
   left: 0;
   right: 0;
 }
-.google-map {
-  height: 65vh;
+
+
+::ng-deep div a[title="Open this area in Google Maps (opens a new window)"] {
+  display: none !important;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-drawer {
+  z-index: 0;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+
+.parking-lot-cards-container {
+  height: calc(100vh - 261px);
+  overflow: auto;
+  @include custom-scrollbar(7px);
+}
+
+.pl-detail-window {
+  width: 75%;
+  transition: width .5s;
+
+  &.expanded-pl-detail-window {
+    width: 100%;
+  }
 }
