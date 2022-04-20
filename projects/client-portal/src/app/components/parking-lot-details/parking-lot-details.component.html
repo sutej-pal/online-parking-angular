@@ -1,6 +1,6 @@
 <div class="parking-lot-details-main container-fluid pt-3">
   <div>
-    <button class="close-button" mat-icon-button (click)="closePLDetailWindow.emit(true)">
+    <button class="close-button" mat-icon-button matTooltip="Hide Parking Lot Details" (click)="closePLDetailWindow.emit(true)">
       <mat-icon>arrow_back</mat-icon>
     </button>
   </div>
@@ -23,6 +23,7 @@
         </button>
       </div>
     </div>
+    <mat-divider vertical style="height: 300px"></mat-divider>
     <div>
       <mat-card class="booking-card">
         <mat-card-title class="text-center">Booking</mat-card-title>
