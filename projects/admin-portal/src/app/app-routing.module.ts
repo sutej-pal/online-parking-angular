@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./screens/login/login.component";
 import {DashboardComponent} from "./screens/dashboard/dashboard.component";
 import {HomeComponent} from "./screens/home/home.component";
-import {ProfileComponent} from "./screens/profile/profile.component";
+import {VehiclesComponent} from "./screens/vehicles/vehicles.component";
 import {MapComponent} from "./screens/map/map.component";
 import {ParkingLotsComponent} from "./screens/parking-lots/parking-lots.component";
 import {EditParkingLotComponent} from "./screens/edit-parking-lot/edit-parking-lot.component";
@@ -23,8 +23,8 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path: "profile",
-        component: ProfileComponent
+        path: "vehicles",
+        component: VehiclesComponent
       },
       {
         path: "map",

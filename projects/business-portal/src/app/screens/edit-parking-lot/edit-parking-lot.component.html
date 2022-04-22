@@ -13,7 +13,7 @@
           <div>
             <mat-form-field appearance="legacy">
               <mat-label>Parking Lot Name</mat-label>
-              <input matInput autocomplete="nope" placeholder="Name" formControlName="name">
+              <input matInput autocomplete="off" placeholder="Name" formControlName="name">
             </mat-form-field>
           </div>
         </div>
@@ -26,13 +26,13 @@
           <div>
             <mat-form-field appearance="legacy">
               <mat-label>Address Line One</mat-label>
-              <input matInput autocomplete="nope" placeholder="Address" formControlName="addressLineOne">
+              <input matInput autocomplete="off" placeholder="Address" formControlName="addressLineOne">
             </mat-form-field>
           </div>
           <div>
             <mat-form-field appearance="legacy">
               <mat-label>Address Line Two</mat-label>
-              <input matInput autocomplete="nope" placeholder="Address" formControlName="addressLineTwo">
+              <input matInput autocomplete="off" placeholder="Address" formControlName="addressLineTwo">
             </mat-form-field>
           </div>
         </div>
@@ -45,14 +45,49 @@
           <div>
             <mat-form-field appearance="legacy">
               <mat-label>Latitude</mat-label>
-              <input matInput autocomplete="nope" [readonly]="true" formControlName="lat" (click)="openLatLngPicker()">
+              <input matInput autocomplete="off" [readonly]="true" formControlName="lat" (click)="openLatLngPicker()">
             </mat-form-field>
           </div>
           <div>
             <mat-form-field appearance="legacy">
               <mat-label>Longitude</mat-label>
-              <input matInput autocomplete="nope" [readonly]="true" formControlName="lng" (click)="openLatLngPicker()">
+              <input matInput autocomplete="off" [readonly]="true" formControlName="lng" (click)="openLatLngPicker()">
             </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="position-relative">
+      <mat-card-title>Parking Spots</mat-card-title>
+      <mat-card-content>
+        <button type="button" mat-raised-button color="primary" class="add-parking-spot" (click)="addNewParkingSpot()">
+          Add
+        </button>
+        <div class="form-fields-container" formArrayName="parkingSpots">
+          <div *ngFor="let parkingSpot of parkingSpots.controls; let i = index">
+            <div [formGroupName]="i.toString()">
+              <div>
+                <mat-form-field appearance="legacy">
+                  <mat-label>Vehicle Type</mat-label>
+                  <mat-select formControlName="vehicle">
+                    <mat-option [value]="vehicle.id"
+                                *ngFor="let vehicle of vehicleTypeList">{{vehicle?.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field appearance="legacy">
+                  <input min="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" matInput autocomplete="off" type="number" placeholder="Price" formControlName="price">
+<!--                  <mat-icon matPrefix>currency_rupee</mat-icon>-->
+                  <span matPrefix>&#8377;&nbsp;</span>
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field appearance="legacy">
+                  <input min="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" matInput autocomplete="off" type="number" placeholder="count" formControlName="count">
+                </mat-form-field>
+              </div>
+            </div>
           </div>
         </div>
       </mat-card-content>

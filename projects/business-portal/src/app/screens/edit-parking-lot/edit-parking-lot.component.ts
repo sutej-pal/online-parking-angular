@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Location} from '@angular/common';
 import {BehaviorSubject} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -10,6 +10,8 @@ import {
 } from "../../components/fullscreen-image-preview/fullscreen-image-preview.component";
 import {ParkingLotService} from "../../services/parking-lot.service";
 import {LatLngPickerComponent} from "../../components/lat-lng-picker/lat-lng-picker.component";
+import {ParkingSpot} from "../../types/types";
+import {VehicleService} from "../../services/vehicle.service";
 
 @Component({
   selector: 'app-edit-parking-lot',
@@ -23,6 +25,7 @@ export class EditParkingLotComponent implements OnInit {
   isImagePreviewReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   formType: string = 'Add';
   editId: string = '';
+  vehicleTypeList: any = [];
 
   constructor(
     private router: Router,
@@ -31,12 +34,13 @@ export class EditParkingLotComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private parkingLotService: ParkingLotService,
+    private vehicleService: VehicleService,
     private notificationService: NotificationService
   ) {
   }
 
   async ngOnInit() {
-    await this.createForm();
+    await this.createForm({});
     this.route.params.subscribe(e => {
       if (e.parkingLotId) {
         this.editId = e.parkingLotId;
@@ -44,6 +48,15 @@ export class EditParkingLotComponent implements OnInit {
       }
       this.isFormReady$.next(true);
     });
+    await this.getVehicleTypesList();
+  }
+
+  get parkingSpots(): FormArray {
+    if (this.formGroup && this.formGroup.get('parkingSpots')) {
+      return this.formGroup.get('parkingSpots') as FormArray;
+    } else {
+      return new FormArray([])
+    }
   }
 
   populateFormValues() {
@@ -90,8 +103,8 @@ export class EditParkingLotComponent implements OnInit {
     this.location.back();
   }
 
-  private createForm() {
-    return new Promise((resolve, reject) => {
+  private createForm(data: any) {
+    return new Promise((resolve) => {
       this.formGroup = this.fb.group({
         name: ['', Validators.required],
         address: this.fb.group({
@@ -102,9 +115,26 @@ export class EditParkingLotComponent implements OnInit {
           lat: ['', Validators.required],
           lng: ['', Validators.required]
         }),
+        parkingSpots: this.fb.array([
+          ...(data.parkingSpots && data.parkingSpots.length > 0
+            ? [...data.parkingSpots].map((x: ParkingSpot) => this.parkingSpot(x))
+            : [this.parkingSpot(null)])
+        ])
       });
       resolve(true);
     });
+  }
+
+  parkingSpot(parkingSpot: ParkingSpot | null): FormGroup {
+    return this.fb.group({
+      vehicle: Boolean(parkingSpot) ? parkingSpot?.vehicle : "",
+      price: Boolean(parkingSpot) ? parkingSpot?.price : null,
+      count: Boolean(parkingSpot) ? parkingSpot?.count : null
+    });
+  }
+
+  addNewParkingSpot() {
+    this.parkingSpots.push(this.parkingSpot(null));
   }
 
   async handleImageUpload(event: HTMLElement | any) {
@@ -190,6 +220,14 @@ export class EditParkingLotComponent implements OnInit {
     const result = await dialogRef.afterClosed().toPromise();
     if (result) {
       this.formGroup.patchValue({geometry: result})
+    }
+  }
+
+  async getVehicleTypesList() {
+    try {
+      this.vehicleTypeList = await this.vehicleService.list();
+    } catch (e) {
+
     }
   }
 }

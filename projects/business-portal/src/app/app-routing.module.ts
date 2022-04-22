@@ -32,7 +32,7 @@ const routes: Routes = [
         component: EditParkingLotComponent
       },
       {
-        path: 'profile',
+        path: 'vehicles',
         component: ProfileComponent
       }
     ]

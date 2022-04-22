@@ -46,6 +46,7 @@ import {MatRippleModule} from "@angular/material/core";
 import { ProfileReviewComponent } from './components/profile-review/profile-review.component';
 import { BookingsComponent } from './screens/bookings/bookings.component';
 import {MatTableModule} from "@angular/material/table";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -65,36 +66,37 @@ import {MatTableModule} from "@angular/material/table";
     ProfileReviewComponent,
     BookingsComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        NgxMaskModule.forRoot(),
-        MatCardModule,
-        MatButtonModule,
-        MatProgressSpinnerModule,
-        ToastrModule.forRoot({
-            preventDuplicates: true,
-        }),
-        MatCheckboxModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule,
-        MatToolbarModule,
-        MatMenuModule,
-        MatGridListModule,
-        MatTooltipModule,
-        MatDialogModule,
-        StoreModule.forRoot(reducers, {metaReducers}),
-        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-        MatTabsModule,
-        MatRippleModule,
-        MatTableModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgxMaskModule.forRoot(),
+    MatCardModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+    }),
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatGridListModule,
+    MatTooltipModule,
+    MatDialogModule,
+    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+    MatTabsModule,
+    MatRippleModule,
+    MatTableModule,
+    MatSelectModule
+  ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true}],
     exports: [ToolbarComponent, ParkingLotCardComponent],
   bootstrap: [AppComponent]

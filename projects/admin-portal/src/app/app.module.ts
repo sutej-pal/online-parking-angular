@@ -18,7 +18,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {ToolbarComponent} from './Components/toolbar/toolbar.component';
 import {MatListModule} from "@angular/material/list";
 import {MatLineModule} from "@angular/material/core";
-import {ProfileComponent} from './screens/profile/profile.component';
+import {VehiclesComponent} from './screens/vehicles/vehicles.component';
 import {MapComponent} from './screens/map/map.component';
 import {ParkingLotsComponent} from './screens/parking-lots/parking-lots.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
@@ -40,7 +40,7 @@ import {MatGridListModule} from "@angular/material/grid-list";
     DashboardComponent,
     HomeComponent,
     ToolbarComponent,
-    ProfileComponent,
+    VehiclesComponent,
     MapComponent,
     ParkingLotsComponent,
     EditParkingLotComponent,
