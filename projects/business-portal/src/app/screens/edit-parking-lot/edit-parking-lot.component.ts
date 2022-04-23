@@ -41,12 +41,11 @@ export class EditParkingLotComponent implements OnInit {
 
   async ngOnInit() {
     await this.createForm({});
-    this.route.params.subscribe(e => {
+    this.route.params.subscribe(async (e) => {
       if (e.parkingLotId) {
         this.editId = e.parkingLotId;
-        this.populateFormValues()
+        this.populateFormValues();
       }
-      this.isFormReady$.next(true);
     });
     await this.getVehicleTypesList();
   }
@@ -55,13 +54,28 @@ export class EditParkingLotComponent implements OnInit {
     if (this.formGroup && this.formGroup.get('parkingSpots')) {
       return this.formGroup.get('parkingSpots') as FormArray;
     } else {
-      return new FormArray([])
+      return new FormArray([]);
     }
   }
 
   populateFormValues() {
-    this.parkingLotService.get(this.editId).then(e => {
-      this.formGroup.patchValue(e.data)
+    this.parkingLotService.get(this.editId).then(async (e) => {
+      e.data.businessName = e.data.business.businessName;
+      let parkingSpotsArray = this.formGroup.get('parkingSpots') as FormArray
+      e.data.parkingSpots = e.data.parkingSpots.map((parkingSpot: any, index: number) => {
+        if (index !== 0) {
+          parkingSpotsArray?.push(this.parkingSpot(null))
+        }
+        return {
+          vehicle: parkingSpot?.vehicle?.id,
+          price: parkingSpot.price,
+          count: parkingSpot.count
+        }
+      })
+      console.log(e.data);
+      await this.formGroup.patchValue(e.data);
+      let t = this.formGroup.get('parkingSpots')
+      t?.setValue(e.data.parkingSpots);
     })
   }
 
@@ -106,21 +120,18 @@ export class EditParkingLotComponent implements OnInit {
   private createForm(data: any) {
     return new Promise((resolve) => {
       this.formGroup = this.fb.group({
-        name: ['', Validators.required],
+        name: [data.name, Validators.required],
         address: this.fb.group({
-          addressLineOne: ['', Validators.required],
-          addressLineTwo: ['', Validators.required]
+          addressLineOne: [data.address?.addressLineOne, Validators.required],
+          addressLineTwo: [data.address?.addressLineTwo, Validators.required]
         }),
         geometry: this.fb.group({
-          lat: ['', Validators.required],
-          lng: ['', Validators.required]
+          lat: [data.geometry?.lat, Validators.required],
+          lng: [data.geometry?.lng, Validators.required]
         }),
-        parkingSpots: this.fb.array([
-          ...(data.parkingSpots && data.parkingSpots.length > 0
-            ? [...data.parkingSpots].map((x: ParkingSpot) => this.parkingSpot(x))
-            : [this.parkingSpot(null)])
-        ])
+        parkingSpots: this.fb.array([this.parkingSpot(null)])
       });
+      this.isFormReady$.next(true);
       resolve(true);
     });
   }
@@ -136,6 +147,11 @@ export class EditParkingLotComponent implements OnInit {
   addNewParkingSpot() {
     this.parkingSpots.push(this.parkingSpot(null));
   }
+
+  removeParkingSpot(index: number) {
+    this.parkingSpots.removeAt(index);
+  }
+
 
   async handleImageUpload(event: HTMLElement | any) {
     this.isImagePreviewReady$.next(false);
@@ -229,5 +245,9 @@ export class EditParkingLotComponent implements OnInit {
     } catch (e) {
 
     }
+  }
+
+  test() {
+    console.log(this.parkingSpots);
   }
 }
