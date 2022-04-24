@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import {searchData} from "../../store/search/search.reducer";
 import {MatDrawer} from "@angular/material/sidenav";
 import {ParkingLot} from "../../types/types";
+import {HttpService} from "../../../../../common-services/http.service";
 
 @Component({
   selector: 'app-search',
@@ -25,29 +26,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     },
     zoom: 15
   };
-  parkingLotList: ParkingLot[] = [
-    {
-      name: "red"
-    },
-    {
-      name: "green"
-    },
-    {
-      name: "blue"
-    },
-    {
-      name: "cyan"
-    },
-    {
-      name: "magenta"
-    },
-    {
-      name: "yellow"
-    },
-    {
-      name: "black"
-    }
-  ];
+  parkingLotList: ParkingLot[] = [];
   google: google | undefined
   isParkingLotDetailsVisible = false;
   searchData$: Observable<searchData> | undefined;
@@ -55,16 +34,16 @@ export class SearchComponent implements OnInit, OnDestroy {
   isPLDetailWindowExpanded = false;
 
   constructor(
-    private store: Store
+    private store: Store,
+    private httpService: HttpService,
   ) {
   }
 
   async ngOnInit() {
     this.searchData$ = this.store.select(getSearchData);
     await this.checkIfMapLoaded();
-    // const searchData = localStorage.getItem('searchData');
-    // this.showParkingLotDetails({name: "red"});
     this.test();
+    this.getParkingLots();
   }
 
   async checkIfMapLoaded() {
@@ -98,13 +77,13 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   test() {
     const style = document.createElement('style');
-    style.type='text/css';
+    style.type = 'text/css';
     style.id = 'google-autocomplete'
     // @ts-ignore
-    if(style.styleSheet){
+    if (style.styleSheet) {
       // @ts-ignore
-      style.styleSheet.cssText='your css styles';
-    }else{
+      style.styleSheet.cssText = 'your css styles';
+    } else {
       style.appendChild(document.createTextNode('.pac-container.pac-logo {left: 353px !important;}'));
     }
     document.getElementsByTagName('head')[0].appendChild(style);
@@ -113,5 +92,15 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     const style = document.getElementById('google-autocomplete');
     style?.remove();
+  }
+
+  async getParkingLots() {
+    try {
+      const result = await this.httpService.executeRequest('search', 'post', {}).toPromise();
+      console.log('Success', result);
+      this.parkingLotList = result.body.data;
+    } catch (e) {
+      console.log('Failed');
+    }
   }
 }

@@ -121,6 +121,8 @@ export class EditParkingLotComponent implements OnInit {
     return new Promise((resolve) => {
       this.formGroup = this.fb.group({
         name: [data.name, Validators.required],
+        minBookingDuration: [data.minBookingDuration, Validators.required],
+        type: [data.type, Validators.required],
         address: this.fb.group({
           addressLineOne: [data.address?.addressLineOne, Validators.required],
           addressLineTwo: [data.address?.addressLineTwo, Validators.required]
@@ -129,7 +131,13 @@ export class EditParkingLotComponent implements OnInit {
           lat: [data.geometry?.lat, Validators.required],
           lng: [data.geometry?.lng, Validators.required]
         }),
-        parkingSpots: this.fb.array([this.parkingSpot(null)])
+        amenities: this.fb.group({
+          cctv: [data.amenities?.cctv],
+          secured: [data.amenities?.secured],
+          twentyFourHourService: [data.amenities?.twentyFourHourService],
+          wheelChairEntrance: [data.amenities?.wheelChairEntrance]
+        }),
+        parkingSpots: this.fb.array([this.parkingSpot(null)]),
       });
       this.isFormReady$.next(true);
       resolve(true);
