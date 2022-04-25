@@ -25,9 +25,22 @@
         dignissimos dolores ea eos,
       </p>
       <mat-divider></mat-divider>
-      Price for {{parkingLotData?.minBookingDuration === 24 ? '1 Day' : parkingLotData?.minBookingDuration + ' Hours' }}
-      <div>
-        <span matPrefix>&#8377;&nbsp;</span>20
+      <div class="d-flex justify-content-between align-items-center pt-1">
+        <div class="d-flex align-items-center">
+          <span *ngIf="parkingLotData?.amenities?.cctv" matTooltip="CCTV"><mat-icon>videocam</mat-icon></span>
+          <span *ngIf="parkingLotData?.amenities?.secured" matTooltip="Secured"><mat-icon>lock</mat-icon></span>
+          <span *ngIf="parkingLotData?.amenities?.twentyFourHourService" matTooltip="24 Hour Service"><mat-icon>history</mat-icon></span>
+          <span *ngIf="parkingLotData?.amenities?.wheelChairEntrance" matTooltip="Accessible for disabled"><mat-icon>accessible</mat-icon></span>
+        </div>
+        <div class="mat-caption">
+          <span>
+          Price for
+            {{parkingLotData?.minBookingDuration === 24 ? '1 Day' : parkingLotData?.minBookingDuration + ' Hours' }}
+          </span>
+          <div class="text-end">
+            <span matPrefix>&#8377;&nbsp;</span>20
+          </div>
+        </div>
       </div>
     </mat-card-content>
   </mat-card>

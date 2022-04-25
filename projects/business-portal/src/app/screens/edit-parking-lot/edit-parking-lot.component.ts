@@ -146,9 +146,9 @@ export class EditParkingLotComponent implements OnInit {
 
   parkingSpot(parkingSpot: ParkingSpot | null): FormGroup {
     return this.fb.group({
-      vehicle: Boolean(parkingSpot) ? parkingSpot?.vehicle : "",
-      price: Boolean(parkingSpot) ? parkingSpot?.price : null,
-      count: Boolean(parkingSpot) ? parkingSpot?.count : null
+      vehicle: [Boolean(parkingSpot) ? parkingSpot?.vehicle : "", Validators.required],
+      price: [Boolean(parkingSpot) ? parkingSpot?.price : null, Validators.required],
+      count: [Boolean(parkingSpot) ? parkingSpot?.count : null, Validators.required]
     });
   }
 

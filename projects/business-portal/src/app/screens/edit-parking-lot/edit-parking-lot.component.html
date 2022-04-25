@@ -161,7 +161,7 @@
         <mat-card>
           <mat-card-title>Gallery</mat-card-title>
           <mat-divider></mat-divider>
-          <mat-card-content class="pt-2">
+          <mat-card-content class="pt-4">
             <input type="file" multiple accept="image/*" (click)="resetFilesArray($event)"
                    (change)="handleImageUpload($event)" hidden #imageUpload>
             <div style="display: flex;justify-content: flex-start;align-items: center;gap: 5px">
@@ -188,8 +188,6 @@
           </mat-card-content>
         </mat-card>
       </div>
-    </div>
-    <div class="row">
     </div>
     <div style="display: flex;gap: 10px;margin: 10px 0;">
       <button mat-raised-button color="primary">

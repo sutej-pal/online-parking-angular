@@ -34,10 +34,11 @@
       </div>
     </div>
     <div class="col p-0 position-relative">
-      <mat-drawer-container class="w-100 h-100 position-absolute border border-1">
+      <mat-drawer-container class="w-100 h-100 position-absolute border-start">
         <mat-drawer #drawer class="pl-detail-window" mode="side"
                     [ngClass]="{'expanded-pl-detail-window': isPLDetailWindowExpanded}">
           <app-parking-lot-details
+            [searchData$]="searchData$"
             (toggleExpandPLDetailWindow)="isPLDetailWindowExpanded = !isPLDetailWindowExpanded"
             (closePLDetailWindow)="drawer.close();isPLDetailWindowExpanded = false"
             [parkingLot]="selectedParkingLot">
