@@ -20,9 +20,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.individual$ = this.store.select(getIndividual);
-    this.individual$.subscribe(e => {
-      console.log(e);
-    })
+    // this.individual$.subscribe(e => {
+    //   console.log(e);
+    // })
   }
 
   logOut() {

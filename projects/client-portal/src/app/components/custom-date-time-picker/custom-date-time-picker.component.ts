@@ -21,7 +21,6 @@ export class CustomDateTimePickerComponent implements OnInit {
 
   ngOnInit(): void {
     this.formControl = this.formGroup.controls[this.controlName] as FormControl;
-    console.log('this.formControl', this.formControl);
     const dateTime = this.formControl.value;
     this.startDate = moment(dateTime).format('ddd Do MMM');
     this.startTime = moment(dateTime).format('hh:mm a');

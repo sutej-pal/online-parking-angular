@@ -23,7 +23,7 @@ export class ParkingLotDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchData$?.subscribe(e => {
-      console.log('e', e);
+      // console.log('e', e);
     })
   }
 

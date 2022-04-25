@@ -14,33 +14,39 @@
     <!--    Vehicle Selection Panel Menu Start   -->
 
     <mat-form-field [ngClass]="{'d-block': isVehicleSelectionVisible, 'd-none': !isVehicleSelectionVisible}"
-                    appearance="outline" class="position-relative" style="width: 110px">
+                    appearance="outline" class="position-relative" style="width: 115px;"
+                    [matMenuTriggerFor]="vehicleSelectionPanelMenu">
       <mat-label>Vehicle</mat-label>
       <input matInput type="text" formControlName="vehicleType" autocomplete="off" style="display: none">
-      <img src="../../../assets/images/car.svg" alt="" style="padding: 0 0 0 10px;">
-      <button type="button" matSuffix mat-icon-button aria-label="Clear"
-              [matMenuTriggerFor]="vehicleSelectionPanelMenu">
-        <mat-icon>expand_more</mat-icon>
-      </button>
-      <div></div>
-      <mat-menu #vehicleSelectionPanelMenu="matMenu" class="vehicle-type-selection-panel-wrapper"  xPosition="before">
+      <div class="d-flex justify-content-between align-items-center" style="height: 18px;">
+        <mat-icon style="font-size: 30px;width: 30px;line-height: .6;"
+                  matPrefix *ngIf="selectedVehicleType.name === 'Bike'">two_wheeler
+        </mat-icon>
+        <mat-icon style="font-size: 30px;width: 30px;line-height: .6;"
+                  matPrefix *ngIf="selectedVehicleType.name === 'Car'">directions_car
+        </mat-icon>
+        <span>{{selectedVehicleType.name}}</span>
+        <span><mat-icon>expand_more</mat-icon></span>
+      </div>
+      <mat-menu #vehicleSelectionPanelMenu="matMenu" class="vehicle-type-selection-panel-wrapper" xPosition="before">
         <div class="text-center py-2">
           <span class="mat-title">Type of Vehicle</span>
         </div>
         <mat-divider></mat-divider>
         <div (click)="$event.stopPropagation();" class="d-flex flex-wrap vehicle-type-selection-panel p-2">
-          <div *ngFor="let x of [0, 1, 2, 3]" class="p-4 vehicle-type">
-            <button mat-stroked-button (click)="selectVehicleType()">
+          <div *ngFor="let vehicle of vehicleTypesList" class="p-4 vehicle-type">
+            <button mat-stroked-button (click)="selectVehicleType(vehicle)">
               <div class="d-flex justify-content-around align-items-center">
-                <div>
-                  <img src="../../../assets/images/car.svg" alt="">
-                  <span class="px-2">Car</span>
+                <div class="d-flex">
+                  <mat-icon style="font-size: 30px" *ngIf="vehicle.name === 'Bike'">two_wheeler</mat-icon>
+                  <img *ngIf="vehicle.name === 'Car'" src="../../../assets/images/car.svg" alt="">
+                  <span class="px-2">{{vehicle.name}}</span>
                 </div>
-                <mat-icon [ngStyle]="{'color': x%2 === 0 ? 'green' : 'gray'}">check_circle</mat-icon>
+                <mat-icon [ngStyle]="{'color': 'green'}">check_circle</mat-icon>
               </div>
             </button>
             <div>
-              <div class="text-center">Sample Text</div>
+              <!--              <div class="text-center">Sample Text</div>-->
             </div>
           </div>
         </div>

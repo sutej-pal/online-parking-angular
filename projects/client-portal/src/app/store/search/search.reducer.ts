@@ -6,14 +6,20 @@ export const searchFeatureKey = 'search';
 export interface searchData {
   lat: number,
   lng: number,
-  destination: string
+  vehicle: string
+  destination: string,
+  arrivalDateTime: Date,
+  exitDateTime: Date,
 }
 
 export const initialState = {
   searchData: {
     lat: 0,
     lng: 0,
-    destination: ''
+    vehicle: '',
+    destination: '',
+    arrivalDateTime: Date,
+    exitDateTime: Date,
   }
 };
 

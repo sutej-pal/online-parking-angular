@@ -9,6 +9,7 @@ import {searchData} from "../../store/search/search.reducer";
 import {MatDrawer} from "@angular/material/sidenav";
 import {ParkingLot} from "../../types/types";
 import {HttpService} from "../../../../../common-services/http.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-search',
@@ -35,6 +36,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
+    private router: Router,
     private httpService: HttpService,
   ) {
   }
@@ -43,7 +45,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.searchData$ = this.store.select(getSearchData);
     await this.checkIfMapLoaded();
     this.test();
-    this.getParkingLots();
+    this.searchData$.subscribe(async e => {
+      await this.getParkingLots(e);
+    })
   }
 
   async checkIfMapLoaded() {
@@ -94,9 +98,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     style?.remove();
   }
 
-  async getParkingLots() {
+  async getParkingLots(data: searchData) {
     try {
-      const result = await this.httpService.executeRequest('search', 'post', {}).toPromise();
+      const result = await this.httpService.executeRequest('search', 'post', data).toPromise();
       console.log('Success', result);
       this.parkingLotList = result.body.data;
     } catch (e) {

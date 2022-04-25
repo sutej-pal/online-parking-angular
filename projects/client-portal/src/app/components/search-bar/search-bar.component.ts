@@ -16,6 +16,8 @@ import {updateSearch} from "../../store/search/search.actions";
 import {getSearchData} from "../../store/search/search.selectors";
 import {searchData} from "../../store/search/search.reducer";
 import {MatMenuTrigger} from "@angular/material/menu";
+import {HttpService} from "../../../../../common-services/http.service";
+import {NotificationService} from "../../../../../common-services/notification.service";
 
 @Component({
   selector: 'app-search-bar',
@@ -38,21 +40,30 @@ export class SearchBarComponent implements OnInit {
   isFormReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   searchData$: Observable<searchData> | undefined;
   isVehicleSelectionVisible = false;
+  vehicleTypesList: any = [];
+  selectedVehicleType: any;
 
   constructor(
     private store: Store,
     private router: Router,
     private fb: FormBuilder,
-    private dateAdapter: DateAdapter<Date>
+    private httpService: HttpService,
+    private dateAdapter: DateAdapter<Date>,
+    private notificationService: NotificationService
   ) {
     this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
   }
 
   async ngOnInit() {
     this.searchData$ = this.store.select(getSearchData);
-    this.loadForm();
     await this.checkIfMapLoaded();
     this.isVehicleSelectionVisible = this.router.url === '/search';
+    await this.getVehiclesTypes();
+    this.loadForm();
+  }
+
+  get f() {
+    return this.formGroup.controls;
   }
 
   async checkIfMapLoaded() {
@@ -109,7 +120,7 @@ export class SearchBarComponent implements OnInit {
       lng: [0],
       arrivalDateTime: [data.arrivalDateTime, [Validators.required]],
       exitDateTime: [data.exitDateTime, [Validators.required]],
-      vehicleType: [' ']
+      vehicleType: [this.selectedVehicleType.id]
     }, {
       validators: DateTimeValidator.validateDiff('arrivalDateTime', 'exitDateTime')
     })
@@ -135,14 +146,30 @@ export class SearchBarComponent implements OnInit {
       const searchData = {
         lat: this.formGroup.value.lat,
         lng: this.formGroup.value.lng,
-        destination: this.formGroup.value.destination
+        arrivalDateTime: this.formGroup.value.arrivalDateTime,
+        exitDateTime: this.formGroup.value.exitDateTime,
+        destination: this.formGroup.value.destination,
+        vehicle: this.formGroup.value.vehicleType,
       }
       this.store.dispatch(updateSearch({payload: searchData}))
       await this.router.navigate(['/search']);
     }
   }
 
-  selectVehicleType () {
+  selectVehicleType(vehicle: any) {
+    this.formGroup.get('vehicleType')?.setValue(vehicle.id);
+    this.selectedVehicleType = vehicle;
     this.vehicleSelectionPanelMenu?.closeMenu()
+  }
+
+  async getVehiclesTypes() {
+    try {
+      const response = await this.httpService.executeRequest('/vehicle', 'get',).toPromise();
+      this.vehicleTypesList = response.data;
+      this.selectedVehicleType = this.vehicleTypesList.filter((vehicle: any) => vehicle.name === 'Car')[0];
+    } catch (e) {
+      console.log(e);
+      this.notificationService.showError('Failed to load vehicles types.');
+    }
   }
 }
