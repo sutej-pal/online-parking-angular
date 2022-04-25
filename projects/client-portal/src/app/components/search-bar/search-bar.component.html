@@ -28,30 +28,30 @@
         <span>{{selectedVehicleType.name}}</span>
         <span><mat-icon>expand_more</mat-icon></span>
       </div>
-      <mat-menu #vehicleSelectionPanelMenu="matMenu" class="vehicle-type-selection-panel-wrapper" xPosition="before">
-        <div class="text-center py-2">
-          <span class="mat-title">Type of Vehicle</span>
-        </div>
-        <mat-divider></mat-divider>
-        <div (click)="$event.stopPropagation();" class="d-flex flex-wrap vehicle-type-selection-panel p-2">
-          <div *ngFor="let vehicle of vehicleTypesList" class="p-4 vehicle-type">
-            <button mat-stroked-button (click)="selectVehicleType(vehicle)">
-              <div class="d-flex justify-content-around align-items-center">
-                <div class="d-flex">
-                  <mat-icon style="font-size: 30px" *ngIf="vehicle.name === 'Bike'">two_wheeler</mat-icon>
-                  <img *ngIf="vehicle.name === 'Car'" src="../../../assets/images/car.svg" alt="">
-                  <span class="px-2">{{vehicle.name}}</span>
-                </div>
-                <mat-icon [ngStyle]="{'color': 'green'}">check_circle</mat-icon>
+    </mat-form-field>
+    <mat-menu #vehicleSelectionPanelMenu="matMenu" class="vehicle-type-selection-panel-wrapper" xPosition="before">
+      <div class="text-center py-2">
+        <span class="mat-title">Type of Vehicle</span>
+      </div>
+      <mat-divider></mat-divider>
+      <div (click)="$event.stopPropagation();" class="d-flex flex-wrap vehicle-type-selection-panel p-2">
+        <div *ngFor="let vehicle of vehicleTypesList" class="p-4 vehicle-type">
+          <button mat-stroked-button (click)="selectVehicleType(vehicle)">
+            <div class="d-flex justify-content-around align-items-center">
+              <div class="d-flex justify-content-between align-items-center">
+                <mat-icon style="font-size: 30px;width: 30px;line-height: .6;" *ngIf="vehicle.name === 'Bike'">two_wheeler</mat-icon>
+                <mat-icon style="font-size: 30px;width: 30px;line-height: .6;" *ngIf="vehicle.name === 'Car'">directions_car</mat-icon>
+                <span class="px-2">{{vehicle.name}}</span>
               </div>
-            </button>
-            <div>
-              <!--              <div class="text-center">Sample Text</div>-->
+              <mat-icon [ngStyle]="{'color': 'green'}">check_circle</mat-icon>
             </div>
+          </button>
+          <div>
+            <!--              <div class="text-center">Sample Text</div>-->
           </div>
         </div>
-      </mat-menu>
-    </mat-form-field>
+      </div>
+    </mat-menu>
 
     <!--    Vehicle Selection Panel Menu End   -->
 
