@@ -3,6 +3,7 @@ import {ParkingLot} from "../../types/types";
 import * as moment from "moment";
 import {searchData} from "../../store/search/search.reducer";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-parking-lot-details',
@@ -18,7 +19,9 @@ export class ParkingLotDetailsComponent implements OnInit {
   isPLDetailWindowExpanded = false;
   moment: any = moment;
 
-  constructor() {
+  constructor(
+    private router: Router,
+  ) {
   }
 
   ngOnInit(): void {
@@ -28,4 +31,7 @@ export class ParkingLotDetailsComponent implements OnInit {
   }
 
 
+  async navigateToCheckOut() {
+    await this.router.navigate(['checkout'])
+  }
 }

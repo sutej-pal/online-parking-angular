@@ -1,0 +1,42 @@
+<app-header></app-header>
+<mat-stepper linear #stepper>
+  <mat-step [stepControl]="informationFormGroup">
+    <form action="" [formGroup]="informationFormGroup">
+      <ng-template matStepLabel>Parking</ng-template>
+      <div>
+        <div>
+          <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input matInput type="text">
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="informationFormGroup">
+    <form action="" [formGroup]="informationFormGroup">
+      <ng-template matStepLabel>Information</ng-template>
+      <div>
+        <div>
+          <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input matInput type="text">
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="informationFormGroup">
+    <form action="" [formGroup]="informationFormGroup">
+      <ng-template matStepLabel>Last Step</ng-template>
+      <div>
+        <div>
+          <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input matInput type="text">
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+</mat-stepper>

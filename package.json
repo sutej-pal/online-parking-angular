@@ -35,6 +35,7 @@
     "ngx-mask": "^13.0.0",
     "ngx-socket-io": "^4.2.0",
     "ngx-toastr": "^14.2.1",
+    "razorpay": "^2.8.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "underscore": "^1.13.1",

@@ -85,7 +85,7 @@
             </span>
           </div>
           <div class="text-center pt-2">
-            <button mat-raised-button color="primary" class="book-button">
+            <button mat-raised-button color="primary" class="book-button" (click)="navigateToCheckOut()">
               Book For <span class="fw-bolder">
               <span matPrefix>&#8377;&nbsp;</span>{{parkingLot?.parkingSpot?.price}}.00
             </span>

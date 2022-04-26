@@ -56,6 +56,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (this.google && this.google.maps) {
       await this.loadGoogleMap();
       this.searchData$?.subscribe(async e => {
+        this.drawer?.close();
         await this.getParkingLots(e);
         this.addMarkerOnMap();
       })

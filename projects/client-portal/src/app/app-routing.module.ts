@@ -7,6 +7,7 @@ import {LoginComponent} from "./screens/login/login.component";
 import {TermAndConditionsComponent} from "./screens/term-and-conditions/term-and-conditions.component";
 import {ForgotPasswordComponent} from "./screens/forgot-password/forgot-password.component";
 import {ResetPasswordComponent} from "./screens/reset-password/reset-password.component";
+import {CheckoutComponent} from "./screens/checkout/checkout.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent
   },
   {
     path: 'individual',
