@@ -2,7 +2,7 @@
   <mat-card>
     <div class="d-flex" style="gap: 10px">
       <div class="pl-profile-image">
-        <img class="w-100 h-auto" src='default-placeholder.png' (error)="utilitiesService.onImgError($event)"
+        <img class="w-100 h-auto" src='../../../assets/images/default-placeholder.png' (error)="utilitiesService.onImgError($event)"
              [title]="parkingLotData?.name"
              [alt]="parkingLotData?.name">
       </div>
@@ -38,7 +38,7 @@
             {{parkingLotData?.minBookingDuration === 24 ? '1 Day' : parkingLotData?.minBookingDuration + ' Hours' }}
           </span>
           <div class="text-end">
-            <span matPrefix>&#8377;&nbsp;</span>20
+            <span matPrefix>&#8377;&nbsp;</span>{{parkingLotData?.parkingSpot?.price}}.00
           </div>
         </div>
       </div>

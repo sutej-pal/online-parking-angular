@@ -50,7 +50,7 @@
                 <span class="text-secondary">One Time Pass</span>
               </div>
               <div class="d-flex align-items-center" style="gap: 5px">
-                Rs. 40.00
+                <span matPrefix>&#8377;&nbsp;</span>{{parkingLot?.parkingSpot?.price}}.00
                 <mat-icon [ngStyle]="{'color': 'green'}">check_circle</mat-icon>
               </div>
             </div>
@@ -78,10 +78,17 @@
               <div class="fw-bold">Car</div>
             </div>
           </div>
-          <div class="px-3 py-2">Selected Time: <span class="fw-bold">1 hours</span></div>
+          <div class="px-1 py-2">Selected Time:
+            <span class="fw-bold">
+              {{moment((searchData$ | async)?.exitDateTime).diff(moment((searchData$ | async)?.arrivalDateTime), 'hours')}}
+              hours
+            </span>
+          </div>
           <div class="text-center pt-2">
-            <button mat-raised-button color="primary" class="book-button">Book For <span
-              class="fw-bolder">Rs.40.00</span>
+            <button mat-raised-button color="primary" class="book-button">
+              Book For <span class="fw-bolder">
+              <span matPrefix>&#8377;&nbsp;</span>{{parkingLot?.parkingSpot?.price}}.00
+            </span>
             </button>
           </div>
         </mat-card-content>
