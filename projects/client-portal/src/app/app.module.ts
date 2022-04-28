@@ -42,6 +42,9 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {ParkingLotCardComponent} from './components/parking-lot-card/parking-lot-card.component';
 import {ParkingLotDetailsComponent} from './components/parking-lot-details/parking-lot-details.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { CheckoutComponent } from './screens/checkout/checkout.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 const CLIENT_ID = environment.client_Id;
 
@@ -60,7 +63,8 @@ const CLIENT_ID = environment.client_Id;
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ParkingLotCardComponent,
-    ParkingLotDetailsComponent
+    ParkingLotDetailsComponent,
+    CheckoutComponent
   ],
     imports: [
         BrowserModule,
@@ -89,6 +93,8 @@ const CLIENT_ID = environment.client_Id;
         FormsModule,
         MatSidenavModule,
         MatTooltipModule,
+        MatStepperModule,
+        MatExpansionModule,
     ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

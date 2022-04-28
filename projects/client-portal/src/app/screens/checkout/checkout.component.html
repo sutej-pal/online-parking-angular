@@ -1,42 +1,185 @@
 <app-header></app-header>
-<mat-stepper linear #stepper>
-  <mat-step [stepControl]="informationFormGroup">
-    <form action="" [formGroup]="informationFormGroup">
-      <ng-template matStepLabel>Parking</ng-template>
-      <div>
-        <div>
-          <mat-form-field>
-            <mat-label>First Name</mat-label>
-            <input matInput type="text">
-          </mat-form-field>
+<div class="container-fluid bg-light" style="height: calc(100vh - 72px)">
+  <div class="row bg-light" style="height: 70px">
+    <div class="col-md-8 m-auto">
+      <div class="align-items-center d-flex justify-content-between stepper">
+        <div class="step d-flex justify-content-center align-items-center">
+          <mat-icon [ngStyle]="{'color': 'green'}">check_circle</mat-icon>
+          Parking
+        </div>
+        <div class="line"></div>
+        <div class="step d-flex justify-content-center align-items-center">
+          <mat-icon [ngStyle]="{'color': 'green'}">radio_button_checked</mat-icon>
+          Information
+        </div>
+        <div class="line"></div>
+        <div class="step d-flex justify-content-center align-items-center">
+          <mat-icon>radio_button_unchecked</mat-icon>
+          Payment
         </div>
       </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="informationFormGroup">
-    <form action="" [formGroup]="informationFormGroup">
-      <ng-template matStepLabel>Information</ng-template>
-      <div>
-        <div>
-          <mat-form-field>
-            <mat-label>First Name</mat-label>
-            <input matInput type="text">
-          </mat-form-field>
+    </div>
+  </div>
+  <div>
+    <div class="col-md-8 m-auto pt-4">
+      <div class="row">
+        <div class="col-md-8">
+          <form action="" [formGroup]="informationFormGroup" (ngSubmit)="onSubmit()">
+            <div class="information border rounded bg-white p-3">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>First Name</mat-label>
+                    <input matInput autocomplete="off" formControlName="firstName">
+                    <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>
+                    <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput autocomplete="off" formControlName="lastName">
+                    <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>
+                    <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>City</mat-label>
+                        <input matInput autocomplete="off" formControlName="city">
+                        <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>
+                        <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Country</mat-label>
+                        <input matInput autocomplete="off" formControlName="country">
+                        <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>
+                        <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Phone</mat-label>
+                        <input matInput autocomplete="off" formControlName="phone">
+                        <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>
+                        <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Email</mat-label>
+                    <input matInput autocomplete="off" formControlName="email">
+                    <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>
+                    <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4 mx-1">
+              <div class="col-12">
+                <mat-checkbox formControlName="acceptTAndC">I accept the Term And Conditions.</mat-checkbox>
+                <mat-error class="mx-4 mt-2" *ngIf="isFormSubmitted && ifg.acceptTAndC.value === false">Please accept the Terms and conditions.</mat-error>
+              </div>
+              <div class="col-12 mt-2">
+                <mat-checkbox formControlName="openToNewsAndPromotions">I want to receive news and promotions from Pal's Parking.</mat-checkbox>
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-md-4 mt-3">
+                    <button mat-raised-button color="primary" class="w-100 fs-4 text-start px-5 py-2 ">Continue</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4">
+          <div class="ticket border rounded bg-white p-3">
+            <p>SUMMARY</p>
+            <div class="mb-2">
+              <div class="fw-bold">MC Plazza</div>
+              <div class="text-secondary">address</div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <div>Duration</div>
+              <div>Price</div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>Service Fee</div>
+              <div>Price</div>
+            </div>
+            <mat-divider class="my-3"></mat-divider>
+            <div class="mat-title d-flex justify-content-between align-items-center">
+              <div>Total</div>
+              <div>Price</div>
+            </div>
+            <mat-divider class="mb-3"></mat-divider>
+            <div>
+              <div class="text-center mat-body">
+                You can cancel/modify your ticker prior one hour the arrival time by navigating my bookings section in
+                your profile.
+              </div>
+              <div class="d-flex justify-content-center align-items-center mat-body my-2">
+                <mat-icon class="mx-2 fs-4">info</mat-icon>
+                <a href="" target="_blank">View Cancellation policy</a>
+              </div>
+            </div>
+            <div class="border border-1 rounded-3 px-3 py-2 position-relative">
+              <div class="d-flex justify-content-between align-items-center py-1">
+                <div class="d-flex flex-column">
+                  <span class="fw-bolder">Basic Car Park</span>
+                  <span class="text-secondary mat-body">One Time Pass</span>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="d-flex justify-content-between align-items-center py-2" style="gap: 10px">
+                <div>
+                  <div class="text-secondary mat-body">Arrival</div>
+                  <div class="d-flex mat-body" style="gap: 5px">
+                    <div>{{moment((searchData$ | async)?.arrivalDateTime).format('ddd, MMM Do')}}</div>
+                    <div class="fw-bolder">{{moment((searchData$ | async)?.arrivalDateTime).format('hh:mm a')}}</div>
+                  </div>
+                </div>
+                <mat-divider [vertical]="true" style="height:30px"></mat-divider>
+                <div>
+                  <div class="text-secondary mat-body">Exit</div>
+                  <div class="d-flex mat-body" style="gap: 5px">
+                    <div>{{moment((searchData$ | async)?.exitDateTime).format('ddd, MMM Do')}}</div>
+                    <div class="fw-bolder">{{moment((searchData$ | async)?.exitDateTime).format('hh:mm a')}}</div>
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="d-flex flex-column pt-1">
+                <div class="text-secondary mat-body">Vehicle</div>
+                <div class="fw-bold mat-body">Car</div>
+              </div>
+            </div>
+
+            <mat-expansion-panel [ngClass]="{'mat-expansion-panel': false}">
+              <mat-expansion-panel-header class="px-2">
+                <mat-panel-title>
+                  <div class="fw-bold">
+                    Car Park Amenities
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis cupiditate eaque enim
+                necessitatibus neque nulla odio omnis, quas quisquam quo, recusandae sapiente sunt tempora tenetur totam
+                voluptatem. Nostrum, soluta!</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis cupiditate eaque enim
+                voluptatem. Nostrum, soluta!</p>
+            </mat-expansion-panel>
+          </div>
         </div>
       </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="informationFormGroup">
-    <form action="" [formGroup]="informationFormGroup">
-      <ng-template matStepLabel>Last Step</ng-template>
-      <div>
-        <div>
-          <mat-form-field>
-            <mat-label>First Name</mat-label>
-            <input matInput type="text">
-          </mat-form-field>
-        </div>
-      </div>
-    </form>
-  </mat-step>
-</mat-stepper>
+    </div>
+  </div>
+</div>
