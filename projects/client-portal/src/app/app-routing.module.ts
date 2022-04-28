@@ -8,6 +8,9 @@ import {TermAndConditionsComponent} from "./screens/term-and-conditions/term-and
 import {ForgotPasswordComponent} from "./screens/forgot-password/forgot-password.component";
 import {ResetPasswordComponent} from "./screens/reset-password/reset-password.component";
 import {CheckoutComponent} from "./screens/checkout/checkout.component";
+import {IndividualComponent} from "./screens/individual/individual.component";
+import {ProfileComponent} from "./screens/individual/profile/profile.component";
+import {BookingsComponent} from "./screens/individual/bookings/bookings.component";
 
 const routes: Routes = [
   {
@@ -32,7 +35,21 @@ const routes: Routes = [
   },
   {
     path: 'individual',
-    loadChildren: () => import('./screens/individual/individual.module').then(m => m.IndividualModule)
+    component: IndividualComponent,
+    children: [
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      {
+        path: 'bookings',
+        component: BookingsComponent
+      },
+      {
+        path: 'payments',
+        component: ProfileComponent
+      },
+    ]
   },
   {
     path: 'forgot-password',

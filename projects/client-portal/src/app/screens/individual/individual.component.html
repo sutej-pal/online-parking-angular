@@ -1,0 +1,27 @@
+<div class="bg-light">
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-3">
+        <div class="bg-white">
+          <mat-selection-list #shoes [multiple]="false" class="p-0">
+            <mat-list-option class="border border-bottom-0" routerLink="/individual/profile"
+                             routerLinkActive="mat-list-single-selected-option">Profile
+            </mat-list-option>
+            <mat-list-option class="border border-bottom-0" routerLink="/individual/bookings"
+                             routerLinkActive="mat-list-single-selected-option">Bookings
+            </mat-list-option>
+            <mat-list-option class="border border-bottom-0" routerLink="/individual/payments"
+                             routerLinkActive="mat-list-single-selected-option">Payments
+            </mat-list-option>
+            <mat-list-option class="border">Log Out</mat-list-option>
+          </mat-selection-list>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="border bg-white rounded-2 p-2">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

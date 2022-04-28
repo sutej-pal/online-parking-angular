@@ -21,8 +21,9 @@
       </button>
       <span class="mat-body">Hi, {{(individual$ | async)?.firstName + ' ' + (individual$ | async)?.lastName}}</span>
       <mat-menu #userMenu="matMenu">
-        <button mat-menu-item routerLink="/individual/profile">Profile</button>
+        <button mat-menu-item routerLink="/individual/profile">My Profile</button>
         <button mat-menu-item routerLink="/individual/bookings">Bookings</button>
+        <button mat-menu-item routerLink="/individual/payments">Payments</button>
         <button mat-menu-item (click)="logOut()">Log Out</button>
       </mat-menu>
     </div>

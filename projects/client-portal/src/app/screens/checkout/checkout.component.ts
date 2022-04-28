@@ -7,6 +7,8 @@ import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {searchData} from "../../store/search/search.reducer";
 import {NotificationService} from "../../../../../common-services/notification.service";
+import {getIndividual} from "../../store/individual/individual.selectors";
+import {Individual} from "../../store/individual/individual.reducer";
 
 @Component({
   selector: 'app-checkout',
@@ -17,6 +19,7 @@ export class CheckoutComponent implements OnInit {
 
   informationFormGroup: FormGroup = this.fb.group({});
   searchData$: Observable<searchData> | undefined;
+  individual$: Observable<Individual> | undefined;
   moment: any = moment;
   isFormSubmitted = false;
 
@@ -29,15 +32,17 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchData$ = this.store.select(getSearchData);
-    this.informationFormGroup = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      country: ['', Validators.required],
-      city: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', Validators.required],
-      acceptTAndC: [false, Validators.required],
-      openToNewsAndPromotions: [false]
+    this.individual$ = this.store.select(getIndividual);
+    this.createForm();
+    this.individual$.subscribe(individual => {
+      this.informationFormGroup.patchValue({
+        firstName: individual.firstName,
+        lastName: individual.lastName,
+        country: individual.country,
+        city: individual.city,
+        phone: individual.phone,
+        email: individual.email,
+      })
     })
   }
 
@@ -52,5 +57,18 @@ export class CheckoutComponent implements OnInit {
       this.notificationService.showError('Please fix form errors.')
       return
     }
+  }
+
+  createForm() {
+    this.informationFormGroup = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      country: ['', Validators.required],
+      city: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', Validators.required],
+      acceptTAndC: [false, Validators.required],
+      openToNewsAndPromotions: [false]
+    })
   }
 }

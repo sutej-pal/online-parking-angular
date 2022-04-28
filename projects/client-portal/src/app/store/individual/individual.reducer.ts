@@ -4,11 +4,14 @@ import {updateIndividual} from "./individual.actions";
 
 export const individualFeatureKey = 'individual';
 
-export interface individual {
+export interface Individual {
+  id: string,
   firstName: string,
   lastName: string,
-  id: string,
-  mobile: string
+  email: any;
+  phone: any;
+  city: any;
+  country: any;
 }
 
 export const initialState = {

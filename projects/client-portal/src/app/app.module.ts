@@ -45,6 +45,9 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import { CheckoutComponent } from './screens/checkout/checkout.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatExpansionModule} from "@angular/material/expansion";
+import { IndividualComponent } from './screens/individual/individual.component';
+import { ProfileComponent } from './screens/individual/profile/profile.component';
+import { BookingsComponent } from './screens/individual/bookings/bookings.component';
 
 const CLIENT_ID = environment.client_Id;
 
@@ -64,7 +67,10 @@ const CLIENT_ID = environment.client_Id;
     ResetPasswordComponent,
     ParkingLotCardComponent,
     ParkingLotDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    IndividualComponent,
+    ProfileComponent,
+    BookingsComponent
   ],
     imports: [
         BrowserModule,
