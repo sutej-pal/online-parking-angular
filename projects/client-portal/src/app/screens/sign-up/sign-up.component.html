@@ -37,6 +37,35 @@
             </mat-form-field>
           </div>
           <div class="row">
+            <div class="col-md-4">
+            <mat-form-field class="w-100">
+              <mat-select  formControlName="city" placeholder="City">
+                <mat-option>
+
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+            <div class="col-md-4">
+            <mat-form-field class="w-100">
+              <mat-select  formControlName="state" placeholder="State">
+                <mat-option>
+
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+            <div class="col-md-4">
+            <mat-form-field class="w-100">
+              <mat-select  formControlName="country" placeholder="Country">
+                <mat-option>
+
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
             <mat-form-field class="w-100">
               <input formControlName="mobile" type="text" mask="000-000-0000" matInput placeholder="Mobile">
               <mat-error *ngIf="f.mobile.hasError('required')">Mobile is required.</mat-error>
