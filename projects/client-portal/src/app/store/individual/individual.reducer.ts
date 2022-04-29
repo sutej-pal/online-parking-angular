@@ -11,7 +11,6 @@ export interface Individual {
   email: any;
   phone: any;
   city: any;
-  country: any;
 }
 
 export const initialState = {

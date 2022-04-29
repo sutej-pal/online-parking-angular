@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {StepperSelectionEvent} from "@angular/cdk/stepper";
 import * as moment from "moment";
 import {getSearchData} from "../../store/search/search.selectors";
 import {Store} from "@ngrx/store";
@@ -9,6 +8,7 @@ import {searchData} from "../../store/search/search.reducer";
 import {NotificationService} from "../../../../../common-services/notification.service";
 import {getIndividual} from "../../store/individual/individual.selectors";
 import {Individual} from "../../store/individual/individual.reducer";
+import * as Razorpay from "razorpay";
 
 @Component({
   selector: 'app-checkout',
@@ -22,6 +22,7 @@ export class CheckoutComponent implements OnInit {
   individual$: Observable<Individual> | undefined;
   moment: any = moment;
   isFormSubmitted = false;
+  activeStep = 2
 
   constructor(
     private store: Store,
@@ -38,7 +39,6 @@ export class CheckoutComponent implements OnInit {
       this.informationFormGroup.patchValue({
         firstName: individual.firstName,
         lastName: individual.lastName,
-        country: individual.country,
         city: individual.city,
         phone: individual.phone,
         email: individual.email,
@@ -57,18 +57,34 @@ export class CheckoutComponent implements OnInit {
       this.notificationService.showError('Please fix form errors.')
       return
     }
+    this.activeStep = 3
   }
 
   createForm() {
     this.informationFormGroup = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      country: ['', Validators.required],
+      // country: ['', Validators.required],
+      // state: ['', Validators.required],
       city: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', Validators.required],
-      acceptTAndC: [false, Validators.required],
+      acceptTAndC: [false, Validators.requiredTrue],
       openToNewsAndPromotions: [false]
+    })
+  }
+
+  createInstance() {
+    var instance = new Razorpay({ key_id: 'YOUR_KEY_ID', key_secret: 'YOUR_SECRET' })
+
+    instance.orders.create({
+      amount: 50000,
+      currency: "INR",
+      receipt: "receipt#1",
+      notes: {
+        key1: "value3",
+        key2: "value2"
+      }
     })
   }
 }

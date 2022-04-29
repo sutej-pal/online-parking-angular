@@ -21,8 +21,8 @@
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" autocomplete="off">
           <div class="row">
             <mat-form-field class="w-50">
-              <input formControlName="name" matInput placeholder="Name">
-              <mat-error *ngIf="f.name.hasError('required')">Name is required.</mat-error>
+              <input formControlName="firstName" matInput placeholder="First Name">
+              <mat-error *ngIf="f.firstName.hasError('required')">First Name is required.</mat-error>
             </mat-form-field>
             <mat-form-field class="w-50">
               <input formControlName="lastName" matInput placeholder="Last Name">
@@ -37,42 +37,40 @@
             </mat-form-field>
           </div>
           <div class="row">
-            <div class="col-md-4">
-            <mat-form-field class="w-100">
-              <mat-select  formControlName="city" placeholder="City">
-                <mat-option>
+            <!--            <div class="col-md-4">-->
+            <!--              <mat-form-field class="w-100">-->
+            <!--                <mat-select formControlName="country" placeholder="Country" >-->
+            <!--                  <mat-option [value]="country.isoCode" *ngFor="let country of countriesList">-->
+            <!--                    {{country.name}}-->
+            <!--                  </mat-option>-->
+            <!--                </mat-select>-->
+            <!--              </mat-form-field>-->
+            <!--            </div>-->
+            <!--            <div class="col-md-4">-->
+            <!--              <mat-form-field class="w-100">-->
+            <!--                <mat-select formControlName="state" placeholder="State">-->
+            <!--                  <mat-option>-->
 
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            </div>
+            <!--                  </mat-option>-->
+            <!--                </mat-select>-->
+            <!--              </mat-form-field>-->
+            <!--            </div>-->
             <div class="col-md-4">
-            <mat-form-field class="w-100">
-              <mat-select  formControlName="state" placeholder="State">
-                <mat-option>
-
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+              <mat-form-field class="w-100">
+                <mat-select formControlName="city" placeholder="City">
+                  <mat-option value="mathura">Mathura</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-            <div class="col-md-4">
-            <mat-form-field class="w-100">
-              <mat-select  formControlName="country" placeholder="Country">
-                <mat-option>
-
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <div class="col-md-8">
+              <mat-form-field class="w-100">
+                <input formControlName="phone" type="text" mask="000-000-0000" matInput placeholder="Phone">
+                <mat-error *ngIf="f.phone.hasError('required')">Phone is required.</mat-error>
+                <mat-error *ngIf="f.phone.hasError('pattern')">
+                  Please enter a valid phone number.
+                </mat-error>
+              </mat-form-field>
             </div>
-          </div>
-          <div class="row">
-            <mat-form-field class="w-100">
-              <input formControlName="mobile" type="text" mask="000-000-0000" matInput placeholder="Mobile">
-              <mat-error *ngIf="f.mobile.hasError('required')">Mobile is required.</mat-error>
-              <mat-error *ngIf="f.mobile.hasError('pattern')">
-                Please enter a valid mobile number.
-              </mat-error>
-            </mat-form-field>
           </div>
           <div class="row">
             <mat-form-field class="w-100">
@@ -90,7 +88,7 @@
               <mat-checkbox class="d-inline" (click)="acceptTAndC = !acceptTAndC">I accept the&nbsp;</mat-checkbox>
               <span class="d-inline"><a target="_blank" href="/terms-and-conditions">terms and conditions</a>.</span>
             </div>
-            <mat-error *ngIf="submitted && !acceptTAndC" style="font-size: 12px">
+            <mat-error *ngIf="submitted && !acceptTAndC" class="pt-2" style="font-size: 12px">
               Please accept the Term and Conditions.
             </mat-error>
           </div>

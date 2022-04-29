@@ -8,12 +8,12 @@
         </div>
         <div class="line"></div>
         <div class="step d-flex justify-content-center align-items-center">
-          <mat-icon [ngStyle]="{'color': 'green'}">radio_button_checked</mat-icon>
+          <mat-icon [ngStyle]="{'color': 'green'}">{{activeStep === 2 ? 'radio_button_checked' : 'check_circle'}}</mat-icon>
           Information
         </div>
-        <div class="line"></div>
+        <div class="line" [ngStyle]="{'border-top-style': activeStep === 2 ? 'dashed' : 'solid'}"></div>
         <div class="step d-flex justify-content-center align-items-center">
-          <mat-icon>radio_button_unchecked</mat-icon>
+          <mat-icon [ngStyle]="{'color': 'green'}">{{activeStep === 3 ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>
           Payment
         </div>
       </div>
@@ -21,8 +21,8 @@
   </div>
   <div>
     <div class="col-md-8 m-auto pt-4">
-      <div class="row">
-        <div class="col-md-8">
+      <div class="d-flex gap-3" *ngIf="activeStep === 2">
+        <div>
           <form action="" [formGroup]="informationFormGroup" (ngSubmit)="onSubmit()">
             <div class="information border rounded bg-white p-3">
               <div class="row">
@@ -52,14 +52,22 @@
                         <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
                       </mat-form-field>
                     </div>
-                    <div class="col-md-4">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Country</mat-label>
-                        <input matInput autocomplete="off" formControlName="country">
-                        <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>
-                        <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
-                      </mat-form-field>
-                    </div>
+<!--                    <div class="col-md-4">-->
+<!--                      <mat-form-field appearance="outline" class="w-100">-->
+<!--                        <mat-label>State</mat-label>-->
+<!--                        <input matInput autocomplete="off" formControlName="state">-->
+<!--                        <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>-->
+<!--                        <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>-->
+<!--                      </mat-form-field>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-4">-->
+<!--                      <mat-form-field appearance="outline" class="w-100">-->
+<!--                        <mat-label>Country</mat-label>-->
+<!--                        <input matInput autocomplete="off" formControlName="country">-->
+<!--                        <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>-->
+<!--                        <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>-->
+<!--                      </mat-form-field>-->
+<!--                    </div>-->
                     <div class="col-md-4">
                       <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Phone</mat-label>
@@ -68,25 +76,29 @@
                         <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
                       </mat-form-field>
                     </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Email</mat-label>
+                        <input matInput autocomplete="off" formControlName="email">
+                        <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>
+                        <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
+                      </mat-form-field>
+                    </div>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Email</mat-label>
-                    <input matInput autocomplete="off" formControlName="email">
-                    <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>
-                    <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
-                  </mat-form-field>
                 </div>
               </div>
             </div>
             <div class="row mt-4 mx-1">
               <div class="col-12">
                 <mat-checkbox formControlName="acceptTAndC">I accept the Term And Conditions.</mat-checkbox>
-                <mat-error class="mx-4 mt-2" *ngIf="isFormSubmitted && ifg.acceptTAndC.value === false">Please accept the Terms and conditions.</mat-error>
+                <mat-error class="mx-4 mt-2" *ngIf="isFormSubmitted && ifg.acceptTAndC.value === false">Please accept
+                  the Terms and conditions.
+                </mat-error>
               </div>
               <div class="col-12 mt-2">
-                <mat-checkbox formControlName="openToNewsAndPromotions">I want to receive news and promotions from Pal's Parking.</mat-checkbox>
+                <mat-checkbox formControlName="openToNewsAndPromotions">I want to receive news and promotions from Pal's
+                  Parking.
+                </mat-checkbox>
               </div>
               <div class="col-12">
                 <div class="row">
@@ -98,7 +110,7 @@
             </div>
           </form>
         </div>
-        <div class="col-md-4">
+        <div style="width: 600px">
           <div class="ticket border rounded bg-white p-3">
             <p>SUMMARY</p>
             <div class="mb-2">
@@ -178,6 +190,9 @@
             </mat-expansion-panel>
           </div>
         </div>
+      </div>
+      <div *ngIf="activeStep === 3">
+        Payment
       </div>
     </div>
   </div>
