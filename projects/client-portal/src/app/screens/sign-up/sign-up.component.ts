@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpService} from "../../../../../common-services/http.service";
 import {NotificationService} from "../../../../../common-services/notification.service";
 import {Location} from "@angular/common";
-import { Country, State, City }  from 'country-state-city';
 
 @Component({
   selector: 'app-sign-up',
@@ -40,7 +39,6 @@ export class SignUpComponent implements OnInit {
       }
     });
     this.createForm();
-    this.countriesList = Country.getAllCountries();
   }
   get f () {
     return this.formGroup.controls
