@@ -48,6 +48,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { IndividualComponent } from './screens/individual/individual.component';
 import { ProfileComponent } from './screens/individual/profile/profile.component';
 import { BookingsComponent } from './screens/individual/bookings/bookings.component';
+import { TicketSummaryComponent } from './components/ticket-summary/ticket-summary.component';
 
 const CLIENT_ID = environment.client_Id;
 
@@ -70,7 +71,8 @@ const CLIENT_ID = environment.client_Id;
     CheckoutComponent,
     IndividualComponent,
     ProfileComponent,
-    BookingsComponent
+    BookingsComponent,
+    TicketSummaryComponent
   ],
     imports: [
         BrowserModule,

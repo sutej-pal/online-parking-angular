@@ -143,14 +143,13 @@ export class SearchComponent implements OnInit, OnDestroy {
       }
     }
 
-    const addMarker = (location: { lat: number; lng: number } | undefined) => {
+    const addMarker = (location: any) => {
       const marker = new google.maps.Marker({
         position: location,
         map: map,
         icon: '../../../assets/images/parking.png'
       });
-      // @ts-ignore
-      this.mapMarkers.push(marker);
+      this.mapMarkers?.push(marker);
     }
 
     deleteMarkers();

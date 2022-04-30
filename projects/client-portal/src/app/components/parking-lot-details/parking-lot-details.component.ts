@@ -4,6 +4,8 @@ import * as moment from "moment";
 import {searchData} from "../../store/search/search.reducer";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
+import {Store} from "@ngrx/store";
+import {updateBookingData} from "../../store/booking/booking.actions";
 
 @Component({
   selector: 'app-parking-lot-details',
@@ -20,6 +22,7 @@ export class ParkingLotDetailsComponent implements OnInit {
   moment: any = moment;
 
   constructor(
+    private store: Store,
     private router: Router,
   ) {
   }
@@ -32,6 +35,7 @@ export class ParkingLotDetailsComponent implements OnInit {
 
 
   async navigateToCheckOut() {
+    this.store.dispatch(updateBookingData({payload: {parkingLot: this.parkingLot}}));
     await this.router.navigate(['checkout'])
   }
 }
