@@ -1,4 +1,10 @@
 <div class="container-fluid bg-light" style="height: calc(100vh - 72px)">
+  <div
+    class="align-items-center bg-opacity-50 d-flex h-100 justify-content-center overflow-hidden position-absolute row top-0 w-100"
+    style="z-index: 1;background: rgb(0 0 0 / 50%);"
+    *ngIf="(isLoading$ | async)">
+    <mat-spinner></mat-spinner>
+  </div>
   <div class="row bg-light" style="height: 70px">
     <div class="col-md-8 m-auto">
       <div class="align-items-center d-flex justify-content-between stepper">
@@ -8,12 +14,14 @@
         </div>
         <div class="line"></div>
         <div class="step d-flex justify-content-center align-items-center">
-          <mat-icon [ngStyle]="{'color': 'green'}">{{activeStep === 2 ? 'radio_button_checked' : 'check_circle'}}</mat-icon>
+          <mat-icon
+            [ngStyle]="{'color': 'green'}">{{activeStep === 2 ? 'radio_button_checked' : 'check_circle'}}</mat-icon>
           Information
         </div>
         <div class="line" [ngStyle]="{'border-top-style': activeStep === 2 ? 'dashed' : 'solid'}"></div>
         <div class="step d-flex justify-content-center align-items-center">
-          <mat-icon [ngStyle]="{'color': 'green'}">{{activeStep === 3 ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>
+          <mat-icon
+            [ngStyle]="{'color': 'green'}">{{activeStep === 3 ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>
           Payment
         </div>
       </div>
@@ -52,22 +60,22 @@
                         <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>
                       </mat-form-field>
                     </div>
-<!--                    <div class="col-md-4">-->
-<!--                      <mat-form-field appearance="outline" class="w-100">-->
-<!--                        <mat-label>State</mat-label>-->
-<!--                        <input matInput autocomplete="off" formControlName="state">-->
-<!--                        <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>-->
-<!--                        <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>-->
-<!--                      </mat-form-field>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-4">-->
-<!--                      <mat-form-field appearance="outline" class="w-100">-->
-<!--                        <mat-label>Country</mat-label>-->
-<!--                        <input matInput autocomplete="off" formControlName="country">-->
-<!--                        <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>-->
-<!--                        <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>-->
-<!--                      </mat-form-field>-->
-<!--                    </div>-->
+                    <!--                    <div class="col-md-4">-->
+                    <!--                      <mat-form-field appearance="outline" class="w-100">-->
+                    <!--                        <mat-label>State</mat-label>-->
+                    <!--                        <input matInput autocomplete="off" formControlName="state">-->
+                    <!--                        <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>-->
+                    <!--                        <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>-->
+                    <!--                      </mat-form-field>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-md-4">-->
+                    <!--                      <mat-form-field appearance="outline" class="w-100">-->
+                    <!--                        <mat-label>Country</mat-label>-->
+                    <!--                        <input matInput autocomplete="off" formControlName="country">-->
+                    <!--                        <mat-error *ngIf="ifg.email.hasError('required')">Email is required.</mat-error>-->
+                    <!--                        <mat-error *ngIf="ifg.email.hasError('email')">Please enter a valid email.</mat-error>-->
+                    <!--                      </mat-form-field>-->
+                    <!--                    </div>-->
                     <div class="col-md-4">
                       <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Phone</mat-label>

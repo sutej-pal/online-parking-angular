@@ -3,13 +3,14 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import * as moment from "moment";
 import {getSearchData} from "../../store/search/search.selectors";
 import {Store} from "@ngrx/store";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {searchData} from "../../store/search/search.reducer";
 import {NotificationService} from "../../../../../common-services/notification.service";
 import {getIndividual} from "../../store/individual/individual.selectors";
 import {Individual} from "../../store/individual/individual.reducer";
 import {WindowRefService} from "../../services/window-ref.service";
 import {HttpService} from "../../../../../common-services/http.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-checkout',
@@ -24,9 +25,11 @@ export class CheckoutComponent implements OnInit {
   moment: any = moment;
   isFormSubmitted = false;
   activeStep = 2
+  isLoading$ = new BehaviorSubject(false);
 
   constructor(
     private store: Store,
+    private router: Router,
     private fb: FormBuilder,
     private winRef: WindowRefService,
     private httpService: HttpService,
@@ -53,7 +56,7 @@ export class CheckoutComponent implements OnInit {
     return this.informationFormGroup.controls
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.isFormSubmitted = true;
     console.log(this.informationFormGroup);
     if (this.informationFormGroup.invalid) {
@@ -61,7 +64,7 @@ export class CheckoutComponent implements OnInit {
       return
     }
     this.activeStep = 3;
-    this.createRazorPayOrder();
+    await this.createRazorPayOrder();
   }
 
   createForm() {
@@ -79,6 +82,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   async createRazorPayOrder() {
+    this.isLoading$.next(true);
     const options = {
       "amount": 100,
       "currency": "INR",
@@ -88,17 +92,25 @@ export class CheckoutComponent implements OnInit {
         "key2": "value2"
       }
     }
-    let res = await this.httpService.executeRequest('create-order', 'post', options).toPromise();
-    this.payWithRazor(res.body.data.id);
+    const body = {...this.informationFormGroup.value, ...options};
+    body['name'] = body.firstName + ' ' + body.lastName;
+    body['contact'] = '+91' + body.phone
+    try {
+      let res = await this.httpService.executeRequest('create-order', 'post', body).toPromise();
+      this.payWithRazor(res.body.data);
+    } catch (e) {
+      console.log(e);
+      this.notificationService.showError('Failed to initiate payment');
+    }
   }
 
-  payWithRazor(val: string) {
+  payWithRazor(data: any) {
     const options: any = {
       key: 'rzp_test_tMwnmNia92ZzZq',
       name: "'Pal's Parking", // company name or product name
       description: '',  // product description
       image: '../../../assets/images/parking.png', // company logo or product image
-      order_id: val, // order_id created by you in backend
+      order_id: data.id, // order_id created by you in backend
       modal: {
         // We should prevent closing of the form when esc key is pressed.
         escape: false,
@@ -108,11 +120,13 @@ export class CheckoutComponent implements OnInit {
       },
       theme: {
         color: '#3f51b5'
-      }
+      },
+      customer_id: data.customer_id
     };
     options.handler = ((response: any, error: any) => {
       options.response = response;
       console.log(response);
+      this.verifyPayment(response);
       console.log(options);
       // call your backend api to verify payment signature & capture transaction
     });
@@ -121,6 +135,18 @@ export class CheckoutComponent implements OnInit {
       console.log('Transaction cancelled.');
     });
     const rzp = new this.winRef.nativeWindow.Razorpay(options);
+    this.isLoading$.next(false);
     rzp.open();
+  }
+
+  async verifyPayment(body: any) {
+    try {
+      let res = await this.httpService.executeRequest('verify-payment', 'post', body).toPromise();
+      if (res.body.message === 'Payment verification successful') {
+        await this.router.navigate(['/individual/bookings']);
+      }
+    } catch (e) {
+
+    }
   }
 }
