@@ -37,16 +37,13 @@ export class LoginComponent implements OnInit {
     this.isLoggingIn$.next(true);
     try {
       let res = await this.httpService.executeRequest( 'admin/login', 'post', this.formGroup.value).toPromise();
-      this.notificationService.showSuccess(res.data.message);
+      this.notificationService.showSuccess(res.body.message);
       console.log('res', res);
       await this.router.navigate(['/dashboard']);
     } catch (e) {
-
-    }
-    setTimeout(() => {
+      console.log('Error', e);
       this.isLoggingIn$.next(false)
-    }, 3000);
-
+    }
   }
 
   private loadForm() {

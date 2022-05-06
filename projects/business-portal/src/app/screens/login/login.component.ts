@@ -13,6 +13,7 @@ import {Routes, BaseUrl} from '../../config/config';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
   formGroup: FormGroup = new FormGroup({});
   isRememberMeChecked = false;

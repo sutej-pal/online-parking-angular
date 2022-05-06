@@ -40,7 +40,7 @@
             [searchData$]="searchData$"
             (toggleExpandPLDetailWindow)="isPLDetailWindowExpanded = !isPLDetailWindowExpanded"
             (closePLDetailWindow)="drawer.close();isPLDetailWindowExpanded = false"
-            [parkingLot]="selectedParkingLot">
+            [parkingLot$]="selectedParkingLot$">
           </app-parking-lot-details>
         </mat-drawer>
         <div #map class="google-map h-100"></div>

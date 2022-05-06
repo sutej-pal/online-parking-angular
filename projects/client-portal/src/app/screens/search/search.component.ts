@@ -3,7 +3,7 @@ import {AppComponent} from "../../app.component";
 import {google} from 'google-maps';
 import {Store} from "@ngrx/store";
 import {getSearchData} from "../../store/search/search.selectors";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {searchData} from "../../store/search/search.reducer";
 import {MatDrawer} from "@angular/material/sidenav";
 import {ParkingLot} from "../../types/types";
@@ -32,7 +32,14 @@ export class SearchComponent implements OnInit, OnDestroy {
   google: google | undefined
   isParkingLotDetailsVisible = false;
   searchData$: Observable<searchData> | undefined;
-  selectedParkingLot: ParkingLot | undefined;
+  selectedParkingLot$: BehaviorSubject<ParkingLot> = new BehaviorSubject<ParkingLot>({
+    amenities: {
+      cctv: false,
+      secured: false,
+      twentyFourHourService: false,
+      wheelChairEntrance: false
+    }, geometry: {lat: 0, lng: 0}, minBookingDuration: 0, name: "", parkingSpot: {price: 0}
+  });
   isPLDetailWindowExpanded = false;
   googleMap: google.maps.Map | undefined;
   mapMarkers: google.maps.Marker[] | undefined;
@@ -79,8 +86,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   showParkingLotDetails(parkingLot: ParkingLot) {
-    this.selectedParkingLot = parkingLot;
-    console.log('this.drawer', this.drawer);
+    this.selectedParkingLot$.next(parkingLot);
     if (!this.drawer?.opened) {
       this.drawer?.open();
     }

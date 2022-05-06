@@ -7,7 +7,7 @@
   </div>
   <div class="d-flex" style="gap: 15px">
     <div class="w-75">
-      <p class="mat-headline">{{parkingLot?.name}}</p>
+      <p class="mat-headline">{{(parkingLot$ | async)?.name}}</p>
       <div class="mat-title">
         About
       </div>
@@ -24,16 +24,16 @@
         </button>
       </div>
       <div class="py-1">
-        <span class="px-2" *ngIf="parkingLot?.amenities?.cctv" matTooltip="CCTV">
+        <span class="px-2" *ngIf="(parkingLot$ | async)?.amenities?.cctv" matTooltip="CCTV">
           <mat-icon>videocam</mat-icon>
         </span>
-        <span class="px-2" *ngIf="parkingLot?.amenities?.secured" matTooltip="Secured">
+        <span class="px-2" *ngIf="(parkingLot$ | async)?.amenities?.secured" matTooltip="Secured">
           <mat-icon>lock</mat-icon>
         </span>
-        <span class="px-2" *ngIf="parkingLot?.amenities?.twentyFourHourService" matTooltip="24 Hour Service">
+        <span class="px-2" *ngIf="(parkingLot$ | async)?.amenities?.twentyFourHourService" matTooltip="24 Hour Service">
           <mat-icon>history</mat-icon>
         </span>
-        <span class="px-2" *ngIf="parkingLot?.amenities?.wheelChairEntrance" matTooltip="Accessible for disabled">
+        <span class="px-2" *ngIf="(parkingLot$ | async)?.amenities?.wheelChairEntrance" matTooltip="Accessible for disabled">
           <mat-icon>accessible</mat-icon>
         </span>
       </div>
@@ -50,7 +50,7 @@
                 <span class="text-secondary">One Time Pass</span>
               </div>
               <div class="d-flex align-items-center" style="gap: 5px">
-                <span matPrefix>&#8377;&nbsp;</span>{{parkingLot?.parkingSpot?.price}}.00
+                <span matPrefix>&#8377;&nbsp;</span>{{price}}.00
                 <mat-icon [ngStyle]="{'color': 'green'}">check_circle</mat-icon>
               </div>
             </div>
@@ -80,14 +80,13 @@
           </div>
           <div class="px-1 py-2">Selected Time:
             <span class="fw-bold">
-              {{moment((searchData$ | async)?.exitDateTime).diff(moment((searchData$ | async)?.arrivalDateTime), 'hours')}}
-              hours
+              {{bookingTime}} hours
             </span>
           </div>
           <div class="text-center pt-2">
             <button mat-raised-button color="primary" class="book-button" (click)="navigateToCheckOut()">
               Book For <span class="fw-bolder">
-              <span matPrefix>&#8377;&nbsp;</span>{{parkingLot?.parkingSpot?.price}}.00
+              <span matPrefix>&#8377;&nbsp;</span>{{price}}.00
             </span>
             </button>
           </div>
