@@ -51,7 +51,11 @@ export class ParkingLotDetailsComponent implements OnInit {
 
 
   async navigateToCheckOut() {
-    this.store.dispatch(updateBookingData({payload: {parkingLot: this.parkingLot$.value}}));
+    const searchData = {
+      basePrice: this.price,
+      parkingLot: this.parkingLot$.value
+    }
+    this.store.dispatch(updateBookingData({payload: searchData}));
     await this.router.navigate(['checkout'])
   }
 }

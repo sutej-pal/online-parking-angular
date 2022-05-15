@@ -6,11 +6,15 @@ export const bookingFeatureKey = 'booking';
 
 export interface BookingData {
   parkingLot: any
+  basePrice: number
+  serviceFee: number
+  totalPrice: number
 }
 
 export const initialState = {
   bookingData: {
-    parkingLot: {}
+    parkingLot: {},
+    serviceFee: 10
   }
 };
 

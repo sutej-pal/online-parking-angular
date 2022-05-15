@@ -9,7 +9,7 @@ export interface searchData {
   vehicle: string
   destination: string,
   arrivalDateTime: Date,
-  exitDateTime: Date,
+  exitDateTime: Date
 }
 
 export const initialState = {

@@ -6,17 +6,17 @@
   </div>
 
   <div class="d-flex justify-content-between align-items-center">
-    <div>Duration</div>
     <div>{{moment((searchData$ | async)?.exitDateTime).diff(moment((searchData$ | async)?.arrivalDateTime), 'hours')}} hours</div>
+    <div>Rs. {{(bookingData$ | async)?.basePrice}}</div>
   </div>
   <div class="d-flex justify-content-between align-items-center">
     <div>Service Fee</div>
-    <div>Rs. 1</div>
+    <div>Rs. {{(bookingData$ | async)?.serviceFee}}</div>
   </div>
   <mat-divider class="my-3"></mat-divider>
   <div class="mat-title d-flex justify-content-between align-items-center">
     <div>Total</div>
-    <div>Price</div>
+    <div>{{(bookingData$ | async)?.totalPrice }}</div>
   </div>
   <mat-divider class="mb-3"></mat-divider>
   <div>
