@@ -11,6 +11,7 @@ import {CheckoutComponent} from "./screens/checkout/checkout.component";
 import {IndividualComponent} from "./screens/individual/individual.component";
 import {ProfileComponent} from "./screens/individual/profile/profile.component";
 import {BookingsComponent} from "./screens/individual/bookings/bookings.component";
+import {NotFoundComponent} from "./screens/not-found/not-found.component";
 
 const routes: Routes = [
   {
@@ -62,7 +63,9 @@ const routes: Routes = [
   {
     path: 'terms-and-conditions',
     component: TermAndConditionsComponent
-  }
+  },
+  {path: '404', component: NotFoundComponent},
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

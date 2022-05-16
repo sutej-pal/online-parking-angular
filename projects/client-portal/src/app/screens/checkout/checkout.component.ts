@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, NgZone, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import * as moment from "moment";
 import {getSearchData} from "../../store/search/search.selectors";
@@ -28,6 +28,7 @@ export class CheckoutComponent implements OnInit {
   isLoading$ = new BehaviorSubject(false);
 
   constructor(
+    private zone: NgZone,
     private store: Store,
     private router: Router,
     private fb: FormBuilder,
@@ -143,7 +144,9 @@ export class CheckoutComponent implements OnInit {
     try {
       let res = await this.httpService.executeRequest('verify-payment', 'post', body).toPromise();
       if (res.body.message === 'Payment verification successful') {
-        await this.router.navigate(['/individual/bookings']);
+        await this.zone.run(async () => {
+          await this.router.navigate(['/individual/bookings']);
+        })
       }
     } catch (e) {
 
