@@ -9,8 +9,8 @@ import {ForgotPasswordComponent} from "./screens/forgot-password/forgot-password
 import {ResetPasswordComponent} from "./screens/reset-password/reset-password.component";
 import {CheckoutComponent} from "./screens/checkout/checkout.component";
 import {IndividualComponent} from "./screens/individual/individual.component";
-import {ProfileComponent} from "./screens/individual/profile/profile.component";
-import {BookingsComponent} from "./screens/individual/bookings/bookings.component";
+import {ProfileComponent} from "./screens/individual/screens/profile/profile.component";
+import {BookingsComponent} from "./screens/individual/screens/bookings/bookings.component";
 import {NotFoundComponent} from "./screens/not-found/not-found.component";
 
 const routes: Routes = [
