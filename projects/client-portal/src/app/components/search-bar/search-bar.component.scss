@@ -18,12 +18,18 @@
 }
 
 ::ng-deep .pac-container.pac-logo {
-  width: 348px !important;
-  left: 412px !important;
-  top: 165px !important;
+  //width: 348px !important;
+  //left: 412px !important;
+  //top: 165px !important;
   border-radius: 0 0 5px 5px;
   &::after {
     display: none;
+  }
+  .pac-item {
+    font-size: 13px;
+    .pack-item-query {
+      font-size: 14px;
+    }
   }
 }
 

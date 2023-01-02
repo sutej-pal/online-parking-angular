@@ -5,7 +5,7 @@
     <div class="search-result-sidebar" style="height: calc(100vh - 193px);"
          [ngClass]="{'expanded-pl-detail-window': isPLDetailWindowExpanded}">
       <div class="row position-relative h-100">
-        <div class="col-md-12 pb-3 border-bottom border-2">
+        <div class="col-md-12 pb-3 mat-elevation-z0" #searchHeader>
           <div class="p-2 d-flex flex-column">
             <div class="availability-and-filters w-100">
               <span class="text-secondary">Parking Lots Found near </span>{{(searchData$ | async)?.destination}}

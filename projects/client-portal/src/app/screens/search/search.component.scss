@@ -61,7 +61,7 @@
 }
 
 .parking-lot-cards-container {
-  height: calc(100vh - 261px);
+  height: calc(100% - 110px);
   overflow: auto;
   @include custom-scrollbar(7px);
 }

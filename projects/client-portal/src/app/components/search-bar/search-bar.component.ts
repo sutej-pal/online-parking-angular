@@ -70,8 +70,12 @@ export class SearchBarComponent implements OnInit {
     this.google = await AppComponent.googleMap;
     const input = document.getElementById("pac-input") as HTMLInputElement;
     this.autocomplete = new this.google.maps.places.Autocomplete(input, this.options);
+    this.google.maps.event.addDomListener(input, 'input', (event) => {
+      console.log(event);
+    })
     this.autocomplete.addListener("place_changed", () => {
       const place = this.autocomplete.getPlace();
+      console.log(place);
       this.updateForm(place);
     });
   }

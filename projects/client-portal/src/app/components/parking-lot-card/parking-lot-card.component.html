@@ -2,7 +2,8 @@
   <mat-card>
     <div class="d-flex" style="gap: 10px">
       <div class="pl-profile-image">
-        <img class="w-100 h-auto" src='default-placeholder.png' (error)="utilitiesService.onImgError($event)" [title]="parkingLotData?.name"
+        <img class="w-100 h-auto" src='default-placeholder.png' (error)="utilitiesService.onImgError($event)"
+             [title]="parkingLotData?.name"
              [alt]="parkingLotData?.name">
       </div>
       <div>

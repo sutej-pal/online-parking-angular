@@ -1,7 +1,9 @@
 <div class="header-main container d-flex p-3">
   <div class="align-items-center d-flex justify-content-between w-100">
     <div class="">
-      <span class="mat-display-1" role="button" [routerLink]="'/'">Pals Parking</span>
+      <span class="mat-display-1" role="button" [routerLink]="'/'">
+        <img src="../../../assets/images/logo.png" alt="" height="50">
+      </span>
     </div>
     <div class="" *ngIf="!((individual$ | async)?.id)">
       <button class="mx-2" [routerLink]="'/login'" mat-raised-button aria-label="Sign Up" color="primary">
