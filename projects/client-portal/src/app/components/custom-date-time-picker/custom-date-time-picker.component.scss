@@ -1,4 +1,4 @@
-.mat-form-field {
+.mat-mdc-form-field {
   width: 300px;
 }
 ::ng-deep.mat-datepicker-actions {
@@ -17,8 +17,6 @@
 }
 
 .cs-input {
-  height: 18px;
-  padding-bottom: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;

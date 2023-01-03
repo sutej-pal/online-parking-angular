@@ -4,7 +4,7 @@
   form {
     gap: 10px;
 
-    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    ::ng-deep .mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {
       background-color: white;
       border-radius: 5px;
     }
@@ -17,7 +17,7 @@
   }
 }
 
-::ng-deep .pac-container.pac-logo {
+:host ::ng-deep .pac-container.pac-logo {
   //width: 348px !important;
   //left: 412px !important;
   //top: 165px !important;
@@ -64,4 +64,8 @@
 
 ::ng-deep .cdk-overlay-transparent-backdrop, .cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
   opacity: 1 !important;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  background: white;
 }
