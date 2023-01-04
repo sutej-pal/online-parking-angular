@@ -42,6 +42,15 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {ParkingLotCardComponent} from './components/parking-lot-card/parking-lot-card.component';
 import {ParkingLotDetailsComponent} from './components/parking-lot-details/parking-lot-details.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { CheckoutComponent } from './screens/checkout/checkout.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatExpansionModule} from "@angular/material/expansion";
+import { IndividualComponent } from './screens/individual/individual.component';
+import { ProfileComponent } from './screens/individual/screens/profile/profile.component';
+import { BookingsComponent } from './screens/individual/screens/bookings/bookings.component';
+import { TicketSummaryComponent } from './components/ticket-summary/ticket-summary.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {ParkingTicketComponent} from "./screens/individual/components/parking-ticket/parking-ticket.component";
 
 const CLIENT_ID = environment.client_Id;
 
@@ -60,7 +69,13 @@ const CLIENT_ID = environment.client_Id;
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ParkingLotCardComponent,
-    ParkingLotDetailsComponent
+    ParkingLotDetailsComponent,
+    CheckoutComponent,
+    IndividualComponent,
+    ProfileComponent,
+    BookingsComponent,
+    TicketSummaryComponent,
+    ParkingTicketComponent
   ],
     imports: [
         BrowserModule,
@@ -89,6 +104,9 @@ const CLIENT_ID = environment.client_Id;
         FormsModule,
         MatSidenavModule,
         MatTooltipModule,
+        MatStepperModule,
+        MatExpansionModule,
+        MatTabsModule,
     ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -1,4 +1,3 @@
-<app-header></app-header>
 <app-search-bar></app-search-bar>
 <div class="search-main container-fluid">
   <div class="row" style="height: calc(100vh - 193px);">
@@ -12,13 +11,13 @@
             </div>
             <div class="d-flex justify-content-between align-items-center pt-3">
               <div>
-                3 Parking Lots Found
+                {{parkingLotList.length}} Parking Lots Found
               </div>
               <div>
                 <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Sort By</button>
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item>Price</button>
-                  <button mat-menu-item>Distance</button>
+                  <button mat-menu-item (click)="sortParkingLotsByPrice()">Price</button>
+                  <button mat-menu-item (click)="sortParkingLotsByDistance()">Distance</button>
                 </mat-menu>
               </div>
             </div>
@@ -34,13 +33,14 @@
       </div>
     </div>
     <div class="col p-0 position-relative">
-      <mat-drawer-container class="w-100 h-100 position-absolute border border-1">
+      <mat-drawer-container class="w-100 h-100 position-absolute border-start">
         <mat-drawer #drawer class="pl-detail-window" mode="side"
                     [ngClass]="{'expanded-pl-detail-window': isPLDetailWindowExpanded}">
           <app-parking-lot-details
+            [searchData$]="searchData$"
             (toggleExpandPLDetailWindow)="isPLDetailWindowExpanded = !isPLDetailWindowExpanded"
             (closePLDetailWindow)="drawer.close();isPLDetailWindowExpanded = false"
-            [parkingLot]="selectedParkingLot">
+            [parkingLot$]="selectedParkingLot$">
           </app-parking-lot-details>
         </mat-drawer>
         <div #map class="google-map h-100"></div>

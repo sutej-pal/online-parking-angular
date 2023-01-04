@@ -20,7 +20,7 @@
             <div>
               <mat-form-field class="w-100">
                 <mat-label>Email</mat-label>
-                <input matInput autocomplete="nope" placeholder="Email" formControlName="email">
+                <input matInput autocomplete="off" placeholder="Email" formControlName="email">
                 <mat-error *ngIf="fg.email.hasError('required')">Email is required.</mat-error>
                 <mat-error *ngIf="fg.email.hasError('email')">Please enter a valid email.</mat-error>
               </mat-form-field>
@@ -28,7 +28,7 @@
             <div>
               <mat-form-field class="w-100">
                 <mat-label>Password</mat-label>
-                <input matInput autocomplete="nope" placeholder="Password" formControlName="password">
+                <input matInput autocomplete="off" placeholder="Password" formControlName="password">
                 <mat-error *ngIf="fg.password.hasError('required')">Password is required.</mat-error>
               </mat-form-field>
             </div>

@@ -6,12 +6,14 @@ import {HttpService} from "../../../../../common-services/http.service";
 import {NotificationService} from "../../../../../common-services/notification.service";
 import {Store} from "@ngrx/store";
 import {updateUser} from "../../store/user/user.actions";
+import {Routes, BaseUrl} from '../../config/config';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
   formGroup: FormGroup = new FormGroup({});
   isRememberMeChecked = false;
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
     }
     this.isLoggingIn$.next(true);
     try {
-      const res = await this.httpService.executeRequest('login', 'post', this.formGroup.value).toPromise();
+      const res = await this.httpService.executeRequest(BaseUrl + Routes.login, 'post', this.formGroup.value).toPromise();
       this.notificationService.showSuccess(res.body.message);
       this.store.dispatch(updateUser(res.body.data));
       localStorage.setItem('token', res.body.data.token);

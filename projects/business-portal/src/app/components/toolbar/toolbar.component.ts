@@ -49,7 +49,7 @@ export class ToolbarComponent implements OnInit {
     //     this.title = 'Parking Lots'
     //     return
     //   }
-    //   case '/profile': {
+    //   case '/vehicles': {
     //     this.title = 'Profile'
     //     return
     //   }

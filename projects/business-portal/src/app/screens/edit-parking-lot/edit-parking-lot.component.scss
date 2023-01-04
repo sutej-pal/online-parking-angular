@@ -1,77 +1,79 @@
-.edit-parking-lot-main {
-  padding: 16px;
+.spinner-container {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
 
-  .spinner-container {
-    height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-  }
+.mat-card {
+  margin-bottom: 20px;
+}
 
-  .mat-card {
-    margin-bottom: 20px;
-  }
+.mat-card-title {
+  font-size: 20px;
+}
 
-  .mat-card-title {
-    font-size: 20px;
-  }
+.form-fields-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 
-  .form-fields-container {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
+.uploaded-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 0;
 
-  .uploaded-images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px 0;
+  div {
+    width: 200px;
+    max-height: 250px;
+    overflow: hidden;
+    position: relative;
+    padding: 5px;
+    border: 1px dashed #aaa;
+    border-radius: 3px;
 
-    div {
-      width: 200px;
-      max-height: 250px;
-      overflow: hidden;
-      position: relative;
-      padding: 5px;
-      border: 1px dashed #aaa;
-      border-radius: 3px;
+    .icon-container {
+      display: none;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #00000087;
 
-      .icon-container {
-        display: none;
+      .delete-icon {
         position: absolute;
-        top: 0;
-        bottom: 0;
         left: 0;
         right: 0;
-        background: #00000087;
-
-        .delete-icon {
-          position: absolute;
-          left: 0;
-          right: 0;
-          margin: 25% auto;
-        }
-
-        .fullscreen-icon {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-        }
+        margin: 25% auto;
       }
 
-      &:hover {
-        .icon-container {
-          display: flex;
-        }
-      }
-
-      img {
-        width: 100%;
-        height: auto;
+      .fullscreen-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
       }
     }
+
+    &:hover {
+      .icon-container {
+        display: flex;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
+}
+
+.add-parking-spot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

@@ -19,6 +19,7 @@ export class SignUpComponent implements OnInit {
   isPasswordVisible = false;
   acceptTAndC = false;
   submitted = false;
+  countriesList: any = [];
 
   constructor(
     private router: Router,
@@ -45,15 +46,15 @@ export class SignUpComponent implements OnInit {
 
   private createForm() {
     this.formGroup = this.fb.group({
-      name: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      mobile: ['', [Validators.required, Validators.pattern(/^[\d]{10}$/)]],
-      password: ['', [Validators.required]]
+      firstName: ['Sutej', [Validators.required]],
+      lastName: ['Pal', [Validators.required]],
+      email: ['sutejpal@hotmail.com', [Validators.required, Validators.email]],
+      // country: ['', [Validators.required]],
+      // state: ['', [Validators.required]],
+      city: ['mathura', [Validators.required]],
+      phone: ['7017222049', [Validators.required, Validators.pattern(/^[\d]{10}$/)]],
+      password: ['Default@123', [Validators.required]]
     });
-    setTimeout(() => {
-      console.log(this.formGroup)
-    }, 3000);
   }
 
   async onSubmit() {
@@ -63,19 +64,20 @@ export class SignUpComponent implements OnInit {
       await this.notificationService.showError('Please fill up the required fields.');
       return
     }
+    if (!this.acceptTAndC) {
+      await this.notificationService.showError('Please accept the terms and conditions.');
+      return
+    }
     this.isRegistering$.next(true);
 
     try {
       let res = await this.httpService.executeRequest('sign-up', 'post', this.formGroup.value).toPromise();
-      this.notificationService.showSuccess(res.data.message);
-      console.log('res', res);
+      this.notificationService.showSuccess(res.body.message);
       await this.router.navigate(['/']);
     } catch (e) {
-
-    }
-    setTimeout(() => {
+      this.notificationService.showError(e.error.message);
       this.isRegistering$.next(false)
-    }, 3000);
+    }
   }
 
   navigateBack() {

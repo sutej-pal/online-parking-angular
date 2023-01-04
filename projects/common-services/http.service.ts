@@ -1,7 +1,4 @@
 import {Injectable} from '@angular/core';
-import axios from 'axios';
-import * as _ from 'underscore';
-import {NotificationService} from "./notification.service";
 import {ToastrService} from "ngx-toastr";
 import {HttpClient} from "@angular/common/http";
 import {Observable, of} from "rxjs";

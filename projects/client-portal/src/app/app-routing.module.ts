@@ -7,6 +7,11 @@ import {LoginComponent} from "./screens/login/login.component";
 import {TermAndConditionsComponent} from "./screens/term-and-conditions/term-and-conditions.component";
 import {ForgotPasswordComponent} from "./screens/forgot-password/forgot-password.component";
 import {ResetPasswordComponent} from "./screens/reset-password/reset-password.component";
+import {CheckoutComponent} from "./screens/checkout/checkout.component";
+import {IndividualComponent} from "./screens/individual/individual.component";
+import {ProfileComponent} from "./screens/individual/screens/profile/profile.component";
+import {BookingsComponent} from "./screens/individual/screens/bookings/bookings.component";
+import {NotFoundComponent} from "./screens/not-found/not-found.component";
 
 const routes: Routes = [
   {
@@ -26,8 +31,26 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'checkout',
+    component: CheckoutComponent
+  },
+  {
     path: 'individual',
-    loadChildren: () => import('./screens/individual/individual.module').then(m => m.IndividualModule)
+    component: IndividualComponent,
+    children: [
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      {
+        path: 'bookings',
+        component: BookingsComponent
+      },
+      {
+        path: 'payments',
+        component: ProfileComponent
+      },
+    ]
   },
   {
     path: 'forgot-password',
@@ -40,7 +63,9 @@ const routes: Routes = [
   {
     path: 'terms-and-conditions',
     component: TermAndConditionsComponent
-  }
+  },
+  {path: '404', component: NotFoundComponent},
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

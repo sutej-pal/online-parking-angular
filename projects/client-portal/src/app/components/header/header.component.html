@@ -18,13 +18,16 @@
       </mat-menu>
     </div>
     <div class="user-menu" role="button" *ngIf="(individual$ | async)?.id" [matMenuTriggerFor]="userMenu">
-      <button mat-icon-button>
-        <mat-icon>account_circle</mat-icon>
-      </button>
-      <span class="mat-body">Hi, {{(individual$ | async)?.firstName + ' ' + (individual$ | async)?.lastName}}</span>
+      <div class="d-flex justify-content-center align-items-center mat-body">
+        <span>{{(individual$ | async)?.firstName + ' ' + (individual$ | async)?.lastName}}</span>
+        <button mat-icon-button>
+          <mat-icon>expand_more</mat-icon>
+        </button>
+      </div>
       <mat-menu #userMenu="matMenu">
-        <button mat-menu-item routerLink="/individual/profile">Profile</button>
-        <button mat-menu-item routerLink="/individual/bookings">Bookings</button>
+        <button mat-menu-item class="border-bottom" routerLink="/individual/profile">My Profile</button>
+        <button mat-menu-item class="border-bottom" routerLink="/individual/bookings">Bookings</button>
+        <button mat-menu-item class="border-bottom" routerLink="/individual/payments">Payments</button>
         <button mat-menu-item (click)="logOut()">Log Out</button>
       </mat-menu>
     </div>

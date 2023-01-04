@@ -1,0 +1,13 @@
+<div>
+  <div class="mat-title">Bookings</div>
+</div>
+<mat-divider></mat-divider>
+<mat-tab-group class="pt-2">
+  <mat-tab label="Active">
+    <div class="d-flex flex-wrap gap-3 ng-star-inserted p-1 py-3 tickets-container">
+      <app-parking-ticket *ngFor="let x of [1, 2, 3, 4]"></app-parking-ticket>
+    </div>
+  </mat-tab>
+  <!--  <mat-tab label="Upcoming"> Upcoming </mat-tab>-->
+  <mat-tab label="History"> History</mat-tab>
+</mat-tab-group>

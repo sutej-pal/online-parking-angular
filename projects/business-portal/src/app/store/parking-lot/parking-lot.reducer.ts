@@ -5,6 +5,7 @@ import {loadParkingLots, loadParkingLotsFailure, loadParkingLotsSuccess} from ".
 export const parkingLotFeatureKey = 'parkingLot';
 
 export interface ParkingLot {
+  amenities: any;
   id: string;
   name: string;
   gallery?: string[];
