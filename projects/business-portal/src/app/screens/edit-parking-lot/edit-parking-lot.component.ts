@@ -54,7 +54,7 @@ export class EditParkingLotComponent implements OnInit {
     if (this.formGroup && this.formGroup.get('parkingSpots')) {
       return this.formGroup.get('parkingSpots') as FormArray;
     } else {
-      return new FormArray([]);
+      return new FormArray([this.fb.group([])]);
     }
   }
 

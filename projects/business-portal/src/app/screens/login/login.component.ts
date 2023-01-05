@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', res.body.data.token);
       await this.router.navigate(['']);
       this.isLoggingIn$.next(false);
-    } catch (e) {
+    } catch (e: any) {
       console.log('Error', e.error.message);
       this.notificationService.showError(e.error.message);
       this.isLoggingIn$.next(false);

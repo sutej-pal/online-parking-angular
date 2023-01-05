@@ -74,7 +74,7 @@ export class SignUpComponent implements OnInit {
       let res = await this.httpService.executeRequest('sign-up', 'post', this.formGroup.value).toPromise();
       this.notificationService.showSuccess(res.body.message);
       await this.router.navigate(['/']);
-    } catch (e) {
+    } catch (e: any) {
       this.notificationService.showError(e.error.message);
       this.isRegistering$.next(false)
     }

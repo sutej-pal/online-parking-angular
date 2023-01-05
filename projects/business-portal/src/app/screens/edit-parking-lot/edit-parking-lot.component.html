@@ -14,13 +14,13 @@
           <mat-card-content class="pt-2">
             <div class="form-fields-container">
               <div>
-                <mat-form-field appearance="legacy">
+                <mat-form-field>
                   <mat-label>Parking Lot Name</mat-label>
                   <input matInput autocomplete="off" formControlName="name">
                 </mat-form-field>
               </div>
               <div>
-                <mat-form-field appearance="legacy">
+                <mat-form-field>
                   <mat-label>Min Booking Duration</mat-label>
                   <mat-select formControlName="minBookingDuration">
                     <mat-option [value]="1">1 Hour</mat-option>
@@ -32,7 +32,7 @@
                 </mat-form-field>
               </div>
               <div>
-                <mat-form-field appearance="legacy">
+                <mat-form-field>
                   <mat-label>Type</mat-label>
                   <mat-select formControlName="type">
                     <mat-option value="covered">Covered</mat-option>
@@ -53,13 +53,13 @@
           <mat-card-content class="pt-2">
             <div class="form-fields-container" formGroupName="address">
               <div>
-                <mat-form-field appearance="legacy">
+                <mat-form-field>
                   <mat-label>Address Line One</mat-label>
                   <input matInput autocomplete="off" placeholder="Address" formControlName="addressLineOne">
                 </mat-form-field>
               </div>
               <div>
-                <mat-form-field appearance="legacy">
+                <mat-form-field>
                   <mat-label>Address Line Two</mat-label>
                   <input matInput autocomplete="off" placeholder="Address" formControlName="addressLineTwo">
                 </mat-form-field>
@@ -79,7 +79,7 @@
               <div *ngFor="let parkingSpot of parkingSpots.controls; let i = index">
                 <div class="row" [formGroupName]="i.toString()">
                   <div class="col-3">
-                    <mat-form-field appearance="legacy" class="w-100">
+                    <mat-form-field class="w-100">
                       <mat-label>Vehicle Type</mat-label>
                       <mat-select formControlName="vehicle">
                         <mat-option [value]="vehicle.id"
@@ -88,13 +88,13 @@
                     </mat-form-field>
                   </div>
                   <div class="col-3">
-                    <mat-form-field appearance="legacy" class="w-100">
+                    <mat-form-field class="w-100">
                       <input min="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" matInput
                              autocomplete="off" type="number" placeholder="count" formControlName="count">
                     </mat-form-field>
                   </div>
                   <div class="col-3">
-                    <mat-form-field appearance="legacy" class="w-100">
+                    <mat-form-field class="w-100">
                       <input min="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" matInput
                              autocomplete="off" type="number" placeholder="Price" formControlName="price">
                       <span matPrefix>&#8377;&nbsp;</span>
@@ -124,14 +124,14 @@
           <mat-card-content class="pt-2">
             <div class="form-fields-container" formGroupName="geometry">
               <div>
-                <mat-form-field appearance="legacy">
+                <mat-form-field>
                   <mat-label>Latitude</mat-label>
                   <input matInput autocomplete="off" [readonly]="true" formControlName="lat"
                          (click)="openLatLngPicker()">
                 </mat-form-field>
               </div>
               <div>
-                <mat-form-field appearance="legacy">
+                <mat-form-field>
                   <mat-label>Longitude</mat-label>
                   <input matInput autocomplete="off" [readonly]="true" formControlName="lng"
                          (click)="openLatLngPicker()">
