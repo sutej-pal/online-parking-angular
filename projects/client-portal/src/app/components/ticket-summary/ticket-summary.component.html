@@ -2,11 +2,14 @@
   <p>SUMMARY</p>
   <div class="mb-2">
     <div class="fw-bold">{{(bookingData$ | async)?.parkingLot?.name}}</div>
-    <div class="text-secondary">{{(bookingData$ | async)?.parkingLot?.address.addressLineOne + ', ' + (bookingData$ | async)?.parkingLot?.address.addressLineTwo }}</div>
+    <div
+      class="text-secondary">{{(bookingData$ | async)?.parkingLot?.address.addressLineOne + ', ' + (bookingData$ | async)?.parkingLot?.address.addressLineTwo }}</div>
   </div>
 
   <div class="d-flex justify-content-between align-items-center">
-    <div>{{moment((searchData$ | async)?.exitDateTime).diff(moment((searchData$ | async)?.arrivalDateTime), 'hours')}} hours</div>
+    <div>{{moment((searchData$ | async)?.exitDateTime).diff(moment((searchData$ | async)?.arrivalDateTime), 'hours')}}
+      hours
+    </div>
     <div>Rs. {{(bookingData$ | async)?.basePrice}}</div>
   </div>
   <div class="d-flex justify-content-between align-items-center">
@@ -69,10 +72,8 @@
         </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis cupiditate eaque enim
-      necessitatibus neque nulla odio omnis, quas quisquam quo, recusandae sapiente sunt tempora tenetur totam
-      voluptatem. Nostrum, soluta!</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis cupiditate eaque enim
-      voluptatem. Nostrum, soluta!</p>
+    <div class="amenities" *ngFor="let facility of parkingLotAmenities">
+      <mat-icon>{{facility.icon}}</mat-icon> {{facility.name}}
+    </div>
   </mat-expansion-panel>
 </div>

@@ -1,15 +1,9 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {google} from 'google-maps';
-import {AppComponent} from "../../app.component";
 import {Observable} from "rxjs";
 import {searchData} from "../../store/search/search.reducer";
 import {Store} from "@ngrx/store";
-import {Router} from "@angular/router";
-import {FormBuilder} from "@angular/forms";
-import {HttpService} from "../../../../../common-services/http.service";
-import {DateAdapter} from "@angular/material/core";
 import {GoogleMapService} from "../../services/google-map.service";
-import {NotificationService} from "../../../../../common-services/notification.service";
 import {getSearchData} from "../../store/search/search.selectors";
 import {ParkingLot} from "../../types/types";
 

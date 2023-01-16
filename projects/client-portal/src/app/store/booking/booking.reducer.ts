@@ -1,11 +1,12 @@
 import {Action, createReducer, on} from '@ngrx/store';
 import {updateBookingData} from "./booking.actions";
+import {ParkingLot} from "../../types/types";
 
 
 export const bookingFeatureKey = 'booking';
 
 export interface BookingData {
-  parkingLot: any
+  parkingLot: ParkingLot | any
   basePrice: number
   serviceFee: number
   totalPrice: number

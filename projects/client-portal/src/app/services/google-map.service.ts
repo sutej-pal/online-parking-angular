@@ -28,7 +28,7 @@ export class GoogleMapService {
   }
 
   getGoogleMapInstance(): Promise<google> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.isMapLoaded.subscribe(e => {
         resolve(this.google);
       })
