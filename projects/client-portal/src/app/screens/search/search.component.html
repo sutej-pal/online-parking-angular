@@ -23,7 +23,7 @@
             </div>
           </div>
         </div>
-        <div class="parking-lot-cards-container py-2">
+        <div class="parking-lot-cards-container py-2 border-top">
           <app-parking-lot-card
             *ngFor="let parkingLot of parkingLotList;let i = index"
             [parkingLotData]="parkingLot"
@@ -43,7 +43,7 @@
             [parkingLot$]="selectedParkingLot$">
           </app-parking-lot-details>
         </mat-drawer>
-        <div #map class="google-map h-100"></div>
+        <app-pals-parking-map [parkingLots]="parkingLotList"></app-pals-parking-map>
       </mat-drawer-container>
     </div>
   </div>

@@ -15,7 +15,7 @@ export class AppComponent {
   }
 
   async ngOnInit() {
-    AppComponent.googleMap = await this.googleMapService.initMap();
+    await this.googleMapService.initMap();
   }
 
   static async getCurrentLocation() {

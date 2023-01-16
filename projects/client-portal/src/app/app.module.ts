@@ -51,6 +51,7 @@ import { BookingsComponent } from './screens/individual/screens/bookings/booking
 import { TicketSummaryComponent } from './components/ticket-summary/ticket-summary.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {ParkingTicketComponent} from "./screens/individual/components/parking-ticket/parking-ticket.component";
+import { PalsParkingMapComponent } from './components/pals-parking-map/pals-parking-map.component';
 
 const CLIENT_ID = environment.client_Id;
 
@@ -75,7 +76,8 @@ const CLIENT_ID = environment.client_Id;
     ProfileComponent,
     BookingsComponent,
     TicketSummaryComponent,
-    ParkingTicketComponent
+    ParkingTicketComponent,
+    PalsParkingMapComponent
   ],
     imports: [
         BrowserModule,

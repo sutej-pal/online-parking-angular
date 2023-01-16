@@ -74,8 +74,8 @@ export class CheckoutComponent implements OnInit {
       lastName: ['', Validators.required],
       // country: ['', Validators.required],
       // state: ['', Validators.required],
-      city: ['', Validators.required],
-      phone: ['', Validators.required],
+      city: [''],
+      phone: [''],
       email: ['', Validators.required],
       acceptTAndC: [false, Validators.requiredTrue],
       openToNewsAndPromotions: [false]
@@ -95,7 +95,8 @@ export class CheckoutComponent implements OnInit {
     }
     const body = {...this.informationFormGroup.value, ...options};
     body['name'] = body.firstName + ' ' + body.lastName;
-    body['contact'] = '+91' + body.phone
+    // TODO: add phone
+    body['contact'] = '+91' + '7017222049'
     try {
       let res = await this.httpService.executeRequest('create-order', 'post', body).toPromise();
       this.payWithRazor(res.body.data);
@@ -107,7 +108,7 @@ export class CheckoutComponent implements OnInit {
 
   payWithRazor(data: any) {
     const options: any = {
-      key: 'rzp_test_tMwnmNia92ZzZq',
+      key: 'rzp_test_pQ742uoIeMgSxm',
       name: "'Pal's Parking", // company name or product name
       description: '',  // product description
       image: '../../../assets/images/parking.png', // company logo or product image

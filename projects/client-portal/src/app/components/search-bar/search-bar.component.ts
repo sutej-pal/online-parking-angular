@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {AppComponent} from "../../app.component";
 import {BehaviorSubject, Observable} from "rxjs";
 import {google} from 'google-maps';
@@ -18,13 +18,14 @@ import {searchData} from "../../store/search/search.reducer";
 import {MatMenuTrigger} from "@angular/material/menu";
 import {HttpService} from "../../../../../common-services/http.service";
 import {NotificationService} from "../../../../../common-services/notification.service";
+import {GoogleMapService} from "../../services/google-map.service";
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss']
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatMenuTrigger) vehicleSelectionPanelMenu: MatMenuTrigger | undefined;
 
@@ -35,7 +36,7 @@ export class SearchBarComponent implements OnInit {
     types: ["address"],
   };
   private autocomplete: google.maps.places.Autocomplete | any;
-  google: google | undefined
+  google: any;
   formGroup: FormGroup = new FormGroup({});
   isFormReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   searchData$: Observable<searchData> | undefined;
@@ -49,14 +50,18 @@ export class SearchBarComponent implements OnInit {
     private fb: FormBuilder,
     private httpService: HttpService,
     private dateAdapter: DateAdapter<Date>,
-    private notificationService: NotificationService
+    private googleMapService: GoogleMapService,
+    private notificationService: NotificationService,
   ) {
     this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
   }
 
+  async ngAfterViewInit() {
+    await this.checkIfMapLoaded();
+  }
+
   async ngOnInit() {
     this.searchData$ = this.store.select(getSearchData);
-    await this.checkIfMapLoaded();
     this.isVehicleSelectionVisible = this.router.url === '/search';
     await this.getVehiclesTypes();
     this.loadForm();
@@ -67,7 +72,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   async checkIfMapLoaded() {
-    this.google = await AppComponent.googleMap;
+    this.google = this.googleMapService.google;
     if (this.google && this.google.maps) {
       await this.initializeAutoComplete();
     } else {
@@ -78,17 +83,15 @@ export class SearchBarComponent implements OnInit {
   }
 
   async initializeAutoComplete() {
-    this.google = await AppComponent.googleMap;
+    this.google = this.googleMapService.google;
     const input = document.getElementById("pac-input") as HTMLInputElement;
-    this.autocomplete = new this.google.maps.places.Autocomplete(input, this.options);
-    this.google.maps.event.addDomListener(input, 'input', (event) => {
-      console.log(event);
-    })
-    this.autocomplete.addListener("place_changed", () => {
-      const place = this.autocomplete.getPlace();
-      console.log(place);
-      this.updateForm(place);
-    });
+    if (input) {
+      this.autocomplete = new this.google.maps.places.Autocomplete(input, this.options);
+      this.autocomplete.addListener("place_changed", () => {
+        const place = this.autocomplete.getPlace();
+        this.updateForm(place);
+      });
+    }
   }
 
   async getCurrentLocation(e: MouseEvent) {
@@ -102,7 +105,7 @@ export class SearchBarComponent implements OnInit {
         lng: parseFloat(currentLocation.lng),
       };
       geocoder
-        .geocode({location: latLng}, (response) => {
+        .geocode({location: latLng}, (response: any[]) => {
           if (response[0]) {
             this.updateForm(response[0]);
           }

@@ -11,6 +11,7 @@ import {HttpService} from "../../../../../common-services/http.service";
 import {Router} from "@angular/router";
 import * as _ from "underscore";
 import {NotificationService} from "../../../../../common-services/notification.service";
+import {GoogleMapService} from "../../services/google-map.service";
 
 @Component({
   selector: 'app-search',
@@ -48,6 +49,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private store: Store,
     private router: Router,
     private httpService: HttpService,
+    private googleMapService: GoogleMapService,
     private notificationService: NotificationService
   ) {
   }
@@ -55,13 +57,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.searchData$ = this.store.select(getSearchData);
     await this.checkIfMapLoaded();
-    this.updateGoogleMapAutocompletePosition();
+    // this.updateGoogleMapAutocompletePosition();
   }
 
   async checkIfMapLoaded() {
-    this.google = await AppComponent.googleMap;
+    this.google = this.googleMapService.google;
     if (this.google && this.google.maps) {
-      await this.loadGoogleMap();
+      // await this.loadGoogleMap();
       this.searchData$?.subscribe(async e => {
         this.drawer?.close();
         await this.getParkingLots(e);
@@ -74,16 +76,16 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  async loadGoogleMap() {
-    const google = await AppComponent.googleMap
-    const MapTypeId = google.maps.MapTypeId;
-    this.mapOptions['mapTypeId'] = MapTypeId.ROADMAP;
-    this.googleMap = new google.maps.Map(this.map?.nativeElement, this.mapOptions);
-    this.searchData$?.subscribe(e => {
-      this.googleMap?.setCenter({lat: e.lat, lng: e.lng});
-      this.addMarkerOnMap();
-    })
-  }
+  // async loadGoogleMap() {
+  //   const google = await AppComponent.googleMap
+  //   const MapTypeId = google.maps.MapTypeId;
+  //   this.mapOptions['mapTypeId'] = MapTypeId.ROADMAP;
+  //   this.googleMap = new google.maps.Map(this.map?.nativeElement, this.mapOptions);
+  //   this.searchData$?.subscribe(e => {
+  //     this.googleMap?.setCenter({lat: e.lat, lng: e.lng});
+  //     this.addMarkerOnMap();
+  //   })
+  // }
 
   showParkingLotDetails(parkingLot: ParkingLot) {
     this.selectedParkingLot$.next(parkingLot);
@@ -92,19 +94,19 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateGoogleMapAutocompletePosition() {
-    const style = document.createElement('style');
-    style.type = 'text/css';
-    style.id = 'google-autocomplete'
-    // @ts-ignore
-    if (style.styleSheet) {
-      // @ts-ignore
-      style.styleSheet.cssText = 'your css styles';
-    } else {
-      style.appendChild(document.createTextNode('.pac-container.pac-logo {left: 353px !important;}'));
-    }
-    document.getElementsByTagName('head')[0].appendChild(style);
-  }
+  // updateGoogleMapAutocompletePosition() {
+  //   const style = document.createElement('style');
+  //   style.type = 'text/css';
+  //   style.id = 'google-autocomplete'
+  //   // @ts-ignore
+  //   if (style.styleSheet) {
+  //     // @ts-ignore
+  //     style.styleSheet.cssText = 'your css styles';
+  //   } else {
+  //     style.appendChild(document.createTextNode('.pac-container.pac-logo {left: 353px !important;}'));
+  //   }
+  //   document.getElementsByTagName('head')[0].appendChild(style);
+  // }
 
   ngOnDestroy() {
     const style = document.getElementById('google-autocomplete');

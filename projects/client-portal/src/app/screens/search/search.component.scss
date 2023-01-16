@@ -68,7 +68,7 @@
 
 .pl-detail-window {
   width: 75%;
-  transition: width .5s;
+  transition: width 300ms ease-in-out;
 
   &.expanded-pl-detail-window {
     width: 100%;
