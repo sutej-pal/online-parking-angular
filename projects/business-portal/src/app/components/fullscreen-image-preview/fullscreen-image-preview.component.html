@@ -1,13 +1,16 @@
-<mat-card-title>
-  <span>
-    Image Preview
-  </span>
-  <span>
-    <mat-icon mat-dialog-close="true" role="button">close</mat-icon>
-  </span>
-</mat-card-title>
-<mat-card-content>
-  <div>
-    <img [src]="data.src" alt="">
-  </div>
-</mat-card-content>
+<mat-card class="p-3">
+  <mat-card-title>
+    <div class="d-flex align-items-center justify-content-between border-bottom mb-3 pb-2">
+    <span>
+      Image Preview
+    </span>
+      <mat-icon mat-dialog-close="true" role="button" class="custom-close-btn">close</mat-icon>
+    </div>
+  </mat-card-title>
+  <mat-card-content class="p-0">
+    <div>
+      <img [src]="data.src" alt="">
+    </div>
+  </mat-card-content>
+
+</mat-card>

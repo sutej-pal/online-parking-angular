@@ -47,6 +47,7 @@ import { ProfileReviewComponent } from './components/profile-review/profile-revi
 import { BookingsComponent } from './screens/bookings/bookings.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatSelectModule} from "@angular/material/select";
+import { MaterialCardWithTitleComponent } from './components/material-card-with-title/material-card-with-title.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import {MatSelectModule} from "@angular/material/select";
     ImgCarouselComponent,
     ProfileComponent,
     ProfileReviewComponent,
-    BookingsComponent
+    BookingsComponent,
+    MaterialCardWithTitleComponent
   ],
   imports: [
     BrowserModule,

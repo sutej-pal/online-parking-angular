@@ -216,7 +216,6 @@ export class EditParkingLotComponent implements OnInit {
   }
 
   fullScreenPreview(index: number) {
-    console.log(this.imagesForUpload[index]);
     const dialogRef = this.dialog.open(FullscreenImagePreviewComponent, {
       width: '70vw',
       data: {src: this.imagesForUpload[index].src}

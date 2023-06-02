@@ -25,3 +25,10 @@ div {
     max-height: 100%
   }
 }
+
+.custom-close-btn {
+  transition: color .15s ease-in-out;
+  &:hover {
+    color: red;
+  }
+}

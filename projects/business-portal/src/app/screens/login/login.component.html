@@ -21,7 +21,11 @@
         </div>
         <div>
           <mat-form-field class="full-width">
-            <input formControlName="password" matInput placeholder="Password" type="password" autocomplete="on">
+            <input [type]="isPasswordVisible ? 'text' : 'password'" formControlName="password" matInput placeholder="Password" type="password" autocomplete="on">
+            <button type="button" matSuffix mat-icon-button (click)="isPasswordVisible = !isPasswordVisible">
+              <mat-icon *ngIf="isPasswordVisible">visibility_off</mat-icon>
+              <mat-icon *ngIf="!isPasswordVisible">visibility</mat-icon>
+            </button>
             <mat-error>Password is required.</mat-error>
           </mat-form-field>
         </div>

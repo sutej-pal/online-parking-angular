@@ -17,7 +17,6 @@ export class SignUpComponent implements OnInit {
   isRegistering$ = new BehaviorSubject(false)
   userType: string = '';
   isPasswordVisible = false;
-  acceptTAndC = false;
   submitted = false;
   countriesList: any = [];
 
@@ -33,6 +32,7 @@ export class SignUpComponent implements OnInit {
 
   async ngOnInit() {
     this.route.params.subscribe(e => {
+      console.log(e);
       if (e.userType) {
         this.userType = e.userType
         this.createForm();
@@ -53,7 +53,8 @@ export class SignUpComponent implements OnInit {
       // state: ['', [Validators.required]],
       city: ['mathura', [Validators.required]],
       phone: ['7017222049', [Validators.required, Validators.pattern(/^[\d]{10}$/)]],
-      password: ['Default@123', [Validators.required]]
+      password: ['Default@123', [Validators.required]],
+      acceptedTAndC: ['', [Validators.requiredTrue]]
     });
   }
 
@@ -62,10 +63,6 @@ export class SignUpComponent implements OnInit {
     if (this.formGroup.invalid) {
       console.log(this.formGroup)
       await this.notificationService.showError('Please fill up the required fields.');
-      return
-    }
-    if (!this.acceptTAndC) {
-      await this.notificationService.showError('Please accept the terms and conditions.');
       return
     }
     this.isRegistering$.next(true);

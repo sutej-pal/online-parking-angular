@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="sign-up-card-wrapper d-flex justify-content-center navigation-links">
-      <mat-card>
+      <mat-card class="p-3">
         <div class="card-title">
           <mat-card-title>Sign Up</mat-card-title>
           <mat-card-subtitle>Please fill up the form to create a {{userType === 'individual' ? '' : 'Business'}}
@@ -85,10 +85,10 @@
           </div>
           <div class="row pt-4 pb-2">
             <div class="d-flex justify-content-start align-items-center mat-body-1">
-              <mat-checkbox class="d-inline" (click)="acceptTAndC = !acceptTAndC">I accept the&nbsp;</mat-checkbox>
+              <mat-checkbox class="d-inline" formControlName="acceptedTAndC">I accept the&nbsp;</mat-checkbox>
               <span class="d-inline"><a target="_blank" href="/terms-and-conditions">terms and conditions</a>.</span>
             </div>
-            <mat-error *ngIf="submitted && !acceptTAndC" class="pt-2" style="font-size: 12px">
+            <mat-error *ngIf="f.acceptedTAndC.value === false" class="pt-2" style="font-size: 12px">
               Please accept the Term and Conditions.
             </mat-error>
           </div>

@@ -3,11 +3,11 @@
   color: #000;
 }
 .mat-icon {
-  transition: .3s;
+  transition: color .15s ease-in-out;
   &:hover {
     color: red;
   }
 }
 .google-map {
-  height: 65vh;
+  height: 60vh;
 }

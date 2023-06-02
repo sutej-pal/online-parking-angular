@@ -8,160 +8,139 @@
   <form *ngIf="(isFormReady$| async)" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-6">
-        <mat-card>
-          <mat-card-title>Basic Info</mat-card-title>
-          <mat-divider></mat-divider>
-          <mat-card-content class="pt-2">
-            <div class="form-fields-container">
-              <div>
-                <mat-form-field>
-                  <mat-label>Parking Lot Name</mat-label>
-                  <input matInput autocomplete="off" formControlName="name">
-                </mat-form-field>
-              </div>
-              <div>
-                <mat-form-field>
-                  <mat-label>Min Booking Duration</mat-label>
-                  <mat-select formControlName="minBookingDuration">
-                    <mat-option [value]="1">1 Hour</mat-option>
-<!--                    <mat-option [value]="2">2 Hour</mat-option>-->
-<!--                    <mat-option [value]="4">4 Hour</mat-option>-->
-<!--                    <mat-option [value]="12">12 Hour</mat-option>-->
-                    <mat-option [value]="24">1 Day</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div>
-                <mat-form-field>
-                  <mat-label>Type</mat-label>
-                  <mat-select formControlName="type">
-                    <mat-option value="covered">Covered</mat-option>
-                    <mat-option value="outdoors">Outdoors</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
+        <app-material-card-with-title title="Basic Info">
+          <div class="form-fields-container">
+            <div>
+              <mat-form-field>
+                <mat-label>Parking Lot Name</mat-label>
+                <input matInput autocomplete="off" formControlName="name">
+              </mat-form-field>
             </div>
-          </mat-card-content>
-        </mat-card>
+            <div>
+              <mat-form-field>
+                <mat-label>Min Booking Duration</mat-label>
+                <mat-select formControlName="minBookingDuration">
+                  <mat-option [value]="1">1 Hour</mat-option>
+                  <!--                    <mat-option [value]="2">2 Hour</mat-option>-->
+                  <!--                    <mat-option [value]="4">4 Hour</mat-option>-->
+                  <!--                    <mat-option [value]="12">12 Hour</mat-option>-->
+                  <mat-option [value]="24">1 Day</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="type">
+                  <mat-option value="covered">Covered</mat-option>
+                  <mat-option value="outdoors">Outdoors</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </app-material-card-with-title>
       </div>
     </div>
     <div class="row">
       <div class="col-6">
-        <mat-card>
-          <mat-card-title>Address</mat-card-title>
-          <mat-divider></mat-divider>
-          <mat-card-content class="pt-2">
-            <div class="form-fields-container" formGroupName="address">
-              <div>
-                <mat-form-field>
-                  <mat-label>Address Line One</mat-label>
-                  <input matInput autocomplete="off" placeholder="Address" formControlName="addressLineOne">
-                </mat-form-field>
-              </div>
-              <div>
-                <mat-form-field>
-                  <mat-label>Address Line Two</mat-label>
-                  <input matInput autocomplete="off" placeholder="Address" formControlName="addressLineTwo">
-                </mat-form-field>
-              </div>
+        <app-material-card-with-title title="Address">
+          <div class="form-fields-container" formGroupName="address">
+            <div>
+              <mat-form-field>
+                <mat-label>Address Line One</mat-label>
+                <input matInput autocomplete="off" placeholder="Address" formControlName="addressLineOne">
+              </mat-form-field>
             </div>
-          </mat-card-content>
-        </mat-card>
+            <div>
+              <mat-form-field>
+                <mat-label>Address Line Two</mat-label>
+                <input matInput autocomplete="off" placeholder="Address" formControlName="addressLineTwo">
+              </mat-form-field>
+            </div>
+          </div>
+        </app-material-card-with-title>
       </div>
     </div>
     <div class="row">
       <div class="col-5">
-        <mat-card class="position-relative">
-          <mat-card-title>Parking Spots</mat-card-title>
-          <mat-divider></mat-divider>
-          <mat-card-content class="pt-2">
-            <div class="form-fields-container" formArrayName="parkingSpots">
-              <div *ngFor="let parkingSpot of parkingSpots.controls; let i = index">
-                <div class="row" [formGroupName]="i.toString()">
-                  <div class="col-3">
-                    <mat-form-field class="w-100">
-                      <mat-label>Vehicle Type</mat-label>
-                      <mat-select formControlName="vehicle">
-                        <mat-option [value]="vehicle.id"
-                                    *ngFor="let vehicle of vehicleTypeList">{{vehicle?.name}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-3">
-                    <mat-form-field class="w-100">
-                      <input min="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" matInput
-                             autocomplete="off" type="number" placeholder="count" formControlName="count">
-                    </mat-form-field>
-                  </div>
-                  <div class="col-3">
-                    <mat-form-field class="w-100">
-                      <input min="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" matInput
-                             autocomplete="off" type="number" placeholder="Price" formControlName="price">
-                      <span matPrefix>&#8377;&nbsp;</span>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-3">
-                    <div class="w-100">
-                      <button [ngStyle]="{visibility: i !== 0 ? 'visible' : 'hidden' }" mat-mini-fab aria-label="Remove" color="warn"
-                              (click)="removeParkingSpot(i)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </div>
+        <app-material-card-with-title title="Parking Spots">
+          <div class="form-fields-container" formArrayName="parkingSpots">
+            <div *ngFor="let parkingSpot of parkingSpots.controls; let i = index">
+              <div class="row" [formGroupName]="i.toString()">
+                <div class="col-3">
+                  <mat-form-field class="w-100">
+                    <mat-label>Vehicle Type</mat-label>
+                    <mat-select formControlName="vehicle">
+                      <mat-option [value]="vehicle.id"
+                                  *ngFor="let vehicle of vehicleTypeList">{{vehicle?.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-3">
+                  <mat-form-field class="w-100">
+                    <input min="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" matInput
+                           autocomplete="off" type="number" placeholder="count" formControlName="count">
+                  </mat-form-field>
+                </div>
+                <div class="col-3">
+                  <mat-form-field class="w-100">
+                    <input min="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" matInput
+                           autocomplete="off" type="number" placeholder="Price" formControlName="price">
+                    <span matPrefix>&#8377;&nbsp;</span>
+                  </mat-form-field>
+                </div>
+                <div class="col-3">
+                  <div class="w-100">
+                    <button [ngStyle]="{visibility: i !== 0 ? 'visible' : 'hidden' }" mat-mini-fab aria-label="Remove"
+                            color="warn"
+                            (click)="removeParkingSpot(i)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-            <button type="button" mat-raised-button color="primary" (click)="addNewParkingSpot()">
-              Add
-            </button>
-          </mat-card-content>
-        </mat-card>
+          </div>
+          <button type="button" mat-raised-button color="primary" (click)="addNewParkingSpot()">
+            Add
+          </button>
+        </app-material-card-with-title>
       </div>
       <div class="col-4">
-        <mat-card>
-          <mat-card-title>Lat Long</mat-card-title>
-          <mat-divider></mat-divider>
-          <mat-card-content class="pt-2">
-            <div class="form-fields-container" formGroupName="geometry">
-              <div>
-                <mat-form-field>
-                  <mat-label>Latitude</mat-label>
-                  <input matInput autocomplete="off" [readonly]="true" formControlName="lat"
-                         (click)="openLatLngPicker()">
-                </mat-form-field>
-              </div>
-              <div>
-                <mat-form-field>
-                  <mat-label>Longitude</mat-label>
-                  <input matInput autocomplete="off" [readonly]="true" formControlName="lng"
-                         (click)="openLatLngPicker()">
-                </mat-form-field>
-              </div>
+        <app-material-card-with-title title="Lat Long">
+          <div class="form-fields-container" formGroupName="geometry">
+            <div>
+              <mat-form-field>
+                <mat-label>Latitude</mat-label>
+                <input matInput autocomplete="off" [readonly]="true" formControlName="lat"
+                       (click)="openLatLngPicker()">
+              </mat-form-field>
             </div>
-          </mat-card-content>
-        </mat-card>
+            <div>
+              <mat-form-field>
+                <mat-label>Longitude</mat-label>
+                <input matInput autocomplete="off" [readonly]="true" formControlName="lng"
+                       (click)="openLatLngPicker()">
+              </mat-form-field>
+            </div>
+          </div>
+        </app-material-card-with-title>
       </div>
       <div class="col-3">
-        <mat-card>
-          <mat-card-title>Amenities</mat-card-title>
-          <mat-divider></mat-divider>
-          <mat-card-content class="pt-2">
-            <div class="d-flex flex-column" formGroupName="amenities">
-              <mat-checkbox formControlName="cctv">CCTV</mat-checkbox>
-              <mat-checkbox formControlName="secured">Secured</mat-checkbox>
-              <mat-checkbox formControlName="twentyFourHourService">24 Hour Service</mat-checkbox>
-              <mat-checkbox formControlName="wheelChairEntrance">Wheel Chair entrance</mat-checkbox>
-            </div>
-          </mat-card-content>
-        </mat-card>
+        <app-material-card-with-title title="Amenities">
+          <div class="d-flex flex-column" formGroupName="amenities">
+            <mat-checkbox formControlName="cctv">CCTV</mat-checkbox>
+            <mat-checkbox formControlName="secured">Secured</mat-checkbox>
+            <mat-checkbox formControlName="twentyFourHourService">24 Hour Service</mat-checkbox>
+            <mat-checkbox formControlName="wheelChairEntrance">Wheel Chair entrance</mat-checkbox>
+          </div>
+        </app-material-card-with-title>
       </div>
     </div>
     <div class="row">
       <div class="col-12">
-        <mat-card>
-          <mat-card-title>Gallery</mat-card-title>
-          <mat-divider></mat-divider>
-          <mat-card-content class="pt-4">
+        <app-material-card-with-title title="Gallery">
+          <div>
             <input type="file" multiple accept="image/*" (click)="resetFilesArray($event)"
                    (change)="handleImageUpload($event)" hidden #imageUpload>
             <div style="display: flex;justify-content: flex-start;align-items: center;gap: 5px">
@@ -172,7 +151,7 @@
             </div>
             <div class="uploaded-images">
               <mat-spinner *ngIf="!(isImagePreviewReady$ | async)" [diameter]="30"></mat-spinner>
-              <div *ngFor="let image of imagesForUpload; let i = index">
+              <div *ngFor="let image of imagesForUpload; let i = index" [ngStyle]="{'background-image': 'url(' + image.src + ')'}">
                 <div class="icon-container">
                   <button mat-mini-fab color="warn" type="button" class="delete-icon" (click)="removeImage(i)">
                     <mat-icon>delete</mat-icon>
@@ -182,11 +161,11 @@
                     <mat-icon>fullscreen</mat-icon>
                   </button>
                 </div>
-                <img [src]="image.src" [alt]="image.name">
+<!--                <img [src]="image.src" [alt]="image.name">-->
               </div>
             </div>
-          </mat-card-content>
-        </mat-card>
+          </div>
+        </app-material-card-with-title>
       </div>
     </div>
     <div style="display: flex;gap: 10px;margin: 10px 0;">

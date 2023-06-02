@@ -29,12 +29,14 @@
 
   div {
     width: 200px;
-    max-height: 250px;
+    min-height: 200px;
     overflow: hidden;
     position: relative;
     padding: 5px;
     border: 1px dashed #aaa;
     border-radius: 3px;
+    background-size: cover;
+    background-position: center;
 
     .icon-container {
       display: none;
@@ -46,10 +48,13 @@
       background: #00000087;
 
       .delete-icon {
-        position: absolute;
         left: 0;
         right: 0;
-        margin: 25% auto;
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
       }
 
       .fullscreen-icon {

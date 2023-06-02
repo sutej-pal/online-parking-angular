@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   formGroup: FormGroup = new FormGroup({});
   isRememberMeChecked = false;
   isLoggingIn$ = new BehaviorSubject(false);
+  isPasswordVisible = false;
 
   constructor(
     private store: Store,
