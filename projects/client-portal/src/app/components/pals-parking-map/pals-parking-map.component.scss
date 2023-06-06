@@ -1,0 +1,25 @@
+::ng-deep.price-tag {
+  font-size: 18px;
+  background: #2C375A;
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 5px;
+  position: relative;
+  &::after {
+    content: "";
+    height: 13px;
+    width: 13px;
+    background: #2C375A;
+    position: absolute;
+    top: 21px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    transform: rotate(45deg);
+  }
+}
+
+.google-map {
+  height: 300px;
+  width: 300px;
+}

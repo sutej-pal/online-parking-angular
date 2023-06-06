@@ -17,8 +17,9 @@ export class GoogleMapService {
 
   async initMap() {
     const options: LoaderOptions = {
-      libraries: ['places'],
-      region: 'IN'
+      libraries: ['places', 'marker'],
+      region: 'IN',
+      version: 'beta',
     };
 
     this.loader = new Loader('AIzaSyDM4BtVx-2cRWTEEu3JOdx0szr735nXzPU', options);

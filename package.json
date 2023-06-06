@@ -6,7 +6,7 @@
     "start": "ng serve",
     "start_admin_portal": "ng serve --open --hmr --project=admin-portal",
     "start_business_portal": "ng serve --open --hmr --project=business-portal",
-    "start_client_portal": "ng serve --open --hmr --project=client-portal",
+    "start_client_portal": "ng serve --open --project=client-portal",
     "build_client": "ng build --project=client-portal",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

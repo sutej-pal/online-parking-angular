@@ -16,6 +16,7 @@ import {UtilitiesService} from "../../services/utilities.service";
 export class PalsParkingMapComponent implements OnInit, OnChanges {
 
   @Input() parkingLots: ParkingLot[] = [];
+  google: google;
 
   constructor(
     private store: Store,
@@ -24,16 +25,16 @@ export class PalsParkingMapComponent implements OnInit, OnChanges {
   ) {
   }
 
-  google: google | undefined;
   @ViewChild('map', {static: true}) map: ElementRef | undefined;
-  googleMap: google.maps.Map | undefined;
+  googleMap: any;
   mapOptions: any = {
     center: {
       lat: 0,
       lng: 0
     },
     mapTypeId: 'roadmap',
-    zoom: 15
+    zoom: 16,
+    mapId: '2e5ef6cf2a84b8af',
   };
   searchData$: Observable<searchData> | undefined;
   mapMarkers: google.maps.Marker[] | undefined;
@@ -42,19 +43,23 @@ export class PalsParkingMapComponent implements OnInit, OnChanges {
     this.searchData$ = this.store.select(getSearchData);
     await this.loadGoogleMap();
   }
+
   async ngOnChanges() {
-    this.searchData$?.subscribe(async e => {
-      const google = await this.googleMapService.getGoogleMapInstance();
-      this.addMarkerOnMap({lat: e.lat, lng: e.lng});
-    });
+    //   this.searchData$?.subscribe(async e => {
+    //     const google = await this.googleMapService.getGoogleMapInstance();
+    //     // this.addMarkerOnMap({lat: e.lat, lng: e.lng});
+    //   });
   }
 
   async loadGoogleMap() {
-    const google = await this.googleMapService.getGoogleMapInstance();
-    this.googleMap = new google.maps.Map(this.map?.nativeElement, this.mapOptions);
+    this.google = await this.googleMapService.getGoogleMapInstance();
     this.searchData$?.subscribe(e => {
-      this.googleMap?.setCenter({lat: e.lat, lng: e.lng});
-      this.addMarkerOnMap({lat: e.lat, lng: e.lng});
+      this.mapOptions.center = {lat: e.lat, lng: e.lng}
+      // this.googleMap?.setCenter({lat: e.lat, lng: e.lng});
+      setTimeout(() => {
+        this.googleMap = new this.google.maps.Map(this.map?.nativeElement, this.mapOptions);
+        this.addMarkerOnMap({lat: e.lat, lng: e.lng});
+      }, 1000);
     })
   }
 
@@ -77,7 +82,7 @@ export class PalsParkingMapComponent implements OnInit, OnChanges {
     }
 
     const addMarker = (location: any) => {
-      const marker = new google.maps.Marker({
+      const marker = new this.google.maps.Marker({
         position: {lat: location[0], lng: location[1]},
         map: map,
         icon: '../../../assets/images/parking.png'
@@ -92,34 +97,24 @@ export class PalsParkingMapComponent implements OnInit, OnChanges {
 
     // add user's current position
     this.addUserCurrentPositionMarker(userPosition)
-
-
   }
 
-  async addUserCurrentPositionMarker(location: { lat: number; lng: number } | undefined) {
-    let map = this.googleMap;
-    // // const label =
-    // const options: google.maps.MarkerOptions = {
-    //   position: location,
-    //   map: map,
-    //   label: {
-    //     text: `<div>Sutej Pal</div>`,
-    //     className: 'sample'
-    //   }
-    // }
-    const t = await this.utilitiesService.sample(map, location);
-    console.log(t);
-    // const options = await this.googleMapService.getMarkerOptions(location, map, 'sample');
-    // const marker = new google.maps.Marker(options);
-    const infoWindow =  new google.maps.InfoWindow({
-      content: 'Hello World! s',
-      position: location
+  addUserCurrentPositionMarker(location: { lat: number; lng: number } | undefined) {
+    const priceTag = document.createElement('div');
+    priceTag.className = 'price-tag';
+    priceTag.textContent = '₹ 10';
+
+    // @ts-ignore
+    const priceTagMarker = new this.google.maps.marker.AdvancedMarkerView({
+      map: this.googleMap,
+      position: location,
+      content: priceTag,
     });
-    // marker.setAnimation(2);
-    // marker.addListener('click', () => {
-    //   infoWindow.open(map);
-    // });
-    // this.mapMarkers?.push(marker);
+    // priceTagMarker.setAnimation(2);
+    priceTagMarker.addListener('gmp-click', () => {
+      console.log('Hi');
+    });
+    this.mapMarkers?.push(priceTagMarker);
   }
 
 }
