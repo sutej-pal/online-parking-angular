@@ -43,7 +43,7 @@
             [parkingLot$]="selectedParkingLot$">
           </app-parking-lot-details>
         </mat-drawer>
-        <app-pals-parking-map [parkingLots]="parkingLotList"></app-pals-parking-map>
+        <app-pals-parking-map [parkingLots]="parkingLotList" (showParkingLotDetails)="showParkingLotDetails($event)"></app-pals-parking-map>
       </mat-drawer-container>
     </div>
   </div>

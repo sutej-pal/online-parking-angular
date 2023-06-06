@@ -2,6 +2,11 @@ import {Injectable} from '@angular/core';
 import {google, Loader, LoaderOptions} from "google-maps";
 import {AsyncSubject, Observable, Subscription} from "rxjs";
 
+export interface LatLng {
+  lat: number,
+  lng: number
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,6 +38,19 @@ export class GoogleMapService {
       this.isMapLoaded.subscribe(e => {
         resolve(this.google);
       })
+    });
+  }
+
+  getPriceTagMarker(map: any, location: any, price: number | undefined) {
+    const priceTag = document.createElement('div');
+    priceTag.className = 'price-tag';
+    priceTag.textContent = '₹ ' + price;
+
+    // @ts-ignore
+    return new this.google.maps.marker.AdvancedMarkerView({
+      map: map,
+      position: location,
+      content: priceTag,
     });
   }
 }

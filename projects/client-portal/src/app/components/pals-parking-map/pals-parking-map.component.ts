@@ -1,9 +1,9 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
 import {google} from 'google-maps';
 import {Observable} from "rxjs";
 import {searchData} from "../../store/search/search.reducer";
 import {select, Store} from "@ngrx/store";
-import {GoogleMapService} from "../../services/google-map.service";
+import {GoogleMapService, LatLng} from "../../services/google-map.service";
 import {getSearchData} from "../../store/search/search.selectors";
 import {ParkingLot} from "../../types/types";
 import {UtilitiesService} from "../../services/utilities.service";
@@ -16,6 +16,7 @@ import {UtilitiesService} from "../../services/utilities.service";
 export class PalsParkingMapComponent implements OnInit, OnChanges {
 
   @Input() parkingLots: ParkingLot[] = [];
+  @Output() showParkingLotDetails: EventEmitter<any> = new EventEmitter();
   google: google;
 
   constructor(
@@ -33,7 +34,7 @@ export class PalsParkingMapComponent implements OnInit, OnChanges {
       lng: 0
     },
     mapTypeId: 'roadmap',
-    zoom: 16,
+    zoom: 15,
     mapId: '2e5ef6cf2a84b8af',
   };
   searchData$: Observable<searchData> | undefined;
@@ -45,10 +46,9 @@ export class PalsParkingMapComponent implements OnInit, OnChanges {
   }
 
   async ngOnChanges() {
-    //   this.searchData$?.subscribe(async e => {
-    //     const google = await this.googleMapService.getGoogleMapInstance();
-    //     // this.addMarkerOnMap({lat: e.lat, lng: e.lng});
-    //   });
+      this.searchData$?.subscribe(async e => {
+        this.addMarkerOnMap({lat: e.lat, lng: e.lng});
+      });
   }
 
   async loadGoogleMap() {
@@ -56,10 +56,8 @@ export class PalsParkingMapComponent implements OnInit, OnChanges {
     this.searchData$?.subscribe(e => {
       this.mapOptions.center = {lat: e.lat, lng: e.lng}
       // this.googleMap?.setCenter({lat: e.lat, lng: e.lng});
-      setTimeout(() => {
-        this.googleMap = new this.google.maps.Map(this.map?.nativeElement, this.mapOptions);
-        this.addMarkerOnMap({lat: e.lat, lng: e.lng});
-      }, 1000);
+      this.googleMap = new this.google.maps.Map(this.map?.nativeElement, this.mapOptions);
+      this.addMarkerOnMap({lat: e.lat, lng: e.lng});
     })
   }
 
@@ -81,18 +79,23 @@ export class PalsParkingMapComponent implements OnInit, OnChanges {
       }
     }
 
-    const addMarker = (location: any) => {
-      const marker = new this.google.maps.Marker({
-        position: {lat: location[0], lng: location[1]},
-        map: map,
-        icon: '../../../assets/images/parking.png'
+    const addMarker = (parkingLot: ParkingLot, location: any, price: number | undefined) => {
+      const infoWindow =  new google.maps.InfoWindow({
+        content: 'Hello World! s',
+        position: {lat: location[0], lng: location[1]}
       });
-      this.mapMarkers?.push(marker);
+      const priceTagMarker = this.googleMapService.getPriceTagMarker(this.googleMap, {lat: location[0], lng: location[1]}, price);
+      priceTagMarker.addListener('gmp-click', () => {
+        // infoWindow.open(map);
+        this.showParkingLotDetails.emit(parkingLot);
+      });
+
+      this.mapMarkers?.push(priceTagMarker);
     }
     deleteMarkers();
 
     this.parkingLots.map(parkingLot => {
-      addMarker(parkingLot?.location.coordinates);
+      addMarker(parkingLot, parkingLot?.location.coordinates, parkingLot?.parkingSpot?.price);
     })
 
     // add user's current position
@@ -100,21 +103,12 @@ export class PalsParkingMapComponent implements OnInit, OnChanges {
   }
 
   addUserCurrentPositionMarker(location: { lat: number; lng: number } | undefined) {
-    const priceTag = document.createElement('div');
-    priceTag.className = 'price-tag';
-    priceTag.textContent = '₹ 10';
-
-    // @ts-ignore
-    const priceTagMarker = new this.google.maps.marker.AdvancedMarkerView({
-      map: this.googleMap,
+    const marker = new this.google.maps.Marker({
       position: location,
-      content: priceTag,
+      map: this.googleMap,
+      icon: '../../../assets/images/ripple1.svg'
     });
-    // priceTagMarker.setAnimation(2);
-    priceTagMarker.addListener('gmp-click', () => {
-      console.log('Hi');
-    });
-    this.mapMarkers?.push(priceTagMarker);
+    marker.setAnimation(2)
   }
 
 }

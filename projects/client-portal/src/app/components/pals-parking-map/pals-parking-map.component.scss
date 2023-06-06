@@ -1,8 +1,14 @@
+::ng-deep.gm-style .gm-style-iw-tc {
+  top: -35px;
+}
+::ng-deep.gm-style .gm-style-iw-c {
+  top: -35px;
+}
 ::ng-deep.price-tag {
-  font-size: 18px;
+  font-size: 22px;
   background: #2C375A;
   color: #ffffff;
-  padding: 3px 8px;
+  padding: 8px 18px;
   border-radius: 5px;
   position: relative;
   &::after {
@@ -11,7 +17,7 @@
     width: 13px;
     background: #2C375A;
     position: absolute;
-    top: 21px;
+    top: 37px;
     right: 0;
     left: 0;
     margin: auto;
