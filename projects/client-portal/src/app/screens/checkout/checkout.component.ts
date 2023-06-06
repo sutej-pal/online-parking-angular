@@ -24,8 +24,9 @@ export class CheckoutComponent implements OnInit {
   individual$: Observable<Individual> | undefined;
   moment: any = moment;
   isFormSubmitted = false;
-  activeStep = 2
+  activeStep = 2;
   isLoading$ = new BehaviorSubject(false);
+  isPaymentSuccess$ = new BehaviorSubject(false);
 
   constructor(
     private zone: NgZone,
@@ -108,7 +109,7 @@ export class CheckoutComponent implements OnInit {
 
   payWithRazor(data: any) {
     const options: any = {
-      key: 'rzp_test_pQ742uoIeMgSxm',
+      key: 'rzp_test_ZhW5aSl0a2Db8h',
       name: "'Pal's Parking", // company name or product name
       description: '',  // product description
       image: '../../../assets/images/parking.png', // company logo or product image
@@ -145,12 +146,22 @@ export class CheckoutComponent implements OnInit {
     try {
       let res = await this.httpService.executeRequest('verify-payment', 'post', body).toPromise();
       if (res.body.message === 'Payment verification successful') {
+        this.isPaymentSuccess$.next(true);
         await this.zone.run(async () => {
-          await this.router.navigate(['/individual/bookings']);
+          // await this.createBooking();
+          // await this.router.navigate(['/individual/bookings']);
         })
       }
     } catch (e) {
 
     }
   }
+
+  // async createBooking() {
+  //   try {
+  //     let res = await this.httpService.executeRequest('verify-payment', 'post', body).toPromise();
+  //   } catch (e) {
+  //
+  //   }
+  // }
 }

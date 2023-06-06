@@ -85,6 +85,11 @@ export class EditParkingLotComponent implements OnInit {
       return;
     }
     let request = Object.assign({}, this.formGroup.value);
+    request.location = {
+      "type": "Point",
+      "coordinates": [request.geometry.lng, request.geometry.lat]
+    }
+    delete request.geometry;
     try {
       let res;
       if (this.editId) {

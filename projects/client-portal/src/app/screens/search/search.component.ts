@@ -31,10 +31,14 @@ export class SearchComponent implements OnInit, OnDestroy {
       twentyFourHourService: false,
       wheelChairEntrance: false
     },
-    geometry: {lat: 0, lng: 0},
     minBookingDuration: 0,
     name: "",
-    parkingSpot: {price: 0}
+    location: {
+      coordinates: [0, 0]
+    },
+    parkingSpot: {
+      price: 0
+    }
   });
   isPLDetailWindowExpanded = false;
 
@@ -74,9 +78,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   sortParkingLotsByPrice() {
-    this.parkingLotList = _.sortBy(this.parkingLotList, (parkingLot) => {
-      return parkingLot?.parkingSpot?.price
-    });
+    // this.parkingLotList = _.sortBy(this.parkingLotList, (parkingLot) => {
+    //   return parkingLot?.parkingSpots?[0].price
+    // });
   }
 
   sortParkingLotsByDistance() {

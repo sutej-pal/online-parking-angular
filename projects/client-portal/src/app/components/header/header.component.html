@@ -1,35 +1,37 @@
 <div class="header-main container d-flex p-3">
-  <div class="align-items-center d-flex justify-content-between w-100">
-    <div class="">
+  <div class="col-md-12">
+    <div class="align-items-center d-flex justify-content-between w-100">
+      <div class="">
       <span class="mat-display-1" role="button" [routerLink]="'/'">
         <img src="../../../assets/images/logo.png" alt="" height="50">
       </span>
-    </div>
-    <div class="" *ngIf="!((individual$ | async)?.id)">
-      <button class="mx-2" [routerLink]="'/login'" mat-raised-button aria-label="Sign Up" color="primary">
-        Login
-      </button>
-      <button class="mx-2" [matMenuTriggerFor]="menu" mat-raised-button aria-label="Sign Up" color="primary">
-        Sign Up
-      </button>
-      <mat-menu #menu="matMenu" xPosition="after">
-        <button mat-menu-item [routerLink]="'/sign-up/individual'">As Individual</button>
-        <button mat-menu-item [routerLink]="'/sign-up/business'">As Business</button>
-      </mat-menu>
-    </div>
-    <div class="user-menu" role="button" *ngIf="(individual$ | async)?.id" [matMenuTriggerFor]="userMenu">
-      <div class="d-flex justify-content-center align-items-center mat-body">
-        <span>{{(individual$ | async)?.firstName + ' ' + (individual$ | async)?.lastName}}</span>
-        <button mat-icon-button>
-          <mat-icon>expand_more</mat-icon>
-        </button>
       </div>
-      <mat-menu #userMenu="matMenu">
-        <button mat-menu-item class="border-bottom" routerLink="/individual/profile">My Profile</button>
-        <button mat-menu-item class="border-bottom" routerLink="/individual/bookings">Bookings</button>
-        <button mat-menu-item class="border-bottom" routerLink="/individual/payments">Payments</button>
-        <button mat-menu-item (click)="logOut()">Log Out</button>
-      </mat-menu>
+      <div class="" *ngIf="!((individual$ | async)?.id)">
+        <button class="mx-2" [routerLink]="'/login'" mat-raised-button aria-label="Sign Up" color="primary">
+          Login
+        </button>
+        <button class="mx-2" [matMenuTriggerFor]="menu" mat-raised-button aria-label="Sign Up" color="primary">
+          Sign Up
+        </button>
+        <mat-menu #menu="matMenu" xPosition="after">
+          <button mat-menu-item [routerLink]="'/sign-up/individual'">As Individual</button>
+          <button mat-menu-item [routerLink]="'/sign-up/business'">As Business</button>
+        </mat-menu>
+      </div>
+      <div class="user-menu" role="button" *ngIf="(individual$ | async)?.id" [matMenuTriggerFor]="userMenu">
+        <div class="d-flex justify-content-center align-items-center mat-body">
+          <span>{{(individual$ | async)?.firstName + ' ' + (individual$ | async)?.lastName}}</span>
+          <button mat-icon-button>
+            <mat-icon>expand_more</mat-icon>
+          </button>
+        </div>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item class="border-bottom" routerLink="/individual/profile">My Profile</button>
+          <button mat-menu-item class="border-bottom" routerLink="/individual/bookings">Bookings</button>
+          <button mat-menu-item class="border-bottom" routerLink="/individual/payments">Payments</button>
+          <button mat-menu-item (click)="logOut()">Log Out</button>
+        </mat-menu>
+      </div>
     </div>
   </div>
 </div>

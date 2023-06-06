@@ -1,10 +1,4 @@
 <div class="container-fluid bg-light" style="height: calc(100vh - 72px)">
-  <div
-    class="align-items-center bg-opacity-50 d-flex h-100 justify-content-center overflow-hidden position-absolute row top-0 w-100"
-    style="z-index: 1;background: rgb(0 0 0 / 50%);"
-    *ngIf="(isLoading$ | async)">
-    <mat-spinner></mat-spinner>
-  </div>
   <div class="row bg-light" style="height: 70px">
     <div class="col-md-8 m-auto">
       <div class="align-items-center d-flex justify-content-between stepper">
@@ -22,7 +16,6 @@
         <div class="step d-flex justify-content-center align-items-center">
           <mat-icon
             [ngStyle]="{'color': 'green'}">{{activeStep === 3 ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>
-          Payment
         </div>
       </div>
     </div>
@@ -123,7 +116,17 @@
         </div>
       </div>
       <div *ngIf="activeStep === 3">
-        Payment
+        <div *ngIf="isPaymentSuccess$ | async">
+          <h1 class="text-center my-3">Payment Success</h1>
+          <h2 class="text-center">Please hang on !</h2>
+          <h2 class="text-center">Booking a parking slot for you.</h2>
+        </div>
+        <div *ngIf="!(isPaymentSuccess$ | async)">
+          <div>
+          <mat-spinner class="m-auto"></mat-spinner>
+            <h3 class="text-center mt-3">Verifying information...</h3>
+          </div>
+        </div>
       </div>
     </div>
   </div>

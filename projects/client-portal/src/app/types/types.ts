@@ -1,11 +1,12 @@
+interface ParkingSpot {
+  price: number
+}
+
 export interface ParkingLot {
   name: string;
-  parkingSpot?: {
-    price: number
-  };
-  geometry: {
-    lat: number,
-    lng: number,
+  parkingSpot?: ParkingSpot;
+  location: {
+    coordinates: [number, number],
   },
   amenities: {
     cctv: boolean,
