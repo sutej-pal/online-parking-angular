@@ -7,7 +7,7 @@ import moment from 'moment'
 import { useSearchStore } from '@/shared/store/searchStore'
 import httpService from '@/shared/services/http.service'
 import { NotificationService } from '@/shared/services/notification.service'
-import { useGoogleMaps } from '@/shared/hooks/useGoogleMaps'
+import { initGoogleMaps, getGoogleMapsInstance } from '@/shared/utils/googleMaps'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -40,9 +40,10 @@ export default function SearchBar() {
   const [selectedVehicleType, setSelectedVehicleType] = useState<VehicleType | null>(null)
   const [isFormReady, setIsFormReady] = useState(false)
   const [isVehiclePopoverOpen, setIsVehiclePopoverOpen] = useState(false)
+  const [isGoogleMapsReady, setIsGoogleMapsReady] = useState(false)
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const { google, isLoaded } = useGoogleMaps()
+  const retryCountRef = useRef(0)
   const { setSearchData } = useSearchStore()
 
   const isVehicleSelectionVisible = pathname === '/client/search'
@@ -67,13 +68,18 @@ export default function SearchBar() {
   useEffect(() => {
     loadForm()
     getVehiclesTypes()
+    initializeGoogleMaps()
   }, [])
 
   useEffect(() => {
-    if (isLoaded && google && inputRef.current && !autocompleteRef.current) {
-      initializeAutoComplete()
+    if (isGoogleMapsReady && inputRef.current && !autocompleteRef.current) {
+      // Small delay to ensure Google Maps is fully initialized
+      const timer = setTimeout(() => {
+        initializeAutoComplete()
+      }, 100)
+      return () => clearTimeout(timer)
     }
-  }, [isLoaded, google])
+  }, [isGoogleMapsReady])
 
   const loadForm = () => {
     const t = moment('10:00', 'hh:mm a')
@@ -87,8 +93,51 @@ export default function SearchBar() {
     setIsFormReady(true)
   }
 
+  const initializeGoogleMaps = async () => {
+    try {
+      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || 'AIzaSyDM4BtVx-2cRWTEEu3JOdx0szr735nXzPU'
+      
+      if (!apiKey) {
+        console.warn('Google Maps API key not found')
+        return
+      }
+
+      await initGoogleMaps({
+        apiKey,
+        libraries: ['places', 'marker'],
+        region: 'IN',
+        version: 'beta',
+      })
+
+      setIsGoogleMapsReady(true)
+    } catch (error) {
+      console.error('Error initializing Google Maps:', error)
+      NotificationService.showError('Failed to load Google Maps')
+    }
+  }
+
   const initializeAutoComplete = () => {
+    const google = getGoogleMapsInstance()
     if (!google || !inputRef.current) return
+
+    // Check if places library is loaded using optional chaining
+    if (!google?.maps?.places) {
+      if (retryCountRef.current < 5) {
+        console.warn(`Google Maps Places library not loaded yet, retrying... (${retryCountRef.current + 1}/5)`)
+        retryCountRef.current += 1
+        // Retry after a short delay
+        setTimeout(() => {
+          initializeAutoComplete()
+        }, 300)
+      } else {
+        console.error('Failed to load Google Maps Places library after multiple retries')
+        NotificationService.showError('Failed to load Google Maps Places library')
+      }
+      return
+    }
+
+    // Reset retry count on success
+    retryCountRef.current = 0
 
     const options = {
       componentRestrictions: { country: ['in'] },
@@ -97,17 +146,22 @@ export default function SearchBar() {
       types: ['address'],
     }
 
-    autocompleteRef.current = new google.maps.places.Autocomplete(
-      inputRef.current,
-      options
-    )
+    try {
+      autocompleteRef.current = new google.maps.places.Autocomplete(
+        inputRef.current,
+        options
+      )
 
-    autocompleteRef.current.addListener('place_changed', () => {
-      const place = autocompleteRef.current?.getPlace()
-      if (place?.geometry?.location) {
-        updateForm(place)
-      }
-    })
+      autocompleteRef.current.addListener('place_changed', () => {
+        const place = autocompleteRef.current?.getPlace()
+        if (place?.geometry?.location) {
+          updateForm(place)
+        }
+      })
+    } catch (error) {
+      console.error('Error initializing Autocomplete:', error)
+      NotificationService.showError('Failed to initialize address autocomplete')
+    }
   }
 
   const updateForm = (place: google.maps.places.PlaceResult) => {
@@ -130,6 +184,7 @@ export default function SearchBar() {
         const lat = position.coords.latitude
         const lng = position.coords.longitude
 
+        const google = getGoogleMapsInstance()
         if (google) {
           const geocoder = new google.maps.Geocoder()
           geocoder.geocode({ location: { lat, lng } }, (results, status) => {
